@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Wedding of F. Pravin Raja and A. Josephin Saranya · 18 November 2026 · St. Joseph’s Church, Vattakarai">
+<meta property="og:title" content="Pravin &amp; Saranya · 18 Nov 2026">
+<meta property="og:description" content="You are invited! Countdown, directions and RSVP.">
+</head>
+<body>
+<title>Pravin &amp; Saranya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=JetBrains+Mono:wght@400;600&family=Noto+Serif+Tamil:wght@500;600;700&display=swap">
+<style>
+:root{
+  --paper:#fbf8f1; --paper-2:#f3eee2; --ink:#1c3263; --ink-2:#2a437a; --soft:#56627c;
+  --gold:#a8843f; --gold-2:#c9a75e; --line:#d9ccb0; --night:#0f1d3d; --night-2:#172a55;
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --caps:'Cinzel','Trajan Pro',Georgia,serif;
+  --script:'Allura','Snell Roundhand',cursive;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --tamil:'Noto Serif Tamil','Latha',serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{background:var(--paper)}
+body{margin:0;color:var(--ink);font-family:var(--serif);font-size:19px;line-height:1.5;padding-inline:16px;
+  background-image:radial-gradient(circle at 50% 0,rgba(168,132,63,.08),transparent 60%)}
+:lang(ta) body, .ta{font-family:var(--tamil)}
+a{color:inherit}
+.wrap{max-width:720px;margin:0 auto;padding-block:28px 60px;display:flex;flex-direction:column;gap:44px}
+.caps{font-family:var(--caps);font-weight:600;letter-spacing:.22em;text-transform:uppercase;font-size:12.5px;color:var(--gold)}
+.frame{position:relative;border:2.5px solid var(--ink);padding:10px}
+.frame::before{content:"";position:absolute;inset:6px;border:1px solid var(--gold);pointer-events:none}
+.frame-in{border:.6px solid var(--ink);padding:48px 28px 44px;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;background:var(--paper)}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:#fff}
+.lang button{font:600 13px/1 var(--caps);letter-spacing:.08em;border:0;background:transparent;color:var(--soft);padding:9px 14px;border-radius:999px;cursor:pointer;min-height:36px}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.lang button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.crest{width:150px;height:170px}
+.crest .draw{stroke-dasharray:420;stroke-dashoffset:0;animation:draw 2.4s ease-out both}
+@keyframes draw{from{stroke-dashoffset:420}to{stroke-dashoffset:0}}
+.names{display:flex;flex-direction:column;align-items:center;gap:2px}
+.name{font-family:var(--script);font-size:clamp(54px,11vw,86px);line-height:1.05;color:var(--ink);text-wrap:balance}
+.with{font-family:var(--script);font-size:38px;color:var(--gold);line-height:.9}
+.sub{font-family:var(--caps);font-size:12px;letter-spacing:.08em;color:var(--soft)}
+.verse{font-style:italic;color:var(--soft);max-width:34em;margin:0}
+.verse b{color:var(--gold);font-weight:600;font-style:normal}
+.divider{width:220px;height:14px;color:var(--gold)}
+.date{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;width:min(100%,460px)}
+.date .side{font-family:var(--caps);font-weight:600;letter-spacing:.14em;font-size:13.5px;padding:9px 0;border-block:1px solid var(--gold)}
+.date .day{display:flex;flex-direction:column;align-items:center;line-height:1}
+.date .day b{font-family:var(--serif);font-size:62px;font-weight:700}
+.date .day span{font-family:var(--caps);font-size:12px;letter-spacing:.2em;color:var(--gold)}
+
+/* countdown */
+.count{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;width:100%}
+.cell{background:var(--night);color:var(--paper);border-radius:10px;padding:16px 6px 12px;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:inset 0 0 0 1px rgba(201,167,94,.35)}
+.cell b{font-family:var(--mono);font-weight:600;font-size:clamp(26px,6vw,40px);font-variant-numeric:tabular-nums;color:#f1dfae}
+.cell span{font-family:var(--caps);font-size:10.5px;letter-spacing:.2em;color:#aab6d3}
+.done{font-family:var(--script);font-size:44px;color:var(--gold)}
+
+section{display:flex;flex-direction:column;gap:16px}
+.wrap>*,section>*,.frame-in>*{min-width:0;max-width:100%}
+.term{width:100%}
+section > h2{margin:0;text-align:center;font-family:var(--script);font-weight:400;font-size:52px;line-height:1.1;color:var(--ink)}
+.events{display:flex;flex-direction:column;gap:14px}
+.event{display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}
+.event .t{font-family:var(--caps);font-weight:600;color:var(--gold);font-size:18px;letter-spacing:.04em;text-align:right;padding-top:2px}
+.event h3{margin:0;font-family:var(--caps);font-size:13px;letter-spacing:.22em;color:var(--gold);font-weight:600}
+.event .v{font-size:22px;font-weight:700;line-height:1.2;margin-top:2px}
+.event .p{color:var(--soft);font-style:italic;font-size:17px}
+.event .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 16px;border-radius:999px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);font:600 13px/1 var(--caps);letter-spacing:.08em;text-decoration:none;cursor:pointer}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.wa{background:#1f7a4d;border-color:#1f7a4d;color:#fff}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+@media (max-width:520px){.event{grid-template-columns:1fr;gap:6px}.event .t{text-align:left}}
+
+/* rsvp */
+form{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;display:grid;gap:14px}
+label{font-family:var(--caps);font-size:12px;letter-spacing:.16em;color:var(--soft);display:grid;gap:6px}
+input,select,textarea{font:500 18px/1.3 var(--serif);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:11px 12px;min-height:44px;width:100%}
+textarea{min-height:80px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.row{grid-template-columns:1fr}}
+.checks{display:flex;flex-wrap:wrap;gap:10px}
+.checks label{display:flex;align-items:center;gap:8px;font-family:var(--serif);font-size:17px;letter-spacing:0;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 14px;min-height:44px;cursor:pointer}
+.checks input{width:18px;height:18px;min-height:0;accent-color:var(--ink)}
+.note{font-size:15px;color:var(--soft);margin:0}
+.preview{font-family:var(--mono);font-size:13px;white-space:pre-wrap;background:var(--paper-2);border-radius:8px;padding:12px;color:var(--ink-2);margin:0}
+
+/* terminal */
+.term{background:var(--night);border-radius:12px;overflow:hidden;box-shadow:0 18px 40px rgba(15,29,61,.25)}
+.term .bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--night-2)}
+.term .bar i{width:11px;height:11px;border-radius:50%;background:#c9a75e;opacity:.8}
+.term .bar i:nth-child(2){opacity:.55}.term .bar i:nth-child(3){opacity:.3}
+.term .bar span{margin-left:8px;font:500 12px var(--mono);color:#8e9cc0}
+.term pre{margin:0;padding:18px 18px 22px;font:400 14px/1.7 var(--mono);color:#dfe6f7;overflow-x:auto;min-height:250px}
+.term .p1{color:#c9a75e}.term .ok{color:#9fd8b3}.term .dim{color:#7f8db3}.term .str{color:#f1dfae}
+.caret{display:inline-block;width:8px;height:16px;background:#c9a75e;vertical-align:-3px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+footer{text-align:center;color:var(--soft);font-size:16px;display:grid;gap:4px}
+footer .num{font-family:var(--caps);letter-spacing:.14em;font-size:14px;color:var(--ink);user-select:all}
+@media (prefers-reduced-motion:reduce){.crest .draw{animation:none}.caret{animation:none}}
+</style>
+
+<div class="wrap">
+  <div class="topbar">
+    <span class="caps" data-i18n="save">Save the Date</span>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="lang-en" aria-pressed="true">English</button>
+      <button type="button" id="lang-ta" aria-pressed="false" class="ta">தமிழ்</button>
+    </div>
+  </div>
+
+  <div class="frame"><div class="frame-in">
+    <span class="caps" data-i18n="bless">With the Blessings of the Almighty</span>
+    <svg class="crest" viewBox="0 0 150 170" fill="none" aria-hidden="true">
+      <g fill="#a8843f">
+        <path d="M49 46 L45 20 L62 33 L75 12 L88 33 L105 20 L101 46 Z"/><rect x="48" y="46" width="54" height="7" rx="2"/>
+        <circle cx="45" cy="18" r="3.4"/><circle cx="75" cy="10" r="3.4"/><circle cx="105" cy="18" r="3.4"/>
+      </g>
+      <circle class="draw" cx="75" cy="108" r="46" stroke="#a8843f" stroke-width="1.4"/>
+      <circle class="draw" cx="75" cy="108" r="41.5" stroke="#a8843f" stroke-width=".6"/>
+      <g fill="#a8843f" id="laurel"></g>
+      <text x="75" y="118" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="600" font-size="30" fill="#1c3263">P<tspan fill="#a8843f" font-family="Cormorant Garamond, Georgia, serif" font-style="italic">&amp;</tspan>S</text>
+    </svg>
+    <span class="caps" data-i18n="weddingof">The Wedding of</span>
+    <div class="names">
+      <div class="name">F. Pravin Raja</div>
+      <div class="sub">B.Tech., MBA · Senior Software Engineer, Wipro</div>
+      <div class="with">with</div>
+      <div class="name">A. Josephin Saranya</div>
+      <div class="sub">M.Sc. (Physics), B.Ed.</div>
+    </div>
+    <svg class="divider" viewBox="0 0 260 16" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 8H104M156 8H254" stroke-width="1"/><path d="M104 8C112 1 120 1 124 8C128 15 132 15 130 8M156 8C148 1 140 1 136 8C132 15 128 15 130 8" stroke-width="1.2"/><path d="M130 3L135 8L130 13L125 8Z" fill="currentColor" stroke="none"/></svg>
+    <div class="date">
+      <div class="side" data-i18n="wed">Wednesday</div>
+      <div class="day"><span data-i18n="nov">November</span><b>18</b><span>2026</span></div>
+      <div class="side" data-i18n="time">10.30 AM</div>
+    </div>
+    <div class="count" id="count" aria-live="off">
+      <div class="cell"><b id="cd-d">--</b><span data-i18n="days">Days</span></div>
+      <div class="cell"><b id="cd-h">--</b><span data-i18n="hours">Hours</span></div>
+      <div class="cell"><b id="cd-m">--</b><span data-i18n="mins">Minutes</span></div>
+      <div class="cell"><b id="cd-s">--</b><span data-i18n="secs">Seconds</span></div>
+    </div>
+    <p class="verse" data-i18n="verse">“Therefore what God has joined together, let no one separate.” <b>Matthew 19:6</b></p>
+    <p class="note" data-i18n="parents">With love, Mr. B. Francis Raja Clement &amp; Mrs. P. Viji Amala Princily, Azhagappapuram</p>
+  </div></div>
+
+  <section aria-labelledby="h-day">
+    <h2 id="h-day" data-i18n="order">Order of the Day</h2>
+    <div class="events">
+      <article class="event">
+        <div class="t">10.30 AM</div>
+        <div>
+          <h3 data-i18n="e1">Holy Matrimony</h3>
+          <div class="v" data-i18n="e1v">St. Joseph’s Church</div>
+          <div class="p" data-i18n="e1p">with Nuptial Mass · Vattakarai, Nagercoil</div>
+          <div class="acts">
+            <a class="btn solid" href="https://maps.google.com/?q=St+Josephs+Church+Vattakarai+Nagercoil" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="dir">Directions</span></a>
+            <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pravin%20%26%20Saranya%20%E2%80%94%20Holy%20Matrimony&amp;dates=20261118T050000Z/20261118T070000Z&amp;location=St.%20Joseph%27s%20Church%2C%20Vattakarai%2C%20Nagercoil&amp;details=Wedding%20of%20F.%20Pravin%20Raja%20%26%20A.%20Josephin%20Saranya" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span data-i18n="cal">Add to calendar</span></a>
+          </div>
+        </div>
+      </article>
+      <article class="event">
+        <div class="t" data-i18n="aftermass">After Mass</div>
+        <div>
+          <h3 data-i18n="e2">Wedding Lunch</h3>
+          <div class="v" data-i18n="e2v">St. Joseph’s Church Mandapam</div>
+          <div class="p" data-i18n="e2p">Vattakarai, Nagercoil</div>
+        </div>
+      </article>
+      <article class="event">
+        <div class="t">6.30 PM</div>
+        <div>
+          <h3 data-i18n="e3">Evening Reception</h3>
+          <div class="v" data-i18n="e3v">St. Antony’s Mandapam, First Floor</div>
+          <div class="p" data-i18n="e3p">Azhagappapuram</div>
+          <div class="acts">
+            <a class="btn solid" href="https://maps.google.com/?q=St+Antonys+Church+Azhagappapuram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="dir">Directions</span></a>
+            <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pravin%20%26%20Saranya%20%E2%80%94%20Reception&amp;dates=20261118T130000Z/20261118T160000Z&amp;location=St.%20Antony%27s%20Mandapam%2C%20First%20Floor%2C%20Azhagappapuram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span data-i18n="cal">Add to calendar</span></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-rsvp">
+    <h2 id="h-rsvp" data-i18n="rsvp">Kindly Reply</h2>
+    <form id="rsvp" novalidate>
+      <div class="row">
+        <label for="f-name"><span data-i18n="fname">Your name</span><input id="f-name" name="name" autocomplete="name" value="" placeholder="e.g. Joseph &amp; family"></label>
+        <label for="f-count"><span data-i18n="fcount">Number of guests</span>
+          <select id="f-count" name="count"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8+</option></select></label>
+      </div>
+      <div class="checks" role="group" aria-label="Events attending">
+        <label for="c-wed"><input type="checkbox" id="c-wed" checked><span data-i18n="c1">Wedding &amp; Lunch</span></label>
+        <label for="c-rec"><input type="checkbox" id="c-rec" checked><span data-i18n="c2">Evening Reception</span></label>
+      </div>
+      <label for="f-msg"><span data-i18n="fmsg">Your wishes (optional)</span><textarea id="f-msg" placeholder="Congratulations to the couple!"></textarea></label>
+      <pre class="preview" id="preview" aria-label="Message preview"></pre>
+      <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3a.4.4 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3z"/></svg><span data-i18n="send">Send RSVP on WhatsApp</span></a>
+      <p class="note" data-i18n="wanote">Opens WhatsApp with your reply ready to send. If it doesn’t open, message +91 94435 79704.</p>
+    </form>
+  </section>
+
+  <section aria-labelledby="h-code">
+    <h2 id="h-code" data-i18n="techh">For the Techies</h2>
+    <div class="term" role="img" aria-label="A terminal showing git merge pravin saranya, merged successfully on 18 November 2026">
+      <div class="bar"><i></i><i></i><i></i><span>~/forever — zsh</span></div>
+      <pre id="term"></pre>
+    </div>
+  </section>
+
+  <footer>
+    <span class="caps" data-i18n="assist">For assistance</span>
+    <span class="num">+91 94435 79704 · +91 94421 07921</span>
+    <span data-i18n="bless2">Your presence is our greatest blessing.</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  // laurel leaves around the crest ring
+  var g=document.getElementById('laurel'),r=58,h='';
+  [-1,1].forEach(function(side){for(var k=0;k<9;k++){var a=(100+k*17)*Math.PI/180,ang=side<0?a:Math.PI-a,
+    x=75+r*Math.cos(ang),y=108+r*Math.sin(ang),rot=ang*180/Math.PI+90+(side<0?-28:28);
+    h+='<ellipse cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" rx="7.5" ry="3" transform="rotate('+rot.toFixed(1)+' '+x.toFixed(1)+' '+y.toFixed(1)+')"/>';}});
+  g.innerHTML=h;
+
+  // countdown to 18 Nov 2026, 10:30 IST
+  var target=Date.UTC(2026,10,18,5,0,0),pad=function(n){return String(n).padStart(2,'0')};
+  function tick(){var d=target-Date.now(),el=document.getElementById('count');
+    if(d<=0){el.innerHTML='<div class="done" style="grid-column:1/-1">'+(lang==='ta'?'மணமக்கள் வாழ்க!':'Just married!')+'</div>';return;}
+    var s=Math.floor(d/1000);
+    document.getElementById('cd-d').textContent=Math.floor(s/86400);
+    document.getElementById('cd-h').textContent=pad(Math.floor(s%86400/3600));
+    document.getElementById('cd-m').textContent=pad(Math.floor(s%3600/60));
+    document.getElementById('cd-s').textContent=pad(s%60);}
+
+  // translations
+  var T={ta:{save:'நாள் குறித்துக்கொள்ளுங்கள்',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
+    days:'நாட்கள்',hours:'மணி',mins:'நிமிடம்',secs:'விநாடி',verse:'“தேவன் இணைத்ததை மனுஷன் பிரிக்காதிருக்கக்கடவன்.” <b>மத்தேயு 19:6</b>',
+    parents:'அன்புடன், திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட் – திருமதி. P. விஜி அமலா பிரின்ஸிலி, அழகப்பபுரம்',
+    order:'நிகழ்ச்சி நிரல்',e1:'திருமணம்',e1v:'புனித சூசையப்பர் ஆலயம்',e1p:'கூட்டுத் திருப்பலியுடன் · வட்டக்கரை, நாகர்கோவில்',dir:'வழி',cal:'நாட்காட்டியில் சேர்',
+    aftermass:'திருப்பலிக்குப் பின்',e2:'திருமண விருந்து',e2v:'புனித சூசையப்பர் ஆலய மண்டபம்',e2p:'வட்டக்கரை, நாகர்கோவில்',
+    e3:'மாலை வரவேற்பு',e3v:'புனித அந்தோனியார் பங்கு மண்டபம், மேல் தளம்',e3p:'அழகப்பபுரம்',
+    rsvp:'வருகையை உறுதிசெய்க',fname:'உங்கள் பெயர்',fcount:'வருபவர்களின் எண்ணிக்கை',c1:'திருமணம் & விருந்து',c2:'மாலை வரவேற்பு',fmsg:'வாழ்த்துகள் (விருப்பம்)',
+    send:'WhatsApp-ல் அனுப்புக',wanote:'உங்கள் பதில் தயாராக WhatsApp திறக்கும். திறக்காவிட்டால் +91 94435 79704 க்கு அனுப்பவும்.',
+    techh:'தொழில்நுட்ப நண்பர்களுக்கு',assist:'உதவிக்கு',bless2:'உங்கள் வருகையே எங்களுக்கு ஆசீர்வாதம்.'}};
+  var EN={};document.querySelectorAll('[data-i18n]').forEach(function(el){EN[el.dataset.i18n]=el.innerHTML;});
+  var lang='en';
+  function setLang(l){lang=l;var dict=l==='ta'?T.ta:EN;
+    document.documentElement.lang=l==='ta'?'ta':'en';
+    document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.dataset.i18n;if(dict[k]!=null)el.innerHTML=dict[k];el.classList.toggle('ta',l==='ta'&&!!T.ta[k]);});
+    document.getElementById('lang-en').setAttribute('aria-pressed',l==='en');document.getElementById('lang-ta').setAttribute('aria-pressed',l==='ta');
+    try{localStorage.setItem('ps-lang',l)}catch(e){}
+    buildMsg();tick();}
+  document.getElementById('lang-en').addEventListener('click',function(){setLang('en')});
+  document.getElementById('lang-ta').addEventListener('click',function(){setLang('ta')});
+
+  // WhatsApp RSVP
+  var PHONE='919443579704';
+  function buildMsg(){
+    var n=document.getElementById('f-name').value.trim()||'(your name)',c=document.getElementById('f-count').value,
+        w=document.getElementById('c-wed').checked,rc=document.getElementById('c-rec').checked,m=document.getElementById('f-msg').value.trim();
+    var ev=[w?'Wedding & Lunch':'',rc?'Evening Reception':''].filter(Boolean).join(' + ')||'Sending wishes only';
+    var txt='RSVP · Pravin & Saranya · 18 Nov 2026\nName: '+n+'\nGuests: '+c+'\nAttending: '+ev+(m?'\nWishes: '+m:'');
+    document.getElementById('preview').textContent=txt;
+    document.getElementById('wa').href='https://wa.me/'+PHONE+'?text='+encodeURIComponent(txt);}
+  ['f-name','f-count','c-wed','c-rec','f-msg'].forEach(function(id){var el=document.getElementById(id);el.addEventListener('input',buildMsg);el.addEventListener('change',buildMsg);});
+  document.getElementById('rsvp').addEventListener('submit',function(e){e.preventDefault();});
+
+  // terminal
+  var lines=[['p1','$ '],['','git checkout -b forever\n'],['dim','Switched to a new branch \'forever\'\n'],
+    ['p1','$ '],['','git merge saranya --no-ff -m "18.11.2026"\n'],
+    ['ok','Merge made by the \'grace\' strategy.\n'],['dim',' 2 hearts changed, '],['ok','∞ insertions(+)'],['dim',', 0 deletions(-)\n\n'],
+    ['p1','$ '],['','cat wedding.json\n'],
+    ['','{ "groom": '],['str','"F. Pravin Raja"'],['',',\n  "bride": '],['str','"A. Josephin Saranya"'],['',',\n  "when":  '],['str','"2026-11-18T10:30+05:30"'],
+    ['',',\n  "where": '],['str','"St. Joseph’s Church, Vattakarai"'],['',' }\n\n'],['p1','$ '],['','while true; do love; done']];
+  var pre=document.getElementById('term'),reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function render(upto){pre.innerHTML='';var left=upto;for(var i=0;i<lines.length&&left>0;i++){var t=lines[i][1].slice(0,left);left-=lines[i][1].length;
+    var s=document.createElement('span');if(lines[i][0])s.className=lines[i][0];s.textContent=t;pre.appendChild(s);}
+    var c=document.createElement('span');c.className='caret';pre.appendChild(c);}
+  var total=lines.reduce(function(a,l){return a+l[1].length},0);
+  render(total);
+  if(!reduce&&'IntersectionObserver' in window){var played=false;new IntersectionObserver(function(es){if(played||!es[0].isIntersecting)return;played=true;var k=0;
+    (function step(){k+=3;render(Math.min(k,total));if(k<total)setTimeout(step,18);})();}).observe(pre);}
+
+  var saved=null;try{saved=localStorage.getItem('ps-lang')}catch(e){}
+  setLang(saved==='ta'?'ta':'en');
+  setInterval(tick,1000);
+})();
+</script>
+
+</body>
+</html>
