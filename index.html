@@ -104,8 +104,56 @@ textarea{min-height:80px;resize:vertical}
 footer{text-align:center;color:var(--soft);font-size:16px;display:grid;gap:4px}
 footer .num{font-family:var(--caps);letter-spacing:.14em;font-size:14px;color:var(--ink);user-select:all}
 @media (prefers-reduced-motion:reduce){.crest .draw{animation:none}.caret{animation:none}}
+
+/* ---- welcome gate, petals, reveals ---- */
+body.locked{overflow:hidden}
+.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.door{position:absolute;top:0;bottom:0;width:50.5%;background:#0f1d3d;transition:transform 1.6s cubic-bezier(.7,0,.2,1);
+  background-image:radial-gradient(circle,rgba(201,167,94,.18) 0 1.5px,transparent 2px),radial-gradient(circle,rgba(201,167,94,.07) 0 12px,transparent 12.5px);
+  background-size:26px 26px,52px 52px;background-position:0 0,13px 13px}
+.door.left{left:0;box-shadow:inset -10px 0 30px rgba(0,0,0,.35)}
+.door.right{right:0;box-shadow:inset 10px 0 30px rgba(0,0,0,.35)}
+.door::before{content:"";position:absolute;inset:18px;border:1.5px solid rgba(201,167,94,.8)}
+.door::after{content:"";position:absolute;inset:26px;border:.6px solid rgba(201,167,94,.5)}
+.door.left::before,.door.left::after{right:0;border-right:0}
+.door.right::before,.door.right::after{left:0;border-left:0}
+.gate.open .door.left{transform:translateX(-101%)}
+.gate.open .door.right{transform:translateX(101%)}
+.gate-center{position:relative;z-index:2;box-sizing:border-box;width:100%;max-width:560px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:24px;color:#f1dfae;transition:opacity .6s ease}
+.gate.open .gate-center{opacity:0}
+.gate .inv{font-family:var(--caps);letter-spacing:.34em;font-size:12.5px;color:#c9a75e;text-transform:uppercase}
+.gate .dear{max-width:100%;text-wrap:balance;overflow-wrap:break-word;font-family:var(--script);font-size:clamp(40px,10vw,64px);line-height:1.05;color:#f6ead0;min-height:1em}
+.gate .couple{font-family:var(--script);font-size:clamp(34px,8vw,48px);color:#e3c677}
+.seal{position:relative;width:112px;height:112px;border-radius:50%;border:0;cursor:pointer;margin-top:8px;
+  background:radial-gradient(circle at 35% 30%,#c23a4a,#8e1b2b 55%,#5e0f1b);box-shadow:0 10px 24px rgba(0,0,0,.45),inset 0 0 0 6px rgba(255,255,255,.06),inset 0 -6px 12px rgba(0,0,0,.35);
+  animation:pulse 2.4s ease-in-out infinite}
+.seal::before{content:"";position:absolute;inset:12px;border-radius:50%;border:1.5px dashed rgba(255,225,190,.45)}
+.seal span{position:relative;font-family:var(--caps);font-weight:700;font-size:28px;color:#f6d9b8;text-shadow:0 1px 0 rgba(0,0,0,.4)}
+.seal:focus-visible{outline:2px solid #f1dfae;outline-offset:4px}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.gate .tap{font-family:var(--serif);font-style:italic;font-size:17px;color:#c9d2ea}
+.gate .tap.ta{font-style:normal;font-size:14px}
+#petals{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:40}
+.welcome{font-family:var(--script);font-size:clamp(34px,7vw,46px);color:var(--gold);line-height:1.1;margin:0}
+.reveal-pre{opacity:0;transform:translateY(26px)}
+.reveal-in{opacity:1;transform:none;transition:opacity .9s ease,transform .9s ease}
+.name.shine{background:linear-gradient(100deg,var(--ink) 40%,#6f86c2 50%,var(--ink) 60%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s ease-in-out 1.8s 2}
+@keyframes shine{from{background-position:120% 0}to{background-position:-20% 0}}
+@media (prefers-reduced-motion:reduce){.door{transition:none}.seal{animation:none}.reveal-pre{opacity:1;transform:none}.name.shine{animation:none;color:var(--ink);background:none}}
 </style>
 
+<div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Welcome">
+  <div class="door left"></div><div class="door right"></div>
+  <div class="gate-center">
+    <div class="inv">You are cordially invited</div>
+    <div class="dear" id="dear">Dear Family &amp; Friends</div>
+    <div class="couple">Pravin &amp; Saranya</div>
+    <button type="button" class="seal" id="open-seal" aria-label="Open the invitation"><span>P&amp;S</span></button>
+    <div class="tap">Tap the seal to open</div>
+    <div class="tap ta">திறக்க முத்திரையைத் தொடவும்</div>
+  </div>
+</div>
+<canvas id="petals" aria-hidden="true"></canvas>
 <div class="wrap">
   <div class="topbar">
     <span class="caps" data-i18n="save">Save the Date</span>
@@ -116,6 +164,7 @@ footer .num{font-family:var(--caps);letter-spacing:.14em;font-size:14px;color:va
   </div>
 
   <div class="frame"><div class="frame-in">
+    <p class="welcome" id="welcome" data-i18n="welcome">Welcome, dear family &amp; friends</p>
     <span class="caps" data-i18n="bless">With the Blessings of the Almighty</span>
     <svg class="crest" viewBox="0 0 150 170" fill="none" aria-hidden="true">
       <g fill="#a8843f">
@@ -129,10 +178,10 @@ footer .num{font-family:var(--caps);letter-spacing:.14em;font-size:14px;color:va
     </svg>
     <span class="caps" data-i18n="weddingof">The Wedding of</span>
     <div class="names">
-      <div class="name">F. Pravin Raja</div>
+      <div class="name shine">F. Pravin Raja</div>
       <div class="sub">B.Tech., MBA · Senior Software Engineer, Wipro</div>
       <div class="with">with</div>
-      <div class="name">A. Josephin Saranya</div>
+      <div class="name shine">A. Josephin Saranya</div>
       <div class="sub">M.Sc. (Physics), B.Ed.</div>
     </div>
     <svg class="divider" viewBox="0 0 260 16" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 8H104M156 8H254" stroke-width="1"/><path d="M104 8C112 1 120 1 124 8C128 15 132 15 130 8M156 8C148 1 140 1 136 8C132 15 128 15 130 8" stroke-width="1.2"/><path d="M130 3L135 8L130 13L125 8Z" fill="currentColor" stroke="none"/></svg>
@@ -243,7 +292,7 @@ footer .num{font-family:var(--caps);letter-spacing:.14em;font-size:14px;color:va
     document.getElementById('cd-s').textContent=pad(s%60);}
 
   // translations
-  var T={ta:{save:'நாள் குறித்துக்கொள்ளுங்கள்',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
+  var T={ta:{welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள்',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
     days:'நாட்கள்',hours:'மணி',mins:'நிமிடம்',secs:'விநாடி',verse:'“தேவன் இணைத்ததை மனுஷன் பிரிக்காதிருக்கக்கடவன்.” <b>மத்தேயு 19:6</b>',
     parents:'அன்புடன், திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட் – திருமதி. P. விஜி அமலா பிரின்ஸிலி, அழகப்பபுரம்',
     order:'நிகழ்ச்சி நிரல்',e1:'திருமணம்',e1v:'புனித சூசையப்பர் ஆலயம்',e1p:'கூட்டுத் திருப்பலியுடன் · வட்டக்கரை, நாகர்கோவில்',dir:'வழி',cal:'நாட்காட்டியில் சேர்',
@@ -297,5 +346,49 @@ footer .num{font-family:var(--caps);letter-spacing:.14em;font-size:14px;color:va
 })();
 </script>
 
+
+<script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // personal greeting: ?to=Joseph%20Uncle%20%26%20Family
+  var to='';try{to=(new URLSearchParams(location.search).get('to')||'').trim().slice(0,60);}catch(e){}
+  if(to){document.getElementById('dear').textContent='Dear '+to;
+    var w=document.getElementById('welcome');w.removeAttribute('data-i18n');w.textContent='Welcome, '+to;}
+  // petals
+  var cv=document.getElementById('petals'),ctx=cv.getContext('2d'),P=[],running=false,until=0;
+  var COLS=['#f4c9d1','#eaa3b3','#f7e3b5','#fff6ea','#e9c07a'];
+  function size(){var d=window.devicePixelRatio||1;cv.width=innerWidth*d;cv.height=innerHeight*d;ctx.setTransform(d,0,0,d,0,0);}
+  size();addEventListener('resize',size);
+  function petal(x,y,burst){return{x:x,y:y,r:6+Math.random()*7,a:Math.random()*6.28,va:(Math.random()-.5)*.08,
+    vx:burst?(Math.random()-.5)*7:(Math.random()-.5)*.6,vy:burst?-(3+Math.random()*6):(.7+Math.random()*1.3),
+    sway:Math.random()*6.28,c:COLS[Math.random()*COLS.length|0],g:burst?.18:0};}
+  function spawn(n){for(var i=0;i<n;i++)P.push(petal(Math.random()*innerWidth,-20-Math.random()*innerHeight*.6));}
+  function burst(x,y){for(var i=0;i<46;i++)P.push(petal(x,y,true));start(4000);}
+  function start(ms){until=Math.max(until,performance.now()+ms);if(!running){running=true;requestAnimationFrame(frame);}}
+  function frame(t){ctx.clearRect(0,0,innerWidth,innerHeight);
+    if(t<until&&P.length<70&&Math.random()<.35)spawn(1);
+    for(var i=P.length-1;i>=0;i--){var p=P[i];p.sway+=.03;p.vy+=p.g;if(p.g&&p.vy>1.6){p.g=0;p.vy=1.6;}p.x+=p.vx+Math.sin(p.sway)*.8;p.y+=p.vy;p.a+=p.va;p.vx*=.99;
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);ctx.fillStyle=p.c;ctx.globalAlpha=.9;ctx.beginPath();
+      ctx.ellipse(0,0,p.r,p.r*.55,0,0,6.283);ctx.fill();ctx.globalAlpha=.25;ctx.fillStyle='#b8636f';ctx.beginPath();ctx.ellipse(-p.r*.2,0,p.r*.35,p.r*.12,0,0,6.283);ctx.fill();ctx.restore();
+      if(p.y>innerHeight+30)P.splice(i,1);}
+    if(P.length||t<until)requestAnimationFrame(frame);else{running=false;ctx.clearRect(0,0,innerWidth,innerHeight);}}
+  // gate
+  var gate=document.getElementById('gate');document.body.classList.add('locked');
+  function openGate(){if(gate.classList.contains('open'))return;gate.classList.add('open');document.body.classList.remove('locked');
+    if(!reduce){spawn(24);start(14000);}
+    setTimeout(function(){gate.remove();},reduce?0:1700);}
+  document.getElementById('open-seal').addEventListener('click',openGate);
+  document.getElementById('open-seal').focus({preventScroll:true});
+  addEventListener('keydown',function(e){if(e.key==='Escape')openGate();});
+  // RSVP petal shower
+  var wa=document.getElementById('wa');
+  if(wa&&!reduce)wa.addEventListener('click',function(e){var r=wa.getBoundingClientRect();burst(r.left+r.width/2,r.top);});
+  // scroll reveals
+  if(!reduce&&'IntersectionObserver' in window){
+    var els=document.querySelectorAll('.event, section > h2, form, .term, footer');
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('reveal-in');en.target.classList.remove('reveal-pre');io.unobserve(en.target);}});},{threshold:.12});
+    els.forEach(function(el){el.classList.add('reveal-pre');io.observe(el);});}
+})();
+</script>
 </body>
 </html>
