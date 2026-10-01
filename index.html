@@ -292,6 +292,9 @@ details.techie .term{border-radius:0;box-shadow:none}
 .hero-band .topbar .caps b{font-weight:700;color:#f6e3b4}
 @media (max-width:520px){.hero-band .topbar{justify-content:center;text-align:center}.hero-band .topbar .caps{font-size:12.5px;letter-spacing:.24em}}
 @media (prefers-reduced-motion:reduce){.mandala svg{animation:none}}
+
+.fam .sib{margin-top:8px;padding-top:10px;border-top:1px solid rgba(168,132,63,.35);font-size:18px;font-weight:600;color:var(--ink)}
+.fam .sib span{display:block;font-family:var(--caps);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:2px}
 </style>
 
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Welcome">
@@ -385,9 +388,9 @@ details.techie .term{border-radius:0;box-shadow:none}
   <section aria-labelledby="h-fam">
     <h2 id="h-fam" data-i18n="famh">Two Families, One Celebration</h2>
     <div class="families">
-      <div class="fam"><span class="mono" aria-hidden="true">P</span><span class="caps" data-i18n="gside">The Groom’s Family</span><div class="who" data-i18n="gpar">Mr. B. Francis Raja Clement<br>&amp; Mrs. P. Viji Amala Princily</div><div class="from" data-i18n="gfrom">Azhagappapuram</div></div>
+      <div class="fam"><span class="mono" aria-hidden="true">P</span><span class="caps" data-i18n="gside">The Groom’s Family</span><div class="who" data-i18n="gpar">Mr. B. Francis Raja Clement<br>&amp; Mrs. P. Viji Amala Princily</div><div class="from" data-i18n="gfrom">Azhagappapuram</div><div class="sib" data-i18n="gsib"><span>Sister</span> F. Praveena Rani</div></div>
       <div class="amp" aria-hidden="true">&amp;</div>
-      <div class="fam"><span class="mono" aria-hidden="true">S</span><span class="caps" data-i18n="bside">The Bride’s Family</span><div class="who" data-i18n="bpar">Mr. S. Antony Joseph<br>&amp; Mrs. G. Iruthaya Therse Edit</div><div class="from" data-i18n="bfrom">Vattakarai</div></div>
+      <div class="fam"><span class="mono" aria-hidden="true">S</span><span class="caps" data-i18n="bside">The Bride’s Family</span><div class="who" data-i18n="bpar">Mr. S. Antony Joseph<br>&amp; Mrs. G. Iruthaya Therse Edit</div><div class="from" data-i18n="bfrom">Vattakarai</div><div class="sib" data-i18n="bsib"><span>Brother</span> A. Dony Jose</div></div>
     </div>
   </section>
 
@@ -518,7 +521,7 @@ details.techie .term{border-radius:0;box-shadow:none}
   function set(id,v){var el=document.getElementById(id);if(!el||el.textContent===v)return;el.textContent=v;var c=el.parentNode;c.classList.remove('flip');void c.offsetWidth;c.classList.add('flip');}
 
   // translations
-  var T={ta:{famh:'இரு குடும்பங்கள், ஒரு கொண்டாட்டம்',gside:'மணமகன் குடும்பம்',bside:'மணமகள் குடும்பம்',gpar:'திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட்<br>– திருமதி. P. விஜி அமலா பிரின்ஸிலி',gfrom:'அழகப்பபுரம்',bpar:'திரு. S. அந்தோணி ஜோசப்<br>– திருமதி. G. இருதய தெரஸ் எடிட்',bfrom:'வட்டக்கரை',sidel:'யாருக்கு பதில் அனுப்புகிறீர்கள்',sg:'மணமகன் குடும்பம்',sb:'மணமகள் குடும்பம்',welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள் · <b>18 நவம்பர் 2026</b>',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
+  var T={ta:{gsib:'<span>சகோதரி</span> F. பிரவினா ராணி',bsib:'<span>சகோதரர்</span> A. டோனி ஜோஸ்',famh:'இரு குடும்பங்கள், ஒரு கொண்டாட்டம்',gside:'மணமகன் குடும்பம்',bside:'மணமகள் குடும்பம்',gpar:'திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட்<br>– திருமதி. P. விஜி அமலா பிரின்ஸிலி',gfrom:'அழகப்பபுரம்',bpar:'திரு. S. அந்தோணி ஜோசப்<br>– திருமதி. G. இருதய தெரஸ் எடிட்',bfrom:'வட்டக்கரை',sidel:'யாருக்கு பதில் அனுப்புகிறீர்கள்',sg:'மணமகன் குடும்பம்',sb:'மணமகள் குடும்பம்',welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள் · <b>18 நவம்பர் 2026</b>',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
     days:'நாட்கள்',hours:'மணி',mins:'நிமிடம்',secs:'விநாடி',verse:'“தேவன் இணைத்ததை மனுஷன் பிரிக்காதிருக்கக்கடவன்.” <b>மத்தேயு 19:6</b>',
     parents:'அன்புடன், திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட் – திருமதி. P. விஜி அமலா பிரின்ஸிலி, அழகப்பபுரம்',
     order:'நிகழ்ச்சி நிரல்',e1:'திருமணம்',e1v:'புனித சூசையப்பர் ஆலயம்',e1p:'கூட்டுத் திருப்பலியுடன் · வட்டக்கரை, நாகர்கோவில்',dir:'வழி',cal:'நாட்காட்டியில் சேர்',
