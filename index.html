@@ -613,7 +613,7 @@ details.map[open] summary::after{transform:rotate(180deg)}
   // countdown to 18 Nov 2026, 10:30 IST
   var target=Date.UTC(2026,10,18,5,0,0),pad=function(n){return String(n).padStart(2,'0')};
   function tick(){var d=target-Date.now(),el=document.getElementById('count');
-    if(d<=0){el.innerHTML='<div class="done" style="grid-column:1/-1">'+(lang==='ta'?'மணமக்கள் வாழ்க! ❤':'Just Married ❤')+'</div>';if(window.__fireworks)window.__fireworks();return;}
+    if(d<=0){el.innerHTML='<div class="done" style="grid-column:1/-1">'+(lang==='ta'?'மணமக்கள் வாழ்க! ❤':'Just Married ❤')+'</div>';if(window.__fwDay&&window.__fwDay()&&window.__fireworks)window.__fireworks();return;}
     var s=Math.floor(d/1000);
     set('cd-d',String(Math.floor(s/86400)));set('cd-h',pad(Math.floor(s%86400/3600)));set('cd-m',pad(Math.floor(s%3600/60)));set('cd-s',pad(s%60));}
   function set(id,v){var el=document.getElementById(id);if(!el||el.textContent===v)return;el.textContent=v;var c=el.parentNode;c.classList.remove('flip');void c.offsetWidth;c.classList.add('flip');}
@@ -803,8 +803,10 @@ details.map[open] summary::after{transform:rotate(180deg)}
     for(var i=parts.length-1;i>=0;i--){var p=parts[i];p.vx*=.985;p.vy=p.vy*.985+.045;p.x+=p.vx;p.y+=p.vy;p.life-=.012;
       if(p.life<=0){parts.splice(i,1);continue;}fc.globalAlpha=p.life;fc.fillStyle=p.c;fc.beginPath();fc.arc(p.x,p.y,1.8,0,6.283);fc.fill();}
     fc.globalAlpha=1;if(parts.length||fxOn)requestAnimationFrame(fstep);else{fc.globalCompositeOperation='source-over';fc.clearRect(0,0,innerWidth,innerHeight);}}
-  window.__fireworks=function(){if(fired||reduce)return;fired=true;fxOn=true;var k=0;(function go(){burst();if(Math.random()<.5)setTimeout(burst,250);if(++k<14)setTimeout(go,650+Math.random()*500);else fxOn=false;})();requestAnimationFrame(fstep);};
-  if(q.get('test')==='fireworks'){var s0=document.getElementById('open-seal');if(s0)s0.addEventListener('click',function(){setTimeout(window.__fireworks,1200);});}
+  window.__fwDay=function(){var t=now();return t>=new Date('2026-11-18T00:00+05:30').getTime()&&t<new Date('2026-11-19T00:00+05:30').getTime();};
+  var pending=false;
+  window.__fireworks=function(){if(fired||reduce)return;if(!document.body.classList.contains('opened')){pending=true;return;}fired=true;fxOn=true;var k=0;(function go(){burst();if(Math.random()<.5)setTimeout(burst,250);if(++k<14)setTimeout(go,650+Math.random()*500);else fxOn=false;})();requestAnimationFrame(fstep);};
+  var s0=document.getElementById('open-seal');if(s0)s0.addEventListener('click',function(){setTimeout(function(){if(q.get('test')==='fireworks'||pending||window.__fwDay())window.__fireworks();},1200);});
 
   /* 3. Wedding-day mode (IST) */
   var EV=[{n:1,from:'2026-11-18T10:30+05:30',to:'2026-11-18T12:30+05:30',en:'Holy Matrimony',ta:'திருமணம்'},
