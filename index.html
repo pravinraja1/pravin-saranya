@@ -168,10 +168,10 @@ section > h2.reveal-in::after{animation:grow 1.2s ease both}
 .event:hover{transform:translateY(-3px);box-shadow:0 0 0 4px #fff,0 0 0 5px var(--gold),0 18px 30px -18px rgba(15,29,61,.35)}
 .medal{position:absolute;left:-41px;top:16px;width:40px;height:40px;border-radius:50%;background:var(--night);display:grid;place-items:center;box-shadow:0 0 0 3px var(--paper),0 0 0 4.5px var(--gold)}
 .medal svg{width:20px;height:20px;color:#e3c677}
-.cell.flip b{animation:flip .5s ease}
-@keyframes flip{0%{transform:rotateX(80deg);opacity:.2}100%{transform:none;opacity:1}}
+.cell.flip b{animation:fadeNum .45s ease}
+@keyframes fadeNum{0%{opacity:.35;transform:translateY(-4px)}100%{opacity:1;transform:none}}
 .cell{position:relative;overflow:hidden}
-.cell::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(241,223,174,.18) 50%,transparent 60%);transform:translateX(-100%);animation:sweep 6s ease-in-out infinite}
+.cell::after{content:none}
 @keyframes sweep{0%,70%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 .btn.wa{position:relative;overflow:hidden;justify-content:center;font-size:14px;min-height:52px;box-shadow:0 10px 24px -12px rgba(31,122,77,.8)}
 .btn.wa::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-100%);animation:sweep 4.5s ease-in-out infinite}
@@ -246,6 +246,19 @@ body.opened .couple-dock.show{transform:none;opacity:1}
 .stage{display:flex;justify-content:center;margin-bottom:6px}
 .stage .couple-svg{width:170px}
 @media (prefers-reduced-motion:reduce){.dancers,.gown,.veil{animation:none}.couple-dock{transition:none}}
+
+/* ---- countdown + families polish ---- */
+.count{gap:12px}
+.cell{background:linear-gradient(180deg,#14275a,#0d1a3d);border-radius:12px;padding:18px 6px 14px;box-shadow:inset 0 0 0 1px rgba(201,167,94,.55),inset 0 0 0 4px #0d1a3d,inset 0 0 0 5px rgba(201,167,94,.25),0 12px 24px -14px rgba(15,29,61,.6)}
+.cell b{font-family:var(--caps);font-weight:600;font-variant-numeric:lining-nums tabular-nums;font-size:clamp(30px,6.5vw,46px);line-height:1;background:linear-gradient(180deg,#f7e7b3,#c9a24e);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cell span{color:#c9b98f;letter-spacing:.24em}
+.fam{position:relative;background:linear-gradient(180deg,#fff,#fbf6ea);border:1px solid rgba(168,132,63,.55);border-radius:4px;padding:34px 22px 28px;box-shadow:0 0 0 5px #fff,0 0 0 6px rgba(168,132,63,.35),0 22px 40px -26px rgba(15,29,61,.45)}
+.fam::before,.fam::after{content:"";position:absolute;width:26px;height:26px;border:1.5px solid var(--gold)}
+.fam::before{top:8px;left:8px;border-right:0;border-bottom:0}
+.fam::after{bottom:8px;right:8px;border-left:0;border-top:0}
+.fam .mono{width:58px;height:58px;margin:0 auto 6px;border-radius:50%;display:grid;place-items:center;background:var(--night);color:#e9cf86;font-family:var(--script);font-size:34px;line-height:1;box-shadow:0 0 0 3px #fff,0 0 0 4.5px var(--gold)}
+.fam .who{font-size:21px}
+.amp{font-size:64px;background:linear-gradient(180deg,#e9cf86,#a8843f);-webkit-background-clip:text;background-clip:text;color:transparent}
 </style>
 
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Welcome">
@@ -339,9 +352,9 @@ body.opened .couple-dock.show{transform:none;opacity:1}
   <section aria-labelledby="h-fam">
     <h2 id="h-fam" data-i18n="famh">Two Families, One Celebration</h2>
     <div class="families">
-      <div class="fam"><span class="caps" data-i18n="gside">The Groom’s Family</span><div class="who" data-i18n="gpar">Mr. B. Francis Raja Clement<br>&amp; Mrs. P. Viji Amala Princily</div><div class="from" data-i18n="gfrom">Azhagappapuram</div></div>
+      <div class="fam"><span class="mono" aria-hidden="true">P</span><span class="caps" data-i18n="gside">The Groom’s Family</span><div class="who" data-i18n="gpar">Mr. B. Francis Raja Clement<br>&amp; Mrs. P. Viji Amala Princily</div><div class="from" data-i18n="gfrom">Azhagappapuram</div></div>
       <div class="amp" aria-hidden="true">&amp;</div>
-      <div class="fam"><span class="caps" data-i18n="bside">The Bride’s Family</span><div class="who" data-i18n="bpar">Mr. S. Antony Joseph<br>&amp; Mrs. G. Iruthaya Therse Edit</div><div class="from" data-i18n="bfrom">Vattakarai</div></div>
+      <div class="fam"><span class="mono" aria-hidden="true">S</span><span class="caps" data-i18n="bside">The Bride’s Family</span><div class="who" data-i18n="bpar">Mr. S. Antony Joseph<br>&amp; Mrs. G. Iruthaya Therse Edit</div><div class="from" data-i18n="bfrom">Vattakarai</div></div>
     </div>
   </section>
 
