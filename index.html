@@ -391,6 +391,10 @@ details.map[open] summary::after{transform:rotate(180deg)}
 /* ---- guest extras: actions, FAQ, hashtag, scratch ---- */
 [hidden]{display:none!important}
 .qa{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.qa .btn{justify-content:center;font-size:13px}
+.qa .btn:not(.solid){background:#fff;color:var(--ink);border:1.5px solid var(--ink)}
+.qa .btn.solid{color:#0f1d3d}
+@media (max-width:420px){.qa .btn{flex:1 1 100%;max-width:300px}}
 .faq{display:grid;gap:10px}
 .faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:0 16px}
 .faq summary{cursor:pointer;list-style:none;min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:var(--caps);font-weight:600;font-size:13.5px;letter-spacing:.08em;color:var(--ink)}
