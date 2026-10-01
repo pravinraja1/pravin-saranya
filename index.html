@@ -1175,8 +1175,13 @@ button.tag:hover{color:var(--gold)}
 
     /* hearts */
     function paintHearts(){if(disp<hearts){disp+=Math.max(1,Math.ceil((hearts-disp)/10));hcn.textContent=disp.toLocaleString();}else{clearInterval(hAnim);hAnim=0;}}
-    function setHearts(n){if(typeof n!=='number')return;hearts=Math.max(hearts,n);hc.hidden=false;if(!hAnim)hAnim=setInterval(paintHearts,60);
+    var seeded=false;
+    function setHearts(n,srv){if(typeof n!=='number')return;hearts=(srv&&!seeded)?n:Math.max(hearts,n);hc.hidden=false;
+      if(srv&&!seeded){seeded=true;disp=hearts;hcn.textContent=disp.toLocaleString();}   // first value from the server shows instantly, no count-up from 0
+      try{localStorage.setItem('ps-hearts',String(hearts));}catch(x){}
+      if(disp<hearts&&!hAnim)hAnim=setInterval(paintHearts,60);
       if(hl)hl.textContent=(ta()?'❤ '+hearts.toLocaleString()+' இதயங்கள் அனுப்பப்பட்டுள்ளன. அன்பை அனுப்ப அடிப்பகுதியிலுள்ள ஜோடியைத் தொடுங்கள்.':'❤ '+hearts.toLocaleString()+' hearts sent by guests. Tap the dancing couple to send one.');}
+    try{var c0=+localStorage.getItem('ps-hearts');if(c0>0){hearts=c0;disp=c0;hcn.textContent=c0.toLocaleString();hc.hidden=false;}}catch(x){}
     window.__heartTap=function(){pend++;setHearts(hearts+1);};
     setInterval(function(){if(!pend)return;var n=Math.min(pend,30);pend-=n;jget('a=heart&n='+n).then(function(d){if(d)setHearts(d.hearts);}).catch(function(){pend+=n;});},3000);
 
@@ -1184,7 +1189,7 @@ button.tag:hover{color:var(--gold)}
       if(!d||Array.isArray(d)||!d.lanterns)return;
       if(first){sec.hidden=false;size();}
       d.lanterns.slice().reverse().forEach(function(o){var l=addL(o,false);if(l)l.px=l.x0*W;});
-      setHearts(d.hearts);
+      setHearts(d.hearts,true);
       if(first){if(L.length)pick(Math.floor(Math.random()*L.length));else{cap.hidden=false;cap.textContent=ta()?'முதல் விளக்கை ஏற்றுங்கள் ✨':'Be the first to light a lantern ✨';}if(reduce)draw(0);}
     }).catch(function(){});}
     load(true);setInterval(function(){if(document.visibilityState==='visible')load(false);},30000);
