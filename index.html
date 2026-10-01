@@ -926,7 +926,7 @@ button.tag:hover{color:var(--gold)}
     navigator.share({title:'Pravin & Saranya — Wedding Invitation',text:'You’re invited to the wedding of Pravin & Saranya · 18 November 2026',url:'https://pravinraja1.github.io/pravin-saranya/'}).catch(function(){});});
 
   // Hashtag copy + optional album link
-  var ALBUM='';  // paste a shared Google Photos / Drive album link here to show the album button
+  var ALBUM='https://drive.google.com/drive/folders/1Gac2OpZJZBdPxEUolfGXSy7r6qHLeg96?usp=sharing';  // paste a shared Google Photos / Drive album link here to show the album button
   if(ALBUM){var al=$('tag-album');al.href=ALBUM;al.hidden=false;}
   function copy(){var t='#PravinWedsSaranya',b=$('tag-copy'),sp=b.firstElementChild,old=sp.innerHTML;
     var done=function(){sp.textContent=ta()?'நகலெடுக்கப்பட்டது ✓':'Copied ✓';setTimeout(function(){sp.innerHTML=old;},1800);};
