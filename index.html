@@ -1306,14 +1306,18 @@ button.tag:hover{color:var(--gold)}
   function paintSnd(){if(!snd)return;snd.textContent=muted?'🔕':'🔔';snd.setAttribute('aria-label',muted?'Bell sound off':'Bell sound on');snd.title=muted?'Bell sound off':'Bell sound on';}
   paintSnd();
   if(snd)snd.addEventListener('click',function(){muted=!muted;try{localStorage.setItem('ps-mute',muted?'1':'0');}catch(e){}paintSnd();if(!muted)bell(1);});
-  function bell(n){if(muted)return;
+  // soft harp-style welcome chime: major-key arpeggio, warm tone, gentle echo
+  function bell(){if(muted)return;
     try{var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;ac=ac||new AC();if(ac.resume)ac.resume();
-      var out=ac.createGain();out.gain.value=.22;out.connect(ac.destination);
-      var P=[[.5,.5],[1,1],[1.19,.55],[1.5,.4],[2,.5],[2.74,.35],[3,.22],[4.17,.14],[5.43,.08]];
-      function strike(at,f0){P.forEach(function(p){var o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime+at,d=3.4/Math.pow(p[0]+.4,.6);
-        o.type='sine';o.frequency.value=f0*p[0];g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(p[1]*.5,t+.006);g.gain.exponentialRampToValueAtTime(.0001,t+d);
-        o.connect(g);g.connect(out);o.start(t);o.stop(t+d+.05);});}
-      var seq=[0,.95,1.9,2.85],fr=[392,370,392,330];for(var i=0;i<(n||3);i++)strike(seq[i],fr[i]);}catch(e){}}
+      var master=ac.createGain();master.gain.value=1;master.connect(ac.destination);
+      var lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.value=3200;lp.connect(master);
+      var dl=ac.createDelay(1);dl.delayTime.value=.27;var fb=ac.createGain();fb.gain.value=.3;var wet=ac.createGain();wet.gain.value=.35;
+      lp.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(wet);wet.connect(master);
+      var N=[523.25,659.25,783.99,1046.5,1318.5,1567.98,2093],T=[0,.13,.26,.39,.54,.7,.9],G=[.5,.5,.5,.5,.45,.4,.35];
+      N.forEach(function(f,i){var t=ac.currentTime+T[i];
+        [[1,1],[2,.18],[3,.06]].forEach(function(h){var o=ac.createOscillator(),g=ac.createGain();o.type=h[0]===1?'triangle':'sine';o.frequency.value=f*h[0];
+          g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(G[i]*h[1]*.5,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+(i===N.length-1?2.6:1.5));
+          o.connect(g);g.connect(lp);o.start(t);o.stop(t+2.8);});});}catch(e){}}
   var seal=$('open-seal');if(seal)seal.addEventListener('click',function(){bell(3);});
 
   // ---------- Personal invitation pass (story-size image) ----------
