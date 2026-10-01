@@ -486,7 +486,7 @@ button.tag:hover{color:var(--gold)}
 .bs-in{position:relative;height:158px;display:grid;place-items:end center;padding-top:36px}
 .bs-bub{position:absolute;top:4px;left:50%;transform:translateX(-50%) scale(.6);opacity:0;background:#fff;border:1px solid var(--gold-2);border-radius:14px;padding:6px 12px;font:600 12px var(--caps);color:var(--ink);white-space:nowrap;transition:opacity .4s,transform .4s}
 .bs-bub.on{opacity:1;transform:translateX(-50%) scale(1)}
-.bs-baby{width:92px;cursor:pointer;transform:translateY(40px) scale(.4);opacity:0;transition:transform .7s cubic-bezier(.2,1.4,.4,1) .15s,opacity .4s .15s}
+.bs-baby{width:74px;cursor:pointer;transform:translateY(40px) scale(.4);opacity:0;transition:transform .7s cubic-bezier(.2,1.4,.4,1) .15s,opacity .4s .15s}
 .babystage.open .bs-baby{transform:none;opacity:1}
 .bb{width:100%;height:auto;display:block;overflow:visible}
 .bb-body{transform-origin:40px 88px;animation:bbbob 2.6s ease-in-out infinite}
@@ -501,10 +501,10 @@ button.tag:hover{color:var(--gold)}
 .babystage.open .bln{animation:blnup 4s ease-in-out infinite}
 .bln.b1{left:14%;background:#e9a3b2}.bln.b2{left:78%;background:#e9cf86;animation-delay:.8s}.bln.b3{left:30%;background:#9db7e6;animation-delay:1.6s}
 @keyframes blnup{0%{transform:translateY(40px);opacity:0}15%{opacity:1}100%{transform:translateY(-120px) translateX(10px);opacity:0}}
-.flowerbaby{position:fixed;left:0;bottom:calc(6px + env(safe-area-inset-bottom,0px));z-index:60;width:92px;pointer-events:none;animation:crawlx 12s linear forwards}
+.flowerbaby{position:fixed;left:0;bottom:calc(6px + env(safe-area-inset-bottom,0px));z-index:60;width:54px;pointer-events:none;animation:crawlx 13s linear forwards}
 .flowerbaby svg{pointer-events:auto;cursor:pointer;width:100%;height:auto;display:block;overflow:visible;filter:drop-shadow(0 6px 8px rgba(15,29,61,.25))}
 @keyframes crawlx{from{transform:translateX(-140px)}to{transform:translateX(calc(100vw + 30px))}}
-.fbtag{text-align:center;margin:0 auto 4px;width:max-content;max-width:260px;background:#fff;border:1px solid var(--gold-2);border-radius:999px;padding:4px 10px;white-space:nowrap;font:600 11px var(--caps);letter-spacing:.05em;color:var(--ink);box-shadow:0 6px 14px -8px rgba(15,29,61,.5)}
+.fbtag{text-align:center;margin:0 0 4px;position:relative;left:50%;transform:translateX(-50%);width:max-content;max-width:260px;background:#fff;border:1px solid var(--gold-2);border-radius:999px;padding:3px 8px;white-space:nowrap;font:600 9px var(--caps);letter-spacing:.04em;color:var(--ink);box-shadow:0 6px 14px -8px rgba(15,29,61,.5)}
 .wk-body{transform-origin:40px 92px;animation:wkw .6s ease-in-out infinite alternate}
 @keyframes wkw{from{transform:rotate(-3deg) translateY(0)}to{transform:rotate(3deg) translateY(-2px)}}
 .wk-l{animation:wkl .6s ease-in-out infinite alternate}.wk-r{animation:wkl .6s ease-in-out infinite alternate-reverse}
@@ -1443,7 +1443,7 @@ button.tag:hover{color:var(--gold)}
     var tag=w.querySelector('.fbtag');tag.textContent=(ta()?'குட்டி அமிரா · ':'Little Amira · ')+ageTxt();
     var svg=w.querySelector('svg');svg.addEventListener('click',function(){hearts(w,6);svg.classList.remove('giggle');void svg.offsetWidth;svg.classList.add('giggle');});
     var k=0,iv=setInterval(function(){var r=w.getBoundingClientRect();if(window.__petalBurst)window.__petalBurst(r.left+r.width*.75,r.top);if(++k>=6)clearInterval(iv);},1500);
-    setTimeout(function(){clearInterval(iv);w.remove();},13500);},1500);});
+    setTimeout(function(){clearInterval(iv);w.remove();},14500);},1500);});
 
   /* ---- 2. Touch Praveena Rani: little Amira pops up ---- */
   var sib=document.querySelector('.fam .sib[data-i18n="gsib"]'),stage=$('babystage');
