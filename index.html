@@ -265,8 +265,7 @@ body.opened .couple-dock.show{transform:none;opacity:1}
 body{background:radial-gradient(ellipse 90% 50% at 50% -10%,rgba(214,181,110,.16),transparent 70%),var(--paper);background-attachment:scroll}
 .band.night::before{background:radial-gradient(ellipse 65% 55% at 50% 30%,rgba(214,181,110,.11),transparent 70%),radial-gradient(ellipse 120% 100% at 50% 50%,transparent 55%,rgba(0,0,0,.35)),linear-gradient(180deg,#09112a 0%,#0e1a3c 50%,#09112a 100%)}
 .band.night::after{top:0;bottom:0;height:auto;background:none;border-top:1px solid rgba(214,181,110,.55);border-bottom:1px solid rgba(214,181,110,.55);box-shadow:inset 0 5px 0 -4px rgba(214,181,110,.3),inset 0 -5px 0 -4px rgba(214,181,110,.3)}
-.hero-band{overflow-y:clip}
-.mandala{width:min(900px,150vw);opacity:.07;top:50%}
+
 .hero-band .frame{box-shadow:0 0 0 1px rgba(214,181,110,.45),0 40px 90px -30px rgba(0,0,0,.75),0 0 120px rgba(214,181,110,.12)}
 .cell{background:linear-gradient(180deg,#0f1c40,#0a132d)}
 .band.night .event{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}
@@ -283,6 +282,16 @@ details.techie summary::-webkit-details-marker{display:none}
 details.techie summary .chev{transition:transform .3s ease;color:var(--gold)}
 details.techie[open] summary .chev{transform:rotate(180deg)}
 details.techie .term{border-radius:0;box-shadow:none}
+
+/* ---- full-bleed fix (Safari) + clearer save-the-date ---- */
+.mandala{position:absolute;left:50%;top:0;bottom:0;width:100vw;height:auto;aspect-ratio:auto;transform:translateX(-50%);overflow:hidden;z-index:-1;opacity:.07}
+.mandala svg{position:absolute;left:50%;top:50%;width:min(900px,150vw);height:auto;aspect-ratio:1;transform:translate(-50%,-50%);animation:spin2 140s linear infinite}
+@keyframes spin2{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.hero-band .topbar{flex-wrap:wrap;row-gap:12px;padding-top:4px}
+.hero-band .topbar .caps{font-size:14.5px;letter-spacing:.3em;color:#ead09a;text-shadow:0 1px 10px rgba(214,181,110,.35)}
+.hero-band .topbar .caps b{font-weight:700;color:#f6e3b4}
+@media (max-width:520px){.hero-band .topbar{justify-content:center;text-align:center}.hero-band .topbar .caps{font-size:12.5px;letter-spacing:.24em}}
+@media (prefers-reduced-motion:reduce){.mandala svg{animation:none}}
 </style>
 
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Welcome">
@@ -328,7 +337,7 @@ details.techie .term{border-radius:0;box-shadow:none}
 <div class="wrap">
   <div class="band night hero-band"><div class="mandala" aria-hidden="true"><svg viewBox="0 0 560 560" fill="none" stroke="currentColor" id="mandala"></svg></div>
 <div class="topbar">
-    <span class="caps" data-i18n="save">Save the Date</span>
+    <span class="caps" data-i18n="save">Save the Date · <b>18 November 2026</b></span>
     <div class="lang" role="group" aria-label="Language">
       <button type="button" id="lang-en" aria-pressed="true">English</button>
       <button type="button" id="lang-ta" aria-pressed="false" class="ta">தமிழ்</button>
@@ -509,7 +518,7 @@ details.techie .term{border-radius:0;box-shadow:none}
   function set(id,v){var el=document.getElementById(id);if(!el||el.textContent===v)return;el.textContent=v;var c=el.parentNode;c.classList.remove('flip');void c.offsetWidth;c.classList.add('flip');}
 
   // translations
-  var T={ta:{famh:'இரு குடும்பங்கள், ஒரு கொண்டாட்டம்',gside:'மணமகன் குடும்பம்',bside:'மணமகள் குடும்பம்',gpar:'திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட்<br>– திருமதி. P. விஜி அமலா பிரின்ஸிலி',gfrom:'அழகப்பபுரம்',bpar:'திரு. S. அந்தோணி ஜோசப்<br>– திருமதி. G. இருதய தெரஸ் எடிட்',bfrom:'வட்டக்கரை',sidel:'யாருக்கு பதில் அனுப்புகிறீர்கள்',sg:'மணமகன் குடும்பம்',sb:'மணமகள் குடும்பம்',welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள்',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
+  var T={ta:{famh:'இரு குடும்பங்கள், ஒரு கொண்டாட்டம்',gside:'மணமகன் குடும்பம்',bside:'மணமகள் குடும்பம்',gpar:'திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட்<br>– திருமதி. P. விஜி அமலா பிரின்ஸிலி',gfrom:'அழகப்பபுரம்',bpar:'திரு. S. அந்தோணி ஜோசப்<br>– திருமதி. G. இருதய தெரஸ் எடிட்',bfrom:'வட்டக்கரை',sidel:'யாருக்கு பதில் அனுப்புகிறீர்கள்',sg:'மணமகன் குடும்பம்',sb:'மணமகள் குடும்பம்',welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள் · <b>18 நவம்பர் 2026</b>',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
     days:'நாட்கள்',hours:'மணி',mins:'நிமிடம்',secs:'விநாடி',verse:'“தேவன் இணைத்ததை மனுஷன் பிரிக்காதிருக்கக்கடவன்.” <b>மத்தேயு 19:6</b>',
     parents:'அன்புடன், திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட் – திருமதி. P. விஜி அமலா பிரின்ஸிலி, அழகப்பபுரம்',
     order:'நிகழ்ச்சி நிரல்',e1:'திருமணம்',e1v:'புனித சூசையப்பர் ஆலயம்',e1p:'கூட்டுத் திருப்பலியுடன் · வட்டக்கரை, நாகர்கோவில்',dir:'வழி',cal:'நாட்காட்டியில் சேர்',
