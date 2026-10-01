@@ -12,7 +12,10 @@ function doGet(){
   var it = DriveApp.getFolderById(FOLDER_ID).getFiles(), out = [];
   while (it.hasNext()) {
     var f = it.next();
-    if (f.getMimeType().indexOf('image/') === 0) out.push({id: f.getId(), t: f.getDateCreated().getTime()});
+    if (f.getMimeType().indexOf('image/') === 0) {
+      if (f.getSharingAccess() !== DriveApp.Access.ANYONE_WITH_LINK) f.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);  // photos added by hand
+      out.push({id: f.getId(), t: f.getDateCreated().getTime()});
+    }
   }
   out.sort(function(a,b){return b.t - a.t;});
   return json_(out.slice(0, MAX_LIST));

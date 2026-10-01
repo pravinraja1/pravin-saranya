@@ -415,6 +415,14 @@ button.tag:hover{color:var(--gold)}
 .pgrid img{width:100%;height:100%;object-fit:cover;display:block}
 .lb{position:fixed;inset:0;z-index:200;background:rgba(8,14,34,.92);display:grid;place-items:center;padding:16px}
 .lb img{max-width:100%;max-height:92vh;border-radius:8px}
+.cam{position:fixed;inset:0;z-index:300;background:#050a1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:12px}
+.cam video,.cam img{width:min(100%,520px);max-height:72vh;object-fit:cover;border-radius:14px;background:#000}
+.cam video.front{transform:scaleX(-1)}
+.cam .row{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}
+.cam .shutter{width:72px;height:72px;border-radius:50%;border:4px solid #fff;background:#e9cf86;cursor:pointer;box-shadow:0 0 0 3px rgba(233,207,134,.4)}
+.cam .btn{background:#fff;color:#0f1d3d;border-color:#fff}
+.cam .btn.solid{background:linear-gradient(135deg,#b8893b,#ecd38a);color:#0f1d3d}
+.cam p{color:#f1dfae;margin:0;font-family:var(--caps);font-size:13px;letter-spacing:.08em;text-align:center}
 </style>
 
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Welcome">
@@ -610,7 +618,7 @@ button.tag:hover{color:var(--gold)}
 <div class="photos" id="photos" hidden>
       <p class="upnote" data-i18n="upnote">Take a selfie or add your photos. They appear here for everyone.</p>
       <div class="acts" style="justify-content:center">
-        <label class="btn solid" for="up-selfie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span data-i18n="selfie">Take a selfie</span></label>
+        <button type="button" class="btn solid" id="selfie-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span data-i18n="selfie">Take a selfie</span></button>
         <label class="btn" for="up-files"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg><span data-i18n="uploadp">Add photos</span></label>
       </div>
       <input class="vh" type="file" id="up-selfie" accept="image/*" capture="user">
@@ -986,13 +994,13 @@ button.tag:hover{color:var(--gold)}
   var ta=function(){return document.documentElement.lang==='ta';},grid=document.getElementById('pgrid'),st=document.getElementById('upstat');
   function say(en,tm){st.textContent=ta()?tm:en;}
   function thumb(id,w){return 'https://drive.google.com/thumbnail?id='+encodeURIComponent(id)+'&sz=w'+w;}
-  function add(src,full,first){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Open photo');var i=new Image();i.src=src;i.loading='lazy';i.alt='Guest photo';b.appendChild(i);
+  function add(src,full,first){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Open photo');var i=new Image();i.onerror=function(){if(!first)b.remove();};i.src=src;i.loading='lazy';i.alt='Guest photo';b.appendChild(i);
     b.addEventListener('click',function(){var o=document.createElement('div');o.className='lb';var f=new Image();f.src=full;f.alt='Guest photo';o.appendChild(f);o.addEventListener('click',function(){o.remove();});document.body.appendChild(o);});
     first?grid.insertBefore(b,grid.firstChild):grid.appendChild(b);}
   function load(){fetch(UPLOAD_URL).then(function(r){return r.json();}).then(function(l){grid.innerHTML='';l.forEach(function(p){add(thumb(p.id,400),thumb(p.id,1600));});}).catch(function(){});}
   function shrink(file){return new Promise(function(ok,no){var u=URL.createObjectURL(file),im=new Image();im.onload=function(){var m=1600,k=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(function(b){b?ok(b):no();},'image/jpeg',.82);};im.onerror=no;im.src=u;});}
   function b64(blob){return new Promise(function(ok,no){var r=new FileReader();r.onload=function(){ok(String(r.result).split(',')[1]);};r.onerror=no;r.readAsDataURL(blob);});}
-  async function send(files){var list=[].slice.call(files).filter(function(f){return /^image\//.test(f.type)||/\.(heic|heif|jpe?g|png|webp)$/i.test(f.name);});if(!list.length)return;
+  async function send(files){var list=[].slice.call(files).filter(function(f){return /^image\//.test(f.type)||/\.(heic|heif|jpe?g|png|webp)$/i.test(f.name||'');});if(!list.length)return;
     var done=0,fail=0;
     for(var n=0;n<list.length;n++){say('Uploading '+(n+1)+' of '+list.length+'…','பதிவேற்றம் '+(n+1)+' / '+list.length+'…');
       try{var blob=await shrink(list[n]),data=await b64(blob);
@@ -1000,6 +1008,29 @@ button.tag:hover{color:var(--gold)}
         if(!j.ok)throw 0;done++;var local=URL.createObjectURL(blob);add(local,local,true);}catch(e){fail++;}}
     if(done&&window.__petalBurst)window.__petalBurst(innerWidth/2,innerHeight*.3);
     say(fail?(done+' added, '+fail+' failed. Please try again.'):('Thank you! '+done+' photo'+(done>1?'s':'')+' added ❤'),fail?(done+' சேர்ந்தது, '+fail+' தோல்வி. மீண்டும் முயலவும்.'):('நன்றி! '+done+' புகைப்படம் சேர்ந்தது ❤'));}
+
+  // live camera (laptop webcam or phone front camera); falls back to the file picker
+  var camStream=null,camFront=true;
+  function stopCam(){if(camStream){camStream.getTracks().forEach(function(t){t.stop();});camStream=null;}}
+  function openCam(){
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){document.getElementById('up-selfie').click();return;}
+    var o=document.createElement('div');o.className='cam';o.setAttribute('role','dialog');o.setAttribute('aria-label','Selfie camera');
+    o.innerHTML='<p id="cam-msg"></p><video playsinline muted autoplay></video><div class="row"><button type="button" class="btn" id="cam-x">Close</button><button type="button" class="shutter" id="cam-go" aria-label="Take photo"></button><button type="button" class="btn" id="cam-flip">Flip</button></div>';
+    document.body.appendChild(o);var v=o.querySelector('video'),msg=o.querySelector('#cam-msg');
+    function close(){stopCam();o.remove();}
+    function start(){stopCam();msg.textContent=ta()?'கேமரா தயாராகிறது…':'Starting camera…';v.classList.toggle('front',camFront);
+      navigator.mediaDevices.getUserMedia({video:{facingMode:camFront?'user':'environment',width:{ideal:1280},height:{ideal:1280}},audio:false}).then(function(st){camStream=st;v.srcObject=st;v.play().catch(function(){});msg.textContent=ta()?'புன்னகை! 📸':'Smile! 📸';})
+      .catch(function(){close();say('Camera is blocked or unavailable. Please pick a photo instead.','கேமரா அனுமதி இல்லை. புகைப்படத்தைத் தேர்ந்தெடுக்கவும்.');document.getElementById('up-selfie').click();});}
+    o.querySelector('#cam-x').addEventListener('click',close);
+    o.querySelector('#cam-flip').addEventListener('click',function(){camFront=!camFront;start();});
+    o.querySelector('#cam-go').addEventListener('click',function(){if(!v.videoWidth)return;var c=document.createElement('canvas'),k=Math.min(1,1600/Math.max(v.videoWidth,v.videoHeight));c.width=Math.round(v.videoWidth*k);c.height=Math.round(v.videoHeight*k);var x=c.getContext('2d');
+      if(camFront){x.translate(c.width,0);x.scale(-1,1);}x.drawImage(v,0,0,c.width,c.height);
+      c.toBlob(function(b){if(!b)return;stopCam();var url=URL.createObjectURL(b);
+        o.innerHTML='<p>'+(ta()?'நன்றாக இருக்கிறதா?':'Looking good?')+'</p><img alt="Your selfie" src="'+url+'"><div class="row"><button type="button" class="btn" id="cam-re">'+(ta()?'மீண்டும்':'Retake')+'</button><button type="button" class="btn solid" id="cam-ok">'+(ta()?'பதிவேற்று':'Upload')+'</button></div>';
+        o.querySelector('#cam-re').addEventListener('click',function(){o.remove();openCam();});
+        o.querySelector('#cam-ok').addEventListener('click',function(){o.remove();send([b]);});},'image/jpeg',.9);});
+    start();}
+  document.getElementById('selfie-btn').addEventListener('click',openCam);
   ['up-selfie','up-files'].forEach(function(id){var el=document.getElementById(id);el.addEventListener('change',function(){send(el.files).then(function(){el.value='';});});});
   if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();load();}},{rootMargin:'300px'});io.observe(box);}else load();
 })();
