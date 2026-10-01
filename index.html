@@ -227,6 +227,25 @@ footer.band.night .num{color:#f1dfae}
 footer .sig{font-family:var(--script);font-size:46px;line-height:1.1;background:linear-gradient(100deg,#b8893b,#f2dc98 45%,#b8893b);-webkit-background-clip:text;background-clip:text;color:transparent}
 footer .sigdate{font-family:var(--caps);letter-spacing:.3em;font-size:12px;color:#d9b46a}
 @media (prefers-reduced-motion:reduce){.mandala svg,.name,.name.shine,body.opened .name,body.opened .crest-wrap{animation:none}}
+
+/* ---- dancing couple ---- */
+.couple-dock{position:fixed;right:max(10px,env(safe-area-inset-right,0px));bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:30;width:104px;transform:translate(0,140%);opacity:0;transition:transform .9s cubic-bezier(.2,.9,.3,1.1),opacity .6s ease}
+body.opened .couple-dock.show{transform:none;opacity:1}
+.couple-dock button.cpl{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;filter:drop-shadow(0 8px 14px rgba(15,29,61,.25))}
+.couple-dock .x{position:absolute;top:-6px;left:-6px;width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--soft);font:600 14px/1 var(--serif);cursor:pointer;display:grid;place-items:center}
+.couple-svg{width:100%;height:auto;display:block;overflow:visible}
+.dancers{transform-origin:72px 146px;animation:waltz 3.6s ease-in-out infinite}
+@keyframes waltz{0%{transform:rotate(-4deg) translateX(-3px)}25%{transform:rotate(0) translateX(0) translateY(-2px)}50%{transform:rotate(4deg) translateX(3px)}75%{transform:rotate(0) translateX(0) translateY(-2px)}100%{transform:rotate(-4deg) translateX(-3px)}}
+.gown{transform-origin:80px 70px;animation:swish 1.8s ease-in-out infinite alternate}
+@keyframes swish{from{transform:skewX(-6deg)}to{transform:skewX(6deg)}}
+.veil{transform-origin:86px 24px;animation:veil 2.4s ease-in-out infinite alternate}
+@keyframes veil{from{transform:rotate(-5deg)}to{transform:rotate(7deg)}}
+.heart{position:fixed;z-index:31;pointer-events:none;width:16px;height:16px;color:#d98ea0;animation:rise 2.6s ease-out forwards}
+.heart svg{width:100%;height:100%}
+@keyframes rise{0%{opacity:0;transform:translate(0,0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),-120px) scale(1.1) rotate(var(--rot))}}
+.stage{display:flex;justify-content:center;margin-bottom:6px}
+.stage .couple-svg{width:170px}
+@media (prefers-reduced-motion:reduce){.dancers,.gown,.veil{animation:none}.couple-dock{transition:none}}
 </style>
 
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Welcome">
@@ -241,6 +260,34 @@ footer .sigdate{font-family:var(--caps);letter-spacing:.3em;font-size:12px;color
   </div>
 </div>
 <canvas id="petals" aria-hidden="true"></canvas>
+<div class="couple-dock" id="dock"><button type="button" class="cpl" id="cpl" aria-label="The dancing couple — tap for hearts"><svg viewBox="0 0 140 160" aria-hidden="true" class="couple-svg">
+  <defs><radialGradient id="spotGa" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f2dc98" stop-opacity=".55"/><stop offset="1" stop-color="#f2dc98" stop-opacity="0"/></radialGradient></defs>
+  <ellipse cx="72" cy="150" rx="62" ry="9" fill="url(#spotGa)"/>
+  <path d="M14 152 Q72 140 130 152" fill="none" stroke="#c9a75e" stroke-width="1.4"/>
+  <g class="dancers">
+    <path class="veil" d="M86 20 Q112 44 110 98 Q104 74 92 52 Q88 40 84 26Z" fill="#e9cf86" opacity=".45"/>
+    <g class="groom" fill="#1c3263">
+      <circle cx="54" cy="24" r="9.5"/>
+      <path d="M50 33 h8 v5 h-8z"/>
+      <path d="M41 39 Q54 34 66 40 L67 86 L40 86Z"/>
+      <path d="M53 40 L56 52 L59 40Z" fill="#f6ecd4"/>
+      <path d="M41 86 h11 l1 54 h-9z M56 86 h11 l-2 54 h-9z"/>
+      <ellipse cx="47" cy="142" rx="7" ry="3"/><ellipse cx="62" cy="142" rx="7" ry="3"/>
+      <path d="M65 44 Q76 52 84 50" stroke="#1c3263" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <path d="M43 44 Q36 60 42 72" stroke="#1c3263" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+    </g>
+    <g class="bride">
+      <circle cx="80" cy="28" r="8.5" fill="#1c3263"/><circle cx="87" cy="22" r="4.6" fill="#1c3263"/>
+      <path d="M76 36 h7 v4 h-7z" fill="#1c3263"/>
+      <path d="M71 40 Q80 36 89 41 L86 70 L73 70Z" fill="#1c3263"/>
+      <path class="gown" d="M73 68 L86 68 Q102 104 114 146 Q82 154 50 146 Q62 104 73 68Z" fill="#f6ecd4" stroke="#c9a75e" stroke-width="1.6"/>
+      <path class="gown" d="M78 76 Q76 110 70 146 M82 76 Q88 112 96 148" fill="none" stroke="#c9a75e" stroke-width=".8" opacity=".7"/>
+      <path d="M73 44 Q64 40 60 38" stroke="#1c3263" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+      <circle cx="94" cy="60" r="4" fill="#d98ea0"/><circle cx="98" cy="57" r="3" fill="#e9cf86"/><circle cx="91" cy="56" r="2.6" fill="#f4c9d1"/>
+    </g>
+  </g>
+</svg></button><button type="button" class="x" id="dock-x" aria-label="Hide the dancing couple">×</button></div>
+
 <div class="wrap">
   <div class="band night hero-band"><div class="mandala" aria-hidden="true"><svg viewBox="0 0 560 560" fill="none" stroke="currentColor" id="mandala"></svg></div>
 <div class="topbar">
@@ -371,6 +418,33 @@ footer .sigdate{font-family:var(--caps);letter-spacing:.3em;font-size:12px;color
   </section>
 
   <footer class="band night">
+    <div class="stage"><svg viewBox="0 0 140 160" aria-hidden="true" class="couple-svg">
+  <defs><radialGradient id="spotGb" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f2dc98" stop-opacity=".55"/><stop offset="1" stop-color="#f2dc98" stop-opacity="0"/></radialGradient></defs>
+  <ellipse cx="72" cy="150" rx="62" ry="9" fill="url(#spotGb)"/>
+  <path d="M14 152 Q72 140 130 152" fill="none" stroke="#c9a75e" stroke-width="1.4"/>
+  <g class="dancers">
+    <path class="veil" d="M86 20 Q112 44 110 98 Q104 74 92 52 Q88 40 84 26Z" fill="#e9cf86" opacity=".45"/>
+    <g class="groom" fill="#1c3263">
+      <circle cx="54" cy="24" r="9.5"/>
+      <path d="M50 33 h8 v5 h-8z"/>
+      <path d="M41 39 Q54 34 66 40 L67 86 L40 86Z"/>
+      <path d="M53 40 L56 52 L59 40Z" fill="#f6ecd4"/>
+      <path d="M41 86 h11 l1 54 h-9z M56 86 h11 l-2 54 h-9z"/>
+      <ellipse cx="47" cy="142" rx="7" ry="3"/><ellipse cx="62" cy="142" rx="7" ry="3"/>
+      <path d="M65 44 Q76 52 84 50" stroke="#1c3263" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <path d="M43 44 Q36 60 42 72" stroke="#1c3263" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+    </g>
+    <g class="bride">
+      <circle cx="80" cy="28" r="8.5" fill="#1c3263"/><circle cx="87" cy="22" r="4.6" fill="#1c3263"/>
+      <path d="M76 36 h7 v4 h-7z" fill="#1c3263"/>
+      <path d="M71 40 Q80 36 89 41 L86 70 L73 70Z" fill="#1c3263"/>
+      <path class="gown" d="M73 68 L86 68 Q102 104 114 146 Q82 154 50 146 Q62 104 73 68Z" fill="#f6ecd4" stroke="#c9a75e" stroke-width="1.6"/>
+      <path class="gown" d="M78 76 Q76 110 70 146 M82 76 Q88 112 96 148" fill="none" stroke="#c9a75e" stroke-width=".8" opacity=".7"/>
+      <path d="M73 44 Q64 40 60 38" stroke="#1c3263" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+      <circle cx="94" cy="60" r="4" fill="#d98ea0"/><circle cx="98" cy="57" r="3" fill="#e9cf86"/><circle cx="91" cy="56" r="2.6" fill="#f4c9d1"/>
+    </g>
+  </g>
+</svg></div>
     <span class="sig">Pravin &amp; Saranya</span>
     <span class="sigdate">18 · XI · 2026</span>
     <span class="caps" data-i18n="assist">For assistance</span>
@@ -522,6 +596,27 @@ footer .sigdate{font-family:var(--caps);letter-spacing:.3em;font-size:12px;color
   var seal=document.getElementById('open-seal');
   if(seal)seal.addEventListener('click',function(){document.body.classList.add('opened');});
   addEventListener('keydown',function(e){if(e.key==='Escape')document.body.classList.add('opened');});
+})();
+</script>
+
+<script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var dock=document.getElementById('dock'),cpl=document.getElementById('cpl'),hidden=false,inForm=false,timer=0;
+  var HEART='<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3.2 1.7-2 3.2-3.2 5.3-3.2 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg>';
+  var COLS=['#d98ea0','#e9b4c0','#c9a75e','#e06b84'];
+  function heart(){if(reduce)return;var r=cpl.getBoundingClientRect();if(!r.width)return;var h=document.createElement('span');h.className='heart';h.innerHTML=HEART;
+    h.style.left=(r.left+r.width*.35+Math.random()*r.width*.3)+'px';h.style.top=(r.top+r.height*.2)+'px';h.style.color=COLS[Math.random()*COLS.length|0];
+    h.style.setProperty('--dx',((Math.random()-.5)*60)+'px');h.style.setProperty('--rot',((Math.random()-.5)*40)+'deg');document.body.appendChild(h);setTimeout(function(){h.remove();},2700);}
+  function update(){var on=!hidden&&!inForm;dock.classList.toggle('show',on);clearInterval(timer);if(on&&!reduce)timer=setInterval(heart,1500);}
+  cpl.addEventListener('click',function(){for(var i=0;i<10;i++)setTimeout(heart,i*70);});
+  document.getElementById('dock-x').addEventListener('click',function(){hidden=true;update();});
+  function start(){setTimeout(update,1800);}
+  var seal=document.getElementById('open-seal');if(seal)seal.addEventListener('click',start);
+  addEventListener('keydown',function(e){if(e.key==='Escape')start();});
+  if('IntersectionObserver' in window){var f=document.getElementById('rsvp'),ft=document.querySelector('footer');
+    var vis={};new IntersectionObserver(function(es){es.forEach(function(e){vis[e.target===f?'f':'t']=e.isIntersecting;});inForm=!!(vis.f||vis.t);if(document.body.classList.contains('opened'))update();},{threshold:.05}).observe(f);
+    }
 })();
 </script>
 </body>
