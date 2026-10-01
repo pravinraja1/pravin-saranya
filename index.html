@@ -300,8 +300,8 @@ section > h2.reveal-in::after{animation:grow 1.2s ease both}
       <div class="side-pick" role="radiogroup" aria-labelledby="side-l">
         <span class="caps side-l" id="side-l" data-i18n="sidel">I am replying to</span>
         <div class="sides">
-          <label class="sidecard" for="s-groom"><input type="radio" name="side" id="s-groom" value="groom" checked><span class="sc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-7 8-7s7 2.5 8 7M10 15l2 2 2-2"/></svg><span><b data-i18n="sg">The Groom’s Family</b><small>Pravin’s father · +91 94435 79704</small></span></span></label>
-          <label class="sidecard" for="s-bride"><input type="radio" name="side" id="s-bride" value="bride"><span class="sc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-7 8-7s7 2.5 8 7M8 6c1-3 7-3 8 0"/></svg><span><b data-i18n="sb">The Bride’s Family</b><small>Saranya’s father · +91 94426 53998</small></span></span></label>
+          <label class="sidecard" for="s-groom"><input type="radio" name="side" id="s-groom" value="groom" checked><span class="sc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-7 8-7s7 2.5 8 7M10 15l2 2 2-2"/></svg><span><b data-i18n="sg">The Groom’s Family</b><small>+91 94435 79704</small></span></span></label>
+          <label class="sidecard" for="s-bride"><input type="radio" name="side" id="s-bride" value="bride"><span class="sc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-7 8-7s7 2.5 8 7M8 6c1-3 7-3 8 0"/></svg><span><b data-i18n="sb">The Bride’s Family</b><small>+91 94426 53998</small></span></span></label>
         </div>
       </div>
       <div class="row">
@@ -374,7 +374,7 @@ section > h2.reveal-in::after{animation:grow 1.2s ease both}
   document.getElementById('lang-ta').addEventListener('click',function(){setLang('ta')});
 
   // WhatsApp RSVP
-  var PHONES={groom:{n:'919443579704',d:'+91 94435 79704',en:'the Groom’s family (Pravin’s father)',ta:'மணமகன் குடும்பத்திற்கு'},bride:{n:'919442653998',d:'+91 94426 53998',en:'the Bride’s family (Saranya’s father)',ta:'மணமகள் குடும்பத்திற்கு'}};
+  var PHONES={groom:{n:'919443579704',d:'+91 94435 79704',en:'the Groom’s family',ta:'மணமகன் குடும்பத்திற்கு'},bride:{n:'919442653998',d:'+91 94426 53998',en:'the Bride’s family',ta:'மணமகள் குடும்பத்திற்கு'}};
   function side(){var r=document.querySelector('input[name="side"]:checked');return r?r.value:'groom';}
   function buildMsg(){var S=PHONES[side()];
     var n=document.getElementById('f-name').value.trim()||'(your name)',c=document.getElementById('f-count').value,
