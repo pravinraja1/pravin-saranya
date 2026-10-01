@@ -456,6 +456,9 @@ button.tag:hover{color:var(--gold)}
 .cam .chip{flex:none;min-height:40px;padding:8px 14px;border-radius:999px;border:1px solid rgba(233,207,134,.5);background:rgba(255,255,255,.08);color:#f6ecd4;font:600 12px var(--caps);letter-spacing:.05em;cursor:pointer}
 .cam .chip[aria-pressed="true"]{background:linear-gradient(135deg,#b8893b,#ecd38a);color:#0f1d3d;border-color:#ecd38a}
 .term #term-out{min-height:0;padding:0 18px 6px;white-space:pre-wrap;max-height:260px;overflow-y:auto}
+.term .tform{background:var(--night)!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:0!important}
+.term .tform::before,.term .tform::after{display:none!important}
+.term .tform input{background:transparent!important;border:0!important;border-bottom:1px solid #3a4a78!important;border-radius:0!important;box-shadow:none!important;padding:6px 0!important;min-height:0!important}
 .tform{display:flex;gap:8px;align-items:center;padding:4px 18px 16px;background:var(--night);font:400 14px var(--mono)}
 .tform input{flex:1;min-width:0;background:transparent;border:0;border-bottom:1px solid #3a4a78;color:#dfe6f7;font:400 16px var(--mono);outline:0;padding:6px 0}
 .tform input:focus{border-bottom-color:#e9cf86}
