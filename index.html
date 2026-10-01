@@ -437,24 +437,6 @@ button.tag:hover{color:var(--gold)}
 .cam p{color:#f1dfae;margin:0;font-family:var(--caps);font-size:13px;letter-spacing:.08em;text-align:center}
 
 /* ---- v3: calendar, lanterns, hearts, AR, terminal, eggs ---- */
-.adv{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
-.dtile{position:relative;aspect-ratio:1;min-width:0;padding:0;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);font:700 15px/1 var(--caps);cursor:pointer;display:grid;place-items:center}
-.dtile span{display:flex;flex-direction:column;align-items:center;gap:3px}
-.dtile small{font:500 8.5px/1 var(--caps);letter-spacing:.04em;color:var(--soft)}
-.dtile.open{background:linear-gradient(135deg,#f6ecd4,#e9cf86);border-color:var(--gold-2)}
-.dtile.today{background:linear-gradient(135deg,#f6ecd4,#e9cf86);border-color:var(--gold);animation:todayp 1.8s ease-in-out infinite}
-@keyframes todayp{0%,100%{box-shadow:0 0 0 0 rgba(201,167,94,.7)}50%{box-shadow:0 0 0 6px rgba(201,167,94,0)}}
-.dtile.lock{background:var(--paper-2);color:#a39b86;cursor:default}
-.dtile.lock i{position:absolute;right:3px;top:2px;font-size:9px;font-style:normal;opacity:.7}
-.dtile.shake{animation:shk .4s}
-@keyframes shk{20%{transform:translateX(-3px)}40%{transform:translateX(3px)}60%{transform:translateX(-2px)}80%{transform:translateX(2px)}}
-.dlg{position:fixed;inset:0;z-index:250;background:rgba(8,14,34,.8);display:grid;place-items:center;padding:16px}
-.dlg .card{background:#fffdf7;border:1px solid var(--gold-2);border-radius:16px;max-width:420px;width:100%;padding:26px 20px;text-align:center;box-shadow:0 0 0 5px #fffdf7,0 0 0 6px var(--gold-2),0 30px 60px -20px rgba(0,0,0,.6)}
-.dlg .k{font:600 13px var(--caps);letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.dlg .dn{font:500 12px var(--caps);letter-spacing:.1em;color:var(--soft);margin:4px 0 14px}
-.dlg .b{font-size:23px;line-height:1.35;white-space:pre-line}
-.dlg .b.code{font:500 14px/1.6 var(--mono);text-align:left;background:var(--night);color:#dfe6f7;padding:14px;border-radius:10px;white-space:pre-wrap;word-break:break-word}
-.dlg .src{margin-top:10px;font:600 13px var(--caps);letter-spacing:.12em;color:var(--gold)}
 .skynote{margin:0;text-align:center;color:#c7cfe6}
 .sky{position:relative;height:380px;border-radius:16px;overflow:hidden;background:linear-gradient(#040a20,#11224d 62%,#2b3770);border:1px solid rgba(201,167,94,.4);touch-action:manipulation}
 .sky canvas{position:absolute;inset:0;width:100%;height:100%;cursor:pointer}
@@ -651,13 +633,6 @@ button.tag:hover{color:var(--gold)}
     </form>
   </section>
 
-  <section aria-labelledby="h-adv">
-    <h2 id="h-adv" data-i18n="advh">Countdown Calendar</h2>
-    <p class="upnote" style="text-align:center" data-i18n="advs">A little surprise unlocks every day until the wedding.</p>
-    <div class="adv" id="adv" role="list"></div>
-    <p class="upstat" id="advmsg" role="status" aria-live="polite" style="text-align:center"></p>
-  </section>
-
   <section class="band night" id="sky-sec" aria-labelledby="h-sky" hidden>
     <h2 id="h-sky" data-i18n="skyh">Light a Lantern</h2>
     <p class="skynote" data-i18n="skys">Make a wish for Pravin &amp; Saranya. Your lantern joins everyone else’s in the sky.</p>
@@ -770,7 +745,7 @@ button.tag:hover{color:var(--gold)}
   function set(id,v){var el=document.getElementById(id);if(!el||el.textContent===v)return;el.textContent=v;var c=el.parentNode;c.classList.remove('flip');void c.offsetWidth;c.classList.add('flip');}
 
   // translations
-  var T={ta:{advh:'நாட்காட்டி கவுண்டவுன்',advs:'திருமணம் வரை தினமும் ஒரு சிறிய ஆச்சரியம் திறக்கும்.',skyh:'ஒரு விளக்கை ஏற்றுங்கள்',skys:'பிரவின் & சரண்யாவுக்கு ஒரு வாழ்த்து சொல்லுங்கள். உங்கள் விளக்கு அனைவரின் விளக்குகளுடன் வானில் சேரும்.',release:'விளக்கை ஏற்று',viewall:'அனைத்து புகைப்படங்களும்',upnote:'செல்ஃபி எடுங்கள் அல்லது உங்கள் புகைப்படங்களைச் சேருங்கள். அனைவரும் இங்கே காணலாம்.',selfie:'செல்ஃபி எடுக்க',uploadp:'புகைப்படங்களைச் சேர்க்க',addall:'அனைத்தையும் நாட்காட்டியில் சேர்க்க',shareinv:'அழைப்பைப் பகிர்க',faqh:'விருந்தினர் குறிப்புகள்',
+  var T={ta:{skyh:'ஒரு விளக்கை ஏற்றுங்கள்',skys:'பிரவின் & சரண்யாவுக்கு ஒரு வாழ்த்து சொல்லுங்கள். உங்கள் விளக்கு அனைவரின் விளக்குகளுடன் வானில் சேரும்.',release:'விளக்கை ஏற்று',viewall:'அனைத்து புகைப்படங்களும்',upnote:'செல்ஃபி எடுங்கள் அல்லது உங்கள் புகைப்படங்களைச் சேருங்கள். அனைவரும் இங்கே காணலாம்.',selfie:'செல்ஃபி எடுக்க',uploadp:'புகைப்படங்களைச் சேர்க்க',addall:'அனைத்தையும் நாட்காட்டியில் சேர்க்க',shareinv:'அழைப்பைப் பகிர்க',faqh:'விருந்தினர் குறிப்புகள்',
     q1:'வாகனம் எங்கே நிறுத்தலாம்?',a1:'புனித சூசையப்பர் ஆலய மண்டபம், வட்டக்கரை (திருமணம் & விருந்து) மற்றும் புனித அந்தோனியார் ஆலய மண்டபம், அழகப்பபுரம் (வரவேற்பு) – இரு இடங்களிலும் வாகனம் நிறுத்த வசதி உண்டு. சற்று முன்பே வருமாறு வேண்டுகிறோம்.',
     
     q6:'மதிய, இரவு விருந்து எப்போது?',a6:'<b>மதிய விருந்து:</b> திருப்பலி முடிந்ததும் புனித சூசையப்பர் ஆலய மண்டபம், வட்டக்கரை.<br><b>இரவு விருந்து:</b> மாலை வரவேற்பிற்குப் பின் புனித அந்தோனியார் ஆலய மண்டபம், மேல் தளம், அழகப்பபுரம் (மாலை 6.30).',
@@ -1096,46 +1071,45 @@ button.tag:hover{color:var(--gold)}
     if(done&&window.__petalBurst)window.__petalBurst(innerWidth/2,innerHeight*.3);
     say(fail?(done+' added, '+fail+' failed. Please try again.'):('Thank you! '+done+' photo'+(done>1?'s':'')+' added ❤'),fail?(done+' சேர்ந்தது, '+fail+' தோல்வி. மீண்டும் முயலவும்.'):('நன்றி! '+done+' புகைப்படம் சேர்ந்தது ❤'));}
 
-  // live camera with AR face filters (MediaPipe, loaded on demand); falls back to frame-only
-  var camStream=null,camFront=true,camRaf=0,lmP=null,LM=null;
-  var VIS='https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14',MODEL='https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task';
+  // live camera: wedding frame + heart reactions (hold the heart button, or tap the picture)
+  var camStream=null,camFront=true,camRaf=0;
   function stopCam(){cancelAnimationFrame(camRaf);if(camStream){camStream.getTracks().forEach(function(t){t.stop();});camStream=null;}}
-  function loadLM(){if(lmP)return lmP;
-    lmP=import(VIS+'/vision_bundle.mjs').then(function(m){return m.FilesetResolver.forVisionTasks(VIS+'/wasm').then(function(fs){
-      var mk=function(d){return m.FaceLandmarker.createFromOptions(fs,{baseOptions:{modelAssetPath:MODEL,delegate:d},runningMode:'VIDEO',numFaces:4});};
-      return mk('GPU').catch(function(){return mk('CPU');});});}).then(function(l){LM=l;return l;}).catch(function(){lmP=null;return null;});
-    return lmP;}
   function openCam(){
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){document.getElementById('up-selfie').click();return;}
     var o=document.createElement('div');o.className='cam';o.setAttribute('role','dialog');o.setAttribute('aria-label','Selfie camera');
-    var FIL=[['none','No filter'],['crown','👑 Crown'],['flowers','🌸 Flowers'],['shades','🕶 Shades'],['stache','🥸 Moustache']];
     o.innerHTML='<p id="cam-msg"></p><video class="camv" playsinline muted autoplay></video><canvas id="cam-cv"></canvas>'+
-      '<div class="chips" id="chips" role="group" aria-label="Filters">'+FIL.map(function(f){return '<button type="button" class="chip" data-f="'+f[0]+'" aria-pressed="'+(f[0]==='crown')+'">'+f[1]+'</button>';}).join('')+'<button type="button" class="chip" id="chip-frame" aria-pressed="true">🖼 Frame</button></div>'+
+      '<div class="chips" role="group" aria-label="Options"><button type="button" class="chip" id="chip-heart">❤ Heart reaction</button><button type="button" class="chip" id="chip-frame" aria-pressed="true">🖼 Frame</button></div>'+
       '<div class="row"><button type="button" class="btn" id="cam-x">Close</button><button type="button" class="shutter" id="cam-go" aria-label="Take photo"></button><button type="button" class="btn" id="cam-flip">Flip</button></div>';
     document.body.appendChild(o);
-    var v=o.querySelector('video'),cv=o.querySelector('#cam-cv'),cx=cv.getContext('2d'),msg=o.querySelector('#cam-msg'),filt='crown',frameOn=true,lastTs=0;
-    function close(){stopCam();o.remove();}
+    var v=o.querySelector('video'),cv=o.querySelector('#cam-cv'),cx=cv.getContext('2d'),msg=o.querySelector('#cam-msg'),frameOn=true,HE=[],hold=0,COL=['#e9556f','#f4a3b5','#fff0f3','#e9cf86','#d63b5a'];
+    function close(){clearInterval(hold);stopCam();o.remove();}
+    function spawn(n,x){var W=cv.width||400,H=cv.height||500;for(var i=0;i<n;i++)HE.push({x:(x==null?Math.random()*W:x+(Math.random()-.5)*W*.2),y:H*(.85+Math.random()*.15),vx:(Math.random()-.5)*1.2,vy:-(2+Math.random()*3.2)*H/500,s:W*(.05+Math.random()*.07),ph:Math.random()*6.3,c:COL[Math.random()*COL.length|0],a:1});}
+    function heart(c,x,y,s){c.beginPath();c.moveTo(x,y+s*.3);c.bezierCurveTo(x,y,x-s*.5,y,x-s*.5,y+s*.3);c.bezierCurveTo(x-s*.5,y+s*.6,x,y+s*.8,x,y+s);c.bezierCurveTo(x,y+s*.8,x+s*.5,y+s*.6,x+s*.5,y+s*.3);c.bezierCurveTo(x+s*.5,y,x,y,x,y+s*.3);c.fill();}
     function paint(){if(!camStream)return;camRaf=requestAnimationFrame(paint);
       if(v.readyState<2||!v.videoWidth)return;
       var k=Math.min(1,1080/Math.max(v.videoWidth,v.videoHeight)),tw=Math.round(v.videoWidth*k),th=Math.round(v.videoHeight*k);if(cv.width!==tw||cv.height!==th){cv.width=tw;cv.height=th;}
       var W=cv.width,H=cv.height;cx.save();if(camFront){cx.translate(W,0);cx.scale(-1,1);}cx.drawImage(v,0,0,W,H);cx.restore();
-      if(filt!=='none'&&LM){var ts=performance.now();if(ts>lastTs){lastTs=ts;try{var r=LM.detectForVideo(v,ts);(r.faceLandmarks||[]).forEach(function(L){window.__arDraw(cx,L,filt,camFront,W,H);});}catch(e){}}}
+      for(var i=HE.length-1;i>=0;i--){var h=HE[i];h.ph+=.08;h.x+=h.vx+Math.sin(h.ph)*.9;h.y+=h.vy;h.a=Math.max(0,Math.min(1,(h.y+H*.1)/(H*.5)));
+        if(h.y<-h.s||h.a<=0){HE.splice(i,1);continue;}cx.save();cx.globalAlpha=h.a;cx.fillStyle=h.c;cx.shadowColor='rgba(0,0,0,.25)';cx.shadowBlur=h.s*.15;heart(cx,h.x,h.y,h.s);cx.restore();}
       if(frameOn)window.__arFrame(cx,W,H);}
     function start(){stopCam();msg.textContent=ta()?'கேமரா தயாராகிறது…':'Starting camera…';
       navigator.mediaDevices.getUserMedia({video:{facingMode:camFront?'user':'environment',width:{ideal:1280},height:{ideal:1280}},audio:false}).then(function(st){camStream=st;v.srcObject=st;v.play().catch(function(){});
-        msg.textContent=LM?(ta()?'புன்னகை! 📸':'Smile! 📸 Pick a filter'):(ta()?'வடிகட்டிகள் ஏற்றப்படுகின்றன…':'Loading AR filters…');paint();})
+        msg.textContent=ta()?'புன்னகை! 📸 இதயத்தைப் பிடித்திருங்கள் ❤':'Smile! 📸 Hold ❤ for heart reactions';paint();})
       .catch(function(){close();say('Camera is blocked or unavailable. Please pick a photo instead.','கேமரா அனுமதி இல்லை. புகைப்படத்தைத் தேர்ந்தெடுக்கவும்.');document.getElementById('up-selfie').click();});}
-    o.querySelectorAll('.chip[data-f]').forEach(function(b){b.addEventListener('click',function(){filt=b.dataset.f;o.querySelectorAll('.chip[data-f]').forEach(function(x){x.setAttribute('aria-pressed',x===b);});});});
+    var hb=o.querySelector('#chip-heart');
+    function hStart(){spawn(10);clearInterval(hold);hold=setInterval(function(){spawn(3);},90);}function hStop(){clearInterval(hold);hold=0;}
+    hb.addEventListener('pointerdown',function(e){e.preventDefault();hStart();});['pointerup','pointercancel','pointerleave'].forEach(function(ev){hb.addEventListener(ev,hStop);});
+    hb.addEventListener('click',function(e){if(e.detail===0)spawn(14);});
+    cv.addEventListener('pointerdown',function(e){var r=cv.getBoundingClientRect();spawn(12,(e.clientX-r.left)/r.width*cv.width);});
     o.querySelector('#chip-frame').addEventListener('click',function(){frameOn=!frameOn;this.setAttribute('aria-pressed',frameOn);});
     o.querySelector('#cam-x').addEventListener('click',close);
     o.querySelector('#cam-flip').addEventListener('click',function(){camFront=!camFront;start();});
-    o.querySelector('#cam-go').addEventListener('click',function(){if(!cv.width)return;
+    o.querySelector('#cam-go').addEventListener('click',function(){if(!cv.width)return;hStop();
       cv.toBlob(function(b){if(!b)return;stopCam();var url=URL.createObjectURL(b);
         o.innerHTML='<p>'+(ta()?'நன்றாக இருக்கிறதா?':'Looking good?')+'</p><img alt="Your selfie" src="'+url+'"><div class="row"><button type="button" class="btn" id="cam-re">'+(ta()?'மீண்டும்':'Retake')+'</button><button type="button" class="btn solid" id="cam-ok">'+(ta()?'பதிவேற்று':'Upload')+'</button></div>';
         o.querySelector('#cam-re').addEventListener('click',function(){o.remove();openCam();});
         o.querySelector('#cam-ok').addEventListener('click',function(){o.remove();send([b]);});},'image/jpeg',.9);});
-    start();
-    loadLM().then(function(l){if(!o.isConnected||!camStream)return;msg.textContent=l?(ta()?'புன்னகை! 📸':'Smile! 📸 Pick a filter'):(ta()?'வடிகட்டிகளுக்கு இணையம் தேவை. சட்டம் மட்டும்.':'Filters need internet. Frame only.');});}
+    start();}
   document.getElementById('selfie-btn').addEventListener('click',openCam);
   ['up-selfie','up-files'].forEach(function(id){var el=document.getElementById(id);el.addEventListener('change',function(){send(el.files).then(function(){el.value='';});});});
   if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();load();}},{rootMargin:'300px'});io.observe(box);}else load();
@@ -1143,48 +1117,6 @@ button.tag:hover{color:var(--gold)}
 </script>
 <script>
 (function(){
-  // AR face filters: draw gold crown / flower crown / shades / moustache on MediaPipe face landmarks
-  window.__arDraw=function(c,L,kind,front,W,H){
-    function P(i){var p=L[i];return {x:(front?1-p.x:p.x)*W,y:p.y*H};}
-    var a=P(33),b=P(263),dx=b.x-a.x,dy=b.y-a.y;if(dx<0){dx=-dx;dy=-dy;}
-    var roll=Math.atan2(dy,dx),eye=Math.hypot(dx,dy),up={x:Math.sin(roll),y:-Math.cos(roll)};
-    var l=P(234),r=P(454),fw=Math.hypot(r.x-l.x,r.y-l.y),top=P(10);
-    c.save();
-    if(kind==='crown'){
-      var w=fw*.92,h=fw*.52;c.translate(top.x-up.x*fw*.06,top.y-up.y*fw*.06);c.rotate(roll);
-      var g=c.createLinearGradient(0,-h,0,0);g.addColorStop(0,'#f6e3a1');g.addColorStop(.55,'#d9b25a');g.addColorStop(1,'#a8782a');
-      c.beginPath();c.moveTo(-w/2,0);c.lineTo(-w/2,-h*.62);c.lineTo(-w/4,-h*.3);c.lineTo(-w/8,-h*.86);c.lineTo(0,-h*.34);c.lineTo(w/8,-h*.86);c.lineTo(w/4,-h*.3);c.lineTo(w/2,-h*.62);c.lineTo(w/2,0);c.closePath();
-      c.fillStyle=g;c.fill();c.lineWidth=Math.max(1.5,fw*.012);c.strokeStyle='#7a5418';c.stroke();
-      c.fillStyle='#b8893b';c.fillRect(-w/2,-h*.14,w,h*.14);
-      [[-w/2,-h*.62],[-w/8,-h*.86],[w/8,-h*.86],[w/2,-h*.62],[0,-h*.34]].forEach(function(p,i){c.beginPath();c.arc(p[0],p[1],fw*.026,0,6.3);c.fillStyle=i%2?'#e9556f':'#fff6e6';c.fill();});
-      for(var k=-2;k<=2;k++){c.beginPath();c.arc(k*w*.17,-h*.07,fw*.017,0,6.3);c.fillStyle='#1c3263';c.fill();}
-    }else if(kind==='flowers'){
-      var p0=P(103),p2=P(332),ctl={x:top.x+up.x*fw*.3,y:top.y+up.y*fw*.3},n=9,cols=['#f4c9d1','#fff6e6','#e9cf86','#e9a3b2'];
-      for(var i=0;i<n;i++){var t=i/(n-1),u=1-t,x=u*u*p0.x+2*u*t*ctl.x+t*t*p2.x,y=u*u*p0.y+2*u*t*ctl.y+t*t*p2.y,fr=fw*(.062+.02*Math.sin(i*1.7)),col=cols[i%4];
-        c.save();c.translate(x,y);c.rotate(roll+i);
-        for(var pe=0;pe<5;pe++){c.rotate(6.2832/5);c.beginPath();c.ellipse(0,-fr*.8,fr*.55,fr*.85,0,0,6.3);c.fillStyle=col;c.fill();c.lineWidth=1;c.strokeStyle='rgba(120,60,70,.35)';c.stroke();}
-        c.beginPath();c.arc(0,0,fr*.42,0,6.3);c.fillStyle='#d9a63c';c.fill();c.restore();
-        if(i%2===0){c.save();c.translate(x,y);c.rotate(roll);c.beginPath();c.ellipse(fr*1.5,fr*.5,fr*.9,fr*.38,.5,0,6.3);c.fillStyle='#6f9a6a';c.fill();c.restore();}}
-    }else if(kind==='shades'){
-      var m={x:(a.x+b.x)/2,y:(a.y+b.y)/2};c.translate(m.x,m.y);c.rotate(roll);
-      var lw=eye*.58,lh=eye*.46,gap=eye*.37;
-      function lens(cx){c.beginPath();c.moveTo(cx-lw/2,-lh*.5);c.lineTo(cx+lw/2,-lh*.5);c.quadraticCurveTo(cx+lw/2,lh*.9,cx,lh*.6);c.quadraticCurveTo(cx-lw/2,lh*.9,cx-lw/2,-lh*.5);c.closePath();
-        var g=c.createLinearGradient(cx,-lh*.5,cx,lh*.7);g.addColorStop(0,'#101a3a');g.addColorStop(1,'#2a3d78');c.fillStyle=g;c.fill();c.lineWidth=Math.max(2,eye*.05);c.strokeStyle='#d9b25a';c.stroke();
-        c.beginPath();c.moveTo(cx-lw*.3,-lh*.3);c.lineTo(cx-lw*.05,-lh*.3);c.lineTo(cx-lw*.25,lh*.1);c.closePath();c.fillStyle='rgba(255,255,255,.28)';c.fill();}
-      lens(-gap);lens(gap);
-      c.beginPath();c.moveTo(-gap+lw/2,-lh*.3);c.quadraticCurveTo(0,-lh*.62,gap-lw/2,-lh*.3);c.lineWidth=Math.max(2,eye*.05);c.strokeStyle='#d9b25a';c.stroke();
-      c.beginPath();c.moveTo(-gap-lw/2,-lh*.3);c.lineTo(-eye*.82,-lh*.2);c.moveTo(gap+lw/2,-lh*.3);c.lineTo(eye*.82,-lh*.2);c.stroke();
-    }else if(kind==='stache'){
-      var nt=P(1),lp=P(0),mc=P(61),mr=P(291),mw=Math.hypot(mr.x-mc.x,mr.y-mc.y)*1.5;
-      c.translate(nt.x*.4+lp.x*.6,nt.y*.4+lp.y*.6);c.rotate(roll);
-      c.fillStyle='#2a1a12';c.beginPath();c.moveTo(0,-mw*.05);
-      c.bezierCurveTo(mw*.12,-mw*.17,mw*.36,-mw*.1,mw*.5,-mw*.16);c.bezierCurveTo(mw*.58,-mw*.2,mw*.6,-mw*.06,mw*.5,-mw*.02);
-      c.bezierCurveTo(mw*.36,mw*.12,mw*.14,mw*.04,0,mw*.07);
-      c.bezierCurveTo(-mw*.14,mw*.04,-mw*.36,mw*.12,-mw*.5,-mw*.02);c.bezierCurveTo(-mw*.6,-mw*.06,-mw*.58,-mw*.2,-mw*.5,-mw*.16);
-      c.bezierCurveTo(-mw*.36,-mw*.1,-mw*.12,-mw*.17,0,-mw*.05);c.closePath();c.fill();
-    }
-    c.restore();
-  };
   // ornate frame + names ribbon baked into every selfie
   window.__arFrame=function(c,W,H){
     var m=Math.round(W*.025),g=c.createLinearGradient(0,0,W,H);g.addColorStop(0,'#b8893b');g.addColorStop(.5,'#f3e3a8');g.addColorStop(1,'#a8843f');
@@ -1206,51 +1138,6 @@ button.tag:hover{color:var(--gold)}
   function ta(){return document.documentElement.lang==='ta';}
   function $(id){return document.getElementById(id);}
   function burst(x,y){if(!reduce&&window.__petalBurst)window.__petalBurst(x==null?innerWidth/2:x,y==null?innerHeight*.35:y);}
-
-  /* ---------- Countdown calendar: one surprise per day ---------- */
-  (function(){
-    var host=$('adv');if(!host)return;
-    var START=new Date('2026-10-01T00:00+05:30').getTime(),WED=new Date('2026-11-18T00:00+05:30').getTime(),DAY=864e5,N=Math.round((WED-START)/DAY)+1;
-    var V=[['Love is patient, love is kind.','1 Corinthians 13:4'],['Two are better than one, because they have a good return for their labor.','Ecclesiastes 4:9'],['A cord of three strands is not quickly broken.','Ecclesiastes 4:12'],
-      ['He who finds a wife finds what is good and receives favor from the Lord.','Proverbs 18:22'],['Many waters cannot quench love; rivers cannot sweep it away.','Song of Songs 8:7'],['Over all these virtues put on love, which binds them all together in perfect unity.','Colossians 3:14'],
-      ['Be devoted to one another in love.','Romans 12:10'],['Above all, love each other deeply.','1 Peter 4:8'],['This is the day the Lord has made; let us rejoice and be glad in it.','Psalm 118:24'],['The Lord bless you and keep you.','Numbers 6:24'],
-      ['Unless the Lord builds the house, the builders labor in vain.','Psalm 127:1'],['For I know the plans I have for you, plans to prosper you and not to harm you.','Jeremiah 29:11'],['Where you go I will go, and where you stay I will stay.','Ruth 1:16'],
-      ['Now these three remain: faith, hope and love. But the greatest of these is love.','1 Corinthians 13:13'],['Be completely humble and gentle; be patient, bearing with one another in love.','Ephesians 4:2'],['We love because he first loved us.','1 John 4:19']];
-    var C=['git commit -m "{n} days to go: still not over-excited"','./countdown --days {n}   # build passing ✓','while (days_left > 0) { dream(); }   // {n} left','TODO: iron the wedding outfit (due in {n} days)',
-      'npm run wedding   # deploying in {n} days','// FIXME: heart.overflow()   T-minus {n} days','if (you.attend) { happiness++; }   // {n} days left',"SELECT guests FROM love WHERE date = '2026-11-18';   -- {n} days",
-      'docker run --name forever pravin/saranya:latest   # {n}d to go','ping saranya.heart -c ∞   # reply in {n} days: yes ✓','rm -rf worries   # {n} days remaining','404: bachelor life not found   · {n} days left',
-      'sudo apt install happiness   # {n} days to finish','git merge pravin saranya --no-ff   # scheduled in {n} days','Exception: TooMuchJoyError at wedding.java:18   // {n} days','return "forever";   // the function runs in {n} days'];
-    var M=['Put 18 November in your calendar. There is a button for it near the countdown.','Ask your family to RSVP. One WhatsApp message is all it takes.','Light a lantern in the sky below and make a wish for the couple.','Practise your dance steps. The dancing couple is watching.',
-      'Open the selfie camera and find your best wedding filter.','Share the invite with a friend who loves weddings.','Check the route to St. Joseph’s Church, Vattakarai, with the Directions button.','Plan how you will travel to Nagercoil. The Guest Notes have tips.',
-      'Send a heart to the couple by tapping them in the bottom corner.','Type “help” in the techie terminal. There are secrets inside.','Pick something nice to wear and get it ready early.','Pack a camera. You will want to add photos to our album.',
-      'Learn to say “Congratulations” in Tamil: வாழ்த்துகள் (vaazhthukal).','Write down the blessing you want to give the couple.','Think of one happy memory you would like to share with the couple.'];
-    function item(d){ // d: 1..N
-      var left=N-d;
-      if(d===N)return{k:'big',h:'Today is the day!',b:'10.30 AM · Holy Matrimony · St. Joseph’s Church, Vattakarai.\nLunch after the Mass. Reception and dinner at 6.30 PM, St. Antony’s Church Mandapam, Azhagappapuram.'};
-      if(d===N-1)return{k:'big',h:'Tomorrow is the day!',b:'Holy Matrimony at 10.30 AM, St. Joseph’s Church, Vattakarai. Please arrive a little early. We cannot wait to see you.'};
-      var r=d%3;
-      if(r===1){var v=V[((d-1)/3|0)%V.length];return{k:'verse',h:'Blessing of the day',b:'“'+v[0]+'”',s:v[1]};}
-      if(r===2){return{k:'code',h:'Commit message of the day',b:C[((d-2)/3|0)%C.length].replace(/\{n\}/g,left)};}
-      return{k:'mission',h:'Mission of the day',b:M[((d-3)/3|0)%M.length]};}
-    var open=Math.max(0,Math.min(N,Math.floor((now()-START)/DAY)+1));if(now()>=WED+DAY)open=N;
-    var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    function dateOf(d){var t=new Date(START+(d-1)*DAY+19800000+3600000*6);return t.getUTCDate()+' '+MON[t.getUTCMonth()];}
-    var msg=$('advmsg'),html='';
-    for(var d=1;d<=N;d++){var st=d<=open?(d===open&&now()<WED+DAY?'today':'open'):'lock';
-      html+='<button type="button" class="dtile '+st+'" data-d="'+d+'" role="listitem" aria-label="Day '+d+', '+dateOf(d)+(st==='lock'?', locked':'')+'"><span>'+(d===N?'❤':d)+'<small>'+dateOf(d)+'</small></span>'+(st==='lock'?'<i aria-hidden="true">🔒</i>':'')+'</button>';}
-    host.innerHTML=html;
-    function show(d){var it=item(d),o=document.createElement('div');o.className='dlg';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');
-      var body=it.k==='code'?'<div class="b code"></div>':'<div class="b"></div>';
-      o.innerHTML='<div class="card"><div class="k"></div><div class="dn">Day '+d+' of '+N+' · '+dateOf(d)+'</div>'+body+(it.s?'<div class="src"></div>':'')+'<button type="button" class="btn solid" style="margin-top:16px">Close</button></div>';
-      o.querySelector('.k').textContent=it.h;o.querySelector('.b').textContent=it.b;if(it.s)o.querySelector('.src').textContent=it.s;
-      function close(){o.remove();document.removeEventListener('keydown',esc);}function esc(e){if(e.key==='Escape')close();}
-      o.addEventListener('click',function(e){if(e.target===o)close();});o.querySelector('button').addEventListener('click',close);document.addEventListener('keydown',esc);document.body.appendChild(o);o.querySelector('button').focus();
-      if(it.k==='big')burst();}
-    host.addEventListener('click',function(e){var b=e.target.closest('.dtile');if(!b)return;var d=+b.dataset.d;
-      if(b.classList.contains('lock')){msg.textContent='Day '+d+' opens on '+dateOf(d)+'. Come back then!';b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');return;}
-      msg.textContent='';show(d);});
-    var tl=host.querySelector('.today');if(tl&&msg)msg.textContent='Today’s surprise is open. Tap the glowing day.';
-  })();
 
   /* ---------- Shared sky of lanterns + live heart counter ---------- */
   (function(){
