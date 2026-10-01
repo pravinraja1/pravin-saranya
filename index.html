@@ -387,6 +387,24 @@ details.map[open] summary::after{transform:rotate(180deg)}
 .mapbox{margin-top:8px;border-radius:12px;overflow:hidden;border:1px solid rgba(214,181,110,.55);box-shadow:0 0 0 4px rgba(255,255,255,.03);aspect-ratio:16/10;background:#0e1a3c}
 .mapbox iframe{width:100%;height:100%;border:0;display:block;filter:saturate(.85) contrast(1.02)}
 @media (prefers-reduced-motion:reduce){.hero-band .frame{transition:none}}
+
+/* ---- guest extras: actions, FAQ, hashtag, scratch ---- */
+.qa{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.faq{display:grid;gap:10px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:0 16px}
+.faq summary{cursor:pointer;list-style:none;min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:var(--caps);font-weight:600;font-size:13.5px;letter-spacing:.08em;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--gold);font-size:22px;line-height:1;transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:0 0 14px;color:var(--soft)}
+.tagcard{display:grid;gap:14px;justify-items:center;text-align:center;border:1px solid var(--line);background:linear-gradient(180deg,#fff,var(--paper-2));border-radius:14px;padding:22px 16px;box-shadow:0 0 0 4px #fff,0 0 0 5px var(--line)}
+.tagcard p{margin:0;color:var(--soft)}
+button.tag{font:400 clamp(30px,8vw,44px)/1.1 var(--script);color:var(--ink);background:none;border:0;cursor:pointer;padding:4px 8px}
+button.tag:hover{color:var(--gold)}
+.date{position:relative}
+.scratch{position:absolute;inset:-10px;width:calc(100% + 20px);height:calc(100% + 20px);z-index:3;border-radius:14px;cursor:grab;touch-action:none;transition:opacity .9s ease}
+.scratch.gone{opacity:0;pointer-events:none}
+.scratch:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 </style>
 
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Welcome">
@@ -478,6 +496,7 @@ details.map[open] summary::after{transform:rotate(180deg)}
       <div class="cell"><b id="cd-m">--</b><span data-i18n="mins">Minutes</span></div>
       <div class="cell"><b id="cd-s">--</b><span data-i18n="secs">Seconds</span></div>
     </div>
+    <div class="qa"><button type="button" class="btn solid" id="qa-cal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span data-i18n="addall">Add all to calendar</span></button><a class="btn" id="qa-share" href="https://wa.me/?text=You%E2%80%99re%20invited%20to%20the%20wedding%20of%20Pravin%20%26%20Saranya%20%C2%B7%2018%20November%202026%0Ahttps%3A%2F%2Fpravinraja1.github.io%2Fpravin-saranya%2F" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></svg><span data-i18n="shareinv">Share this invite</span></a></div>
     <p class="verse" data-i18n="verse">“Therefore what God has joined together, let no one separate.” <b>Matthew 19:6</b></p>
     <p class="note" data-i18n="parents">With love, Mr. B. Francis Raja Clement &amp; Mrs. P. Viji Amala Princily, Azhagappapuram</p>
   </div></div>
@@ -503,7 +522,7 @@ details.map[open] summary::after{transform:rotate(180deg)}
           <div class="v" data-i18n="e1v">St. Joseph’s Church</div>
           <div class="p" data-i18n="e1p">with Nuptial Mass · Vattakarai, Nagercoil</div>
           <div class="acts">
-            <a class="btn solid" href="https://maps.google.com/?q=St+Josephs+Church+Vattakarai+Nagercoil" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="dir">Directions</span></a>
+            <a class="btn solid" href="https://www.google.com/maps/dir/?api=1&amp;destination=St+Josephs+Church+Vattakarai+Nagercoil&amp;travelmode=driving" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="dir">Directions</span></a>
             <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pravin%20%26%20Saranya%20%E2%80%94%20Holy%20Matrimony&amp;dates=20261118T050000Z/20261118T070000Z&amp;location=St.%20Joseph%27s%20Church%2C%20Vattakarai%2C%20Nagercoil&amp;details=Wedding%20of%20F.%20Pravin%20Raja%20%26%20A.%20Josephin%20Saranya" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span data-i18n="cal">Add to calendar</span></a>
           </div>
         <details class="map"><summary data-i18n="vmap">View map</summary><div class="mapbox" data-q="St Josephs Church Vattakarai Nagercoil"></div></details></div>
@@ -514,6 +533,7 @@ details.map[open] summary::after{transform:rotate(180deg)}
           <h3 data-i18n="e2">Wedding Lunch</h3>
           <div class="v" data-i18n="e2v">St. Joseph’s Church Mandapam</div>
           <div class="p" data-i18n="e2p">Vattakarai, Nagercoil</div>
+          <div class="acts"><a class="btn solid" href="https://www.google.com/maps/dir/?api=1&amp;destination=St+Josephs+Church+Vattakarai+Nagercoil&amp;travelmode=driving" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="dir">Directions</span></a></div>
         <details class="map"><summary data-i18n="vmap">View map</summary><div class="mapbox" data-q="St Josephs Church Vattakarai Nagercoil"></div></details></div>
       </article>
       <article class="event" data-ev="3"><span class="nowtag" data-i18n="nowtag">Happening now</span><span class="medal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 3h5l-.5 6a2 2 0 0 1-4 0zM13 3h5l-.5 6a2 2 0 0 1-4 0zM8.5 11v8M15.5 11v8M6 19h5M13 19h5"/></svg></span>
@@ -523,7 +543,7 @@ details.map[open] summary::after{transform:rotate(180deg)}
           <div class="v" data-i18n="e3v">St. Antony’s Church Mandapam, First Floor</div>
           <div class="p" data-i18n="e3p">Azhagappapuram</div>
           <div class="acts">
-            <a class="btn solid" href="https://maps.google.com/?q=St+Antonys+Church+Azhagappapuram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="dir">Directions</span></a>
+            <a class="btn solid" href="https://www.google.com/maps/dir/?api=1&amp;destination=St+Antonys+Church+Azhagappapuram&amp;travelmode=driving" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="dir">Directions</span></a>
             <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pravin%20%26%20Saranya%20%E2%80%94%20Reception&amp;dates=20261118T130000Z/20261118T160000Z&amp;location=St.%20Antony%27s%20Church%20Mandapam%2C%20First%20Floor%2C%20Azhagappapuram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span data-i18n="cal">Add to calendar</span></a>
           </div>
         <details class="map"><summary data-i18n="vmap">View map</summary><div class="mapbox" data-q="St Antonys Church Azhagappapuram"></div></details></div>
@@ -555,6 +575,31 @@ details.map[open] summary::after{transform:rotate(180deg)}
       <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3a.4.4 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3z"/></svg><span data-i18n="send">Send RSVP on WhatsApp</span></a>
       <p class="note" id="wanote"></p>
     </form>
+  </section>
+
+  <section aria-labelledby="h-faq">
+    <h2 id="h-faq" data-i18n="faqh">Guest Notes</h2>
+    <div class="faq">
+      <details><summary data-i18n="q1">Where can I park?</summary><p data-i18n="a1">Parking is available near the church and the mandapam. Please arrive about 20 minutes early.</p></details>
+      <details><summary data-i18n="q2">What should I wear?</summary><p data-i18n="a2">Traditional or festive attire. Soft pastels and ivory look lovely in the church.</p></details>
+      <details><summary data-i18n="q3">Are children welcome?</summary><p data-i18n="a3">Yes, please bring the whole family. Everyone is welcome.</p></details>
+      <details><summary data-i18n="q6">When is the lunch?</summary><p data-i18n="a6">Lunch is served at St. Joseph’s Church Mandapam right after the Mass.</p></details>
+      <details><summary data-i18n="q4">How do I get there?</summary><p data-i18n="a4">The nearest railway station is Nagercoil Junction. Trivandrum airport is about two hours away by road.</p></details>
+      <details><summary data-i18n="q5">Where can I stay?</summary><p data-i18n="a5">Nagercoil has many hotels and lodges. Message us on WhatsApp and we will gladly help.</p></details>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-mem">
+    <h2 id="h-mem" data-i18n="memh">Share the Joy</h2>
+    <div class="tagcard">
+      <p data-i18n="mems">Use our hashtag on your photos and stories</p>
+      <button type="button" class="tag" id="tag" aria-label="Copy hashtag">#PravinWedsSaranya</button>
+      <div class="acts" style="justify-content:center">
+        <button type="button" class="btn" id="tag-copy"><span data-i18n="copy">Copy hashtag</span></button>
+        <a class="btn" id="tag-ig" href="https://www.instagram.com/explore/tags/pravinwedssaranya/" target="_blank" rel="noopener"><span>Instagram</span></a>
+        <a class="btn solid" id="tag-album" href="#" target="_blank" rel="noopener" hidden><span data-i18n="album">Open photo album</span></a>
+      </div>
+    </div>
   </section>
 
   <section aria-label="For the techies">
@@ -619,7 +664,15 @@ details.map[open] summary::after{transform:rotate(180deg)}
   function set(id,v){var el=document.getElementById(id);if(!el||el.textContent===v)return;el.textContent=v;var c=el.parentNode;c.classList.remove('flip');void c.offsetWidth;c.classList.add('flip');}
 
   // translations
-  var T={ta:{vmap:'வரைபடம் காண்க',nowtag:'இப்போது நடைபெறுகிறது',sgs:'பிரவின் வீட்டார்',sbs:'சரண்யா வீட்டார்',pvl:'உங்கள் செய்தியின் முன்னோட்டம்',sharebtn:'இந்த அழைப்பிதழை WhatsApp-ல் பகிருங்கள்',gsib:'<span>சகோதரி</span> F. பிரவினா ராணி',bsib:'<span>சகோதரர்</span> A. டோனி ஜோஸ்',famh:'இரு குடும்பங்கள், ஒரு கொண்டாட்டம்',gside:'மணமகன் குடும்பம்',bside:'மணமகள் குடும்பம்',gpar:'திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட்<br>– திருமதி. P. விஜி அமலா பிரின்ஸிலி',gfrom:'அழகப்பபுரம்',bpar:'திரு. S. அந்தோணி ஜோசப்<br>– திருமதி. G. இருதய தெரஸ் எடிட்',bfrom:'வட்டக்கரை',sidel:'யாருக்கு பதில் அனுப்புகிறீர்கள்',sg:'மணமகன் குடும்பம்',sb:'மணமகள் குடும்பம்',welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள் · <b>18 நவம்பர் 2026</b>',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
+  var T={ta:{addall:'அனைத்தையும் நாட்காட்டியில் சேர்க்க',shareinv:'அழைப்பைப் பகிர்க',faqh:'விருந்தினர் குறிப்புகள்',
+    q1:'வாகனம் எங்கே நிறுத்தலாம்?',a1:'ஆலயம் மற்றும் மண்டபத்தின் அருகே இடம் உள்ளது. 20 நிமிடம் முன்பே வருமாறு வேண்டுகிறோம்.',
+    q2:'என்ன உடை அணியலாம்?',a2:'பாரம்பரிய அல்லது விழாக்கால உடைகள். மென்மையான வண்ணங்கள் அழகாக இருக்கும்.',
+    q3:'குழந்தைகளை அழைத்து வரலாமா?',a3:'ஆம், குடும்பத்துடன் வருக. அனைவரும் வரவேற்கப்படுகிறார்கள்.',
+    q6:'விருந்து எப்போது?',a6:'திருப்பலி முடிந்ததும் புனித சூசையப்பர் ஆலய மண்டபத்தில் மதிய விருந்து.',
+    q4:'எப்படி வருவது?',a4:'அருகிலுள்ள ரயில் நிலையம் நாகர்கோவில் சந்திப்பு. திருவனந்தபுரம் விமான நிலையம் சுமார் 2 மணி நேர பயணத் தொலைவில் உள்ளது.',
+    q5:'தங்கும் வசதி எங்கே?',a5:'நாகர்கோவிலில் பல தங்கும் விடுதிகள் உள்ளன. உதவிக்கு WhatsApp-ல் எங்களைத் தொடர்பு கொள்ளுங்கள்.',
+    memh:'மகிழ்ச்சியைப் பகிருங்கள்',mems:'உங்கள் புகைப்படங்களிலும் ஸ்டோரிகளிலும் இந்த ஹேஷ்டேக்கைப் பயன்படுத்துங்கள்',copy:'ஹேஷ்டேக் நகலெடு',album:'புகைப்பட ஆல்பம் திறக்க',
+    vmap:'வரைபடம் காண்க',nowtag:'இப்போது நடைபெறுகிறது',sgs:'பிரவின் வீட்டார்',sbs:'சரண்யா வீட்டார்',pvl:'உங்கள் செய்தியின் முன்னோட்டம்',sharebtn:'இந்த அழைப்பிதழை WhatsApp-ல் பகிருங்கள்',gsib:'<span>சகோதரி</span> F. பிரவினா ராணி',bsib:'<span>சகோதரர்</span> A. டோனி ஜோஸ்',famh:'இரு குடும்பங்கள், ஒரு கொண்டாட்டம்',gside:'மணமகன் குடும்பம்',bside:'மணமகள் குடும்பம்',gpar:'திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட்<br>– திருமதி. P. விஜி அமலா பிரின்ஸிலி',gfrom:'அழகப்பபுரம்',bpar:'திரு. S. அந்தோணி ஜோசப்<br>– திருமதி. G. இருதய தெரஸ் எடிட்',bfrom:'வட்டக்கரை',sidel:'யாருக்கு பதில் அனுப்புகிறீர்கள்',sg:'மணமகன் குடும்பம்',sb:'மணமகள் குடும்பம்',welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள் · <b>18 நவம்பர் 2026</b>',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
     days:'நாட்கள்',hours:'மணி',mins:'நிமிடம்',secs:'விநாடி',verse:'“தேவன் இணைத்ததை மனுஷன் பிரிக்காதிருக்கக்கடவன்.” <b>மத்தேயு 19:6</b>',
     parents:'அன்புடன், திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட் – திருமதி. P. விஜி அமலா பிரின்ஸிலி, அழகப்பபுரம்',
     order:'நிகழ்ச்சி நிரல்',e1:'திருமணம்',e1v:'புனித சூசையப்பர் ஆலயம்',e1p:'கூட்டுத் திருப்பலியுடன் · வட்டக்கரை, நாகர்கோவில்',dir:'வழி',cal:'நாட்காட்டியில் சேர்',
@@ -694,6 +747,7 @@ details.map[open] summary::after{transform:rotate(180deg)}
     sway:Math.random()*6.28,c:COLS[Math.random()*COLS.length|0],g:burst?.18:0};}
   function spawn(n){for(var i=0;i<n;i++)P.push(petal(Math.random()*innerWidth,-20-Math.random()*innerHeight*.6));}
   function burst(x,y){for(var i=0;i<46;i++)P.push(petal(x,y,true));start(4000);}
+  window.__petalBurst=burst;
   function start(ms){until=Math.max(until,performance.now()+ms);if(!running){running=true;requestAnimationFrame(frame);}}
   function frame(t){ctx.clearRect(0,0,innerWidth,innerHeight);
     if(t<until&&P.length<34&&Math.random()<.2)spawn(1);
@@ -757,7 +811,8 @@ details.map[open] summary::after{transform:rotate(180deg)}
     h.style.left=(r.left+r.width*.35+Math.random()*r.width*.3)+'px';h.style.top=(r.top+r.height*.2)+'px';h.style.color=COLS[Math.random()*COLS.length|0];
     h.style.setProperty('--dx',((Math.random()-.5)*60)+'px');h.style.setProperty('--rot',((Math.random()-.5)*40)+'deg');document.body.appendChild(h);setTimeout(function(){h.remove();},2700);}
   function update(){var on=!hidden&&!inForm;dock.classList.toggle('show',on);clearInterval(timer);if(on&&!reduce)timer=setInterval(heart,1500);}
-  cpl.addEventListener('click',function(){for(var i=0;i<10;i++)setTimeout(heart,i*70);});
+  cpl.addEventListener('click',function(){for(var i=0;i<10;i++)setTimeout(heart,i*70);
+    if(!reduce&&window.__petalBurst){var r=cpl.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height*.25;window.__petalBurst(x,y);setTimeout(function(){window.__petalBurst(x,y);},220);}});
   
   function start(){setTimeout(update,1800);}
   var seal=document.getElementById('open-seal');if(seal)seal.addEventListener('click',start);
@@ -842,6 +897,66 @@ details.map[open] summary::after{transform:rotate(180deg)}
       sx.globalAlpha=p.l;sx.fillStyle='#f2dc98';sx.shadowColor='#f2dc98';sx.shadowBlur=8;sx.beginPath();
       var r=p.r;sx.moveTo(p.x,p.y-r*2);sx.lineTo(p.x+r*.5,p.y-r*.5);sx.lineTo(p.x+r*2,p.y);sx.lineTo(p.x+r*.5,p.y+r*.5);sx.lineTo(p.x,p.y+r*2);sx.lineTo(p.x-r*.5,p.y+r*.5);sx.lineTo(p.x-r*2,p.y);sx.lineTo(p.x-r*.5,p.y-r*.5);sx.closePath();sx.fill();}
       sx.globalAlpha=1;if(sp.length)requestAnimationFrame(sstep);else{run=false;sx.clearRect(0,0,innerWidth,innerHeight);}}
+  }
+})();
+</script>
+<script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ta=function(){return document.documentElement.lang==='ta';};
+  function $(id){return document.getElementById(id);}
+
+  // Add all three events to any calendar app (.ics, with reminders)
+  function ics(){
+    var ev=[['Holy Matrimony — Pravin & Saranya','20261118T050000Z','20261118T070000Z','St. Joseph\'s Church, Vattakarai, Nagercoil'],
+            ['Wedding Lunch','20261118T070000Z','20261118T100000Z','St. Joseph\'s Church Mandapam, Vattakarai, Nagercoil'],
+            ['Evening Reception — Pravin & Saranya','20261118T130000Z','20261118T160000Z','St. Antony\'s Church Mandapam, First Floor, Azhagappapuram']];
+    var esc=function(t){return t.replace(/[\;,]/g,'\\$&');};
+    var L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Pravin Saranya Wedding//EN','CALSCALE:GREGORIAN'];
+    ev.forEach(function(e,i){L.push('BEGIN:VEVENT','UID:ps-wedding-'+i+'@pravinraja1.github.io','DTSTAMP:20261001T000000Z','DTSTART:'+e[1],'DTEND:'+e[2],
+      'SUMMARY:'+esc(e[0]),'LOCATION:'+esc(e[3]),'DESCRIPTION:'+esc('Wedding of F. Pravin Raja & A. Josephin Saranya. https://pravinraja1.github.io/pravin-saranya/'),
+      'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Tomorrow: '+esc(e[0]),'TRIGGER:-P1D','END:VALARM',
+      'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Starting soon: '+esc(e[0]),'TRIGGER:-PT2H','END:VALARM','END:VEVENT');});
+    L.push('END:VCALENDAR');return L.join('\r\n');}
+  $('qa-cal').addEventListener('click',function(){
+    var blob=new Blob([ics()],{type:'text/calendar;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download='Pravin-Saranya-Wedding.ics';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},4000);});
+
+  // Share: native share sheet where available, else WhatsApp link
+  var sh=$('qa-share');
+  sh.addEventListener('click',function(e){if(!navigator.share)return;e.preventDefault();
+    navigator.share({title:'Pravin & Saranya — Wedding Invitation',text:'You’re invited to the wedding of Pravin & Saranya · 18 November 2026',url:'https://pravinraja1.github.io/pravin-saranya/'}).catch(function(){});});
+
+  // Hashtag copy + optional album link
+  var ALBUM='';  // paste a shared Google Photos / Drive album link here to show the album button
+  if(ALBUM){var al=$('tag-album');al.href=ALBUM;al.hidden=false;}
+  function copy(){var t='#PravinWedsSaranya',b=$('tag-copy'),sp=b.firstElementChild,old=sp.innerHTML;
+    var done=function(){sp.textContent=ta()?'நகலெடுக்கப்பட்டது ✓':'Copied ✓';setTimeout(function(){sp.innerHTML=old;},1800);};
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(done,done);else{var i=document.createElement('input');i.value=t;document.body.appendChild(i);i.select();try{document.execCommand('copy');}catch(e){}i.remove();done();}}
+  $('tag-copy').addEventListener('click',copy);$('tag').addEventListener('click',copy);
+
+  // Scratch-to-reveal date
+  var box=document.querySelector('.date'),seen=false;try{seen=localStorage.getItem('ps-scratched')==='1';}catch(e){}
+  if(box&&!seen&&!reduce){
+    var c=document.createElement('canvas');c.className='scratch';c.tabIndex=0;c.setAttribute('role','button');c.setAttribute('aria-label','Scratch to reveal the wedding date. Press Enter to reveal.');
+    box.appendChild(c);var x=c.getContext('2d'),dpr=Math.min(2,window.devicePixelRatio||1),touched=false,gone=false,down=false,lx=0,ly=0,checks=0;
+    function paint(){var r=c.getBoundingClientRect();if(!r.width)return;c.width=r.width*dpr;c.height=r.height*dpr;x.setTransform(dpr,0,0,dpr,0,0);x.globalCompositeOperation='source-over';
+      var g=x.createLinearGradient(0,0,r.width,r.height);g.addColorStop(0,'#b8893b');g.addColorStop(.25,'#ecd38a');g.addColorStop(.5,'#c9a75e');g.addColorStop(.75,'#f3e3a8');g.addColorStop(1,'#a8843f');
+      x.fillStyle=g;x.fillRect(0,0,r.width,r.height);
+      x.globalAlpha=.18;x.strokeStyle='#fff';for(var i=-r.height;i<r.width;i+=9){x.beginPath();x.moveTo(i,0);x.lineTo(i+r.height,r.height);x.stroke();}x.globalAlpha=1;
+      x.fillStyle='#4a3512';x.textAlign='center';x.textBaseline='middle';x.font='600 13px Cinzel,Georgia,serif';
+      x.fillText(ta()?'தேதியை அறிய தேய்க்கவும்':'SCRATCH TO REVEAL THE DATE',r.width/2,r.height/2-8);x.font='18px Georgia,serif';x.fillText('✦ ✦ ✦',r.width/2,r.height/2+16);}
+    function reveal(){if(gone)return;gone=true;c.classList.add('gone');try{localStorage.setItem('ps-scratched','1');}catch(e){}
+      if(window.__petalBurst){var r=box.getBoundingClientRect();window.__petalBurst(r.left+r.width/2,r.top+r.height/2);}setTimeout(function(){c.remove();},1000);}
+    function progress(){var w=c.width,h=c.height,d=x.getImageData(0,0,w,h).data,n=0,t=0;for(var i=3;i<d.length;i+=64){t++;if(d[i]<128)n++;}if(n/t>.42)reveal();}
+    function pos(e){var r=c.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top];}
+    function line(a,b){x.globalCompositeOperation='destination-out';x.lineCap='round';x.lineJoin='round';x.lineWidth=34;x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke();}
+    c.addEventListener('pointerdown',function(e){down=true;touched=true;c.setPointerCapture(e.pointerId);var p=pos(e);lx=p[0];ly=p[1];line(p,[p[0]+.1,p[1]+.1]);e.preventDefault();});
+    c.addEventListener('pointermove',function(e){if(!down)return;var p=pos(e);line([lx,ly],p);lx=p[0];ly=p[1];if(++checks%6===0)progress();});
+    var up=function(){if(!down)return;down=false;progress();};c.addEventListener('pointerup',up);c.addEventListener('pointercancel',up);
+    c.addEventListener('dblclick',reveal);c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();reveal();}});
+    paint();addEventListener('resize',function(){if(!touched&&!gone)paint();});
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){if(!touched&&!gone)paint();});
   }
 })();
 </script>
