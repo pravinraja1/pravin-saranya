@@ -469,6 +469,13 @@ button.tag:hover{color:var(--gold)}
 .tform input:focus{border-bottom-color:#e9cf86}
 .egg{position:fixed;inset:0;z-index:400;background:rgba(5,10,26,.93);display:grid;place-items:center;padding:16px;cursor:pointer}
 .egg pre{margin:0;max-width:100%;font:500 clamp(12px,3.6vw,17px)/1.7 var(--mono);color:#9fd8b3;white-space:pre-wrap}
+.passform{display:flex!important;flex-wrap:wrap;gap:10px;justify-content:center;background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important}
+.passform::before,.passform::after{display:none!important}
+.passform input{flex:1 1 220px;max-width:340px;min-height:48px;border-radius:999px;border:1px solid rgba(168,132,63,.55);background:#fff;padding:10px 18px;text-align:center}
+.passout{display:grid;gap:14px;justify-items:center}
+.passout canvas{width:min(100%,320px);height:auto;border-radius:10px;box-shadow:0 0 0 4px #fff,0 0 0 5px var(--gold-2),0 24px 40px -22px rgba(15,29,61,.6)}
+#snd{font-size:15px;padding:9px 12px;line-height:1}
+.hero-band .lang #snd{color:#f1dfae}
 </style>
 
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Welcome">
@@ -524,6 +531,7 @@ button.tag:hover{color:var(--gold)}
     <div class="lang" role="group" aria-label="Language">
       <button type="button" id="lang-en" aria-pressed="true">English</button>
       <button type="button" id="lang-ta" aria-pressed="false" class="ta">தமிழ்</button>
+      <button type="button" id="snd" aria-label="Bell sound on" title="Bell sound on">🔔</button>
     </div>
   </div>
 
@@ -612,6 +620,22 @@ button.tag:hover{color:var(--gold)}
           </div>
         <details class="map"><summary data-i18n="vmap">View map</summary><div class="mapbox" data-q="St Antonys Church Azhagappapuram"></div></details></div>
       </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-pass">
+    <h2 id="h-pass" data-i18n="passh">Your Invitation Pass</h2>
+    <p class="upnote" style="text-align:center" data-i18n="passs">Type your name to get a personal invitation card. Save it or share it on WhatsApp.</p>
+    <form class="passform" id="passform" autocomplete="off">
+      <input id="pass-name" maxlength="36" placeholder="e.g. Joseph &amp; family" aria-label="Your name" required>
+      <button class="btn solid" type="submit"><span data-i18n="passmk">Create my pass</span></button>
+    </form>
+    <div class="passout" id="passout" hidden>
+      <canvas id="passcv" width="1080" height="1920" aria-label="Your personal invitation pass"></canvas>
+      <div class="acts" style="justify-content:center">
+        <button type="button" class="btn solid" id="pass-save"><span data-i18n="passsave">Save image</span></button>
+        <button type="button" class="btn" id="pass-share"><span data-i18n="passshare">Share</span></button>
+      </div>
     </div>
   </section>
 
@@ -753,7 +777,7 @@ button.tag:hover{color:var(--gold)}
   function set(id,v){var el=document.getElementById(id);if(!el||el.textContent===v)return;el.textContent=v;var c=el.parentNode;c.classList.remove('flip');void c.offsetWidth;c.classList.add('flip');}
 
   // translations
-  var T={ta:{skyh:'ஒரு விளக்கை ஏற்றுங்கள்',skys:'பிரவின் & சரண்யாவுக்கு ஒரு வாழ்த்து சொல்லுங்கள். உங்கள் விளக்கு அனைவரின் விளக்குகளுடன் வானில் சேரும்.',release:'விளக்கை ஏற்று',viewall:'அனைத்து புகைப்படங்களும்',upnote:'செல்ஃபி எடுங்கள் அல்லது உங்கள் புகைப்படங்களைச் சேருங்கள். அனைவரும் இங்கே காணலாம்.',selfie:'செல்ஃபி எடுக்க',uploadp:'புகைப்படங்களைச் சேர்க்க',addall:'அனைத்தையும் நாட்காட்டியில் சேர்க்க',shareinv:'அழைப்பைப் பகிர்க',faqh:'விருந்தினர் குறிப்புகள்',
+  var T={ta:{passh:'உங்கள் அழைப்பிதழ்',passs:'உங்கள் பெயரை எழுதி தனிப்பட்ட அழைப்பிதழ் பெறுங்கள். சேமிக்கலாம் அல்லது WhatsApp-ல் பகிரலாம்.',passmk:'என் அழைப்பிதழ் உருவாக்கு',passsave:'படத்தைச் சேமி',passshare:'பகிர்க',skyh:'ஒரு விளக்கை ஏற்றுங்கள்',skys:'பிரவின் & சரண்யாவுக்கு ஒரு வாழ்த்து சொல்லுங்கள். உங்கள் விளக்கு அனைவரின் விளக்குகளுடன் வானில் சேரும்.',release:'விளக்கை ஏற்று',viewall:'அனைத்து புகைப்படங்களும்',upnote:'செல்ஃபி எடுங்கள் அல்லது உங்கள் புகைப்படங்களைச் சேருங்கள். அனைவரும் இங்கே காணலாம்.',selfie:'செல்ஃபி எடுக்க',uploadp:'புகைப்படங்களைச் சேர்க்க',addall:'அனைத்தையும் நாட்காட்டியில் சேர்க்க',shareinv:'அழைப்பைப் பகிர்க',faqh:'விருந்தினர் குறிப்புகள்',
     q1:'வாகனம் எங்கே நிறுத்தலாம்?',a1:'புனித சூசையப்பர் ஆலய மண்டபம், வட்டக்கரை (திருமணம் & விருந்து) மற்றும் புனித அந்தோனியார் ஆலய மண்டபம், அழகப்பபுரம் (வரவேற்பு) – இரு இடங்களிலும் வாகனம் நிறுத்த வசதி உண்டு. சற்று முன்பே வருமாறு வேண்டுகிறோம்.',
     
     q6:'மதிய, இரவு விருந்து எப்போது?',a6:'<b>மதிய விருந்து:</b> திருப்பலி முடிந்ததும் புனித சூசையப்பர் ஆலய மண்டபம், வட்டக்கரை.<br><b>இரவு விருந்து:</b> மாலை வரவேற்பிற்குப் பின் புனித அந்தோனியார் ஆலய மண்டபம், மேல் தளம், அழகப்பபுரம் (மாலை 6.30).',
@@ -1269,5 +1293,75 @@ button.tag:hover{color:var(--gold)}
   try{console.log('%cPravin ♥ Saranya','font:700 22px Georgia;color:#a8843f','\nCurious? There is a terminal under "For the Techies", and a code with arrows, B and A.\n18.11.2026 · merge approved ✓');}catch(e){}
 })();
 </script>
+<script>
+(function(){
+  var QR='111111100010010001111001001111111|100000100110111111001010001000001|101110101100110011111110101011101|101110101110101010001101101011101|101110101001110101100001101011101|100000101001011110101010001000001|111111101010101010101010101111111|000000001111001100000100100000000|101111100010111101000010101111100|100011010101001010011111001101111|010010111011100110100100100010110|111010000010101100011101010011110|000110110101000000110100110111000|000011001110101110001101011001111|011100100111100000010000011010010|000011000001111010111100111101100|101111111010011001010011010110001|001010010100011011110001011101101|101101111000110101001010000110110|001101001110000011100000101111101|000100111010011010001110010011000|111110011000101101100101001000001|100010101100110110101100100001110|101110001111111100100111000011110|100000110000111101001011111110011|000000001100010000010100100010111|111111100010111100101101101010110|100000101100100000000111100011100|101110101101001100100100111111000|101110101010010110001010010011001|101110101010101000010000111100000|100000100010110010011100000010100|111111101011010001010011110100010'.split('|');
+  var URLS='pravinraja1.github.io/pravin-saranya';
+  function $(id){return document.getElementById(id);}
+  var ta=function(){return document.documentElement.lang==='ta';};
+
+  // ---------- Bell: synthesised church bell, no audio file ----------
+  var muted=false;try{muted=localStorage.getItem('ps-mute')==='1';}catch(e){}
+  var ac=null,snd=$('snd');
+  function paintSnd(){if(!snd)return;snd.textContent=muted?'🔕':'🔔';snd.setAttribute('aria-label',muted?'Bell sound off':'Bell sound on');snd.title=muted?'Bell sound off':'Bell sound on';}
+  paintSnd();
+  if(snd)snd.addEventListener('click',function(){muted=!muted;try{localStorage.setItem('ps-mute',muted?'1':'0');}catch(e){}paintSnd();if(!muted)bell(1);});
+  function bell(n){if(muted)return;
+    try{var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;ac=ac||new AC();if(ac.resume)ac.resume();
+      var out=ac.createGain();out.gain.value=.22;out.connect(ac.destination);
+      var P=[[.5,.5],[1,1],[1.19,.55],[1.5,.4],[2,.5],[2.74,.35],[3,.22],[4.17,.14],[5.43,.08]];
+      function strike(at,f0){P.forEach(function(p){var o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime+at,d=3.4/Math.pow(p[0]+.4,.6);
+        o.type='sine';o.frequency.value=f0*p[0];g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(p[1]*.5,t+.006);g.gain.exponentialRampToValueAtTime(.0001,t+d);
+        o.connect(g);g.connect(out);o.start(t);o.stop(t+d+.05);});}
+      var seq=[0,.95,1.9,2.85],fr=[392,370,392,330];for(var i=0;i<(n||3);i++)strike(seq[i],fr[i]);}catch(e){}}
+  var seal=$('open-seal');if(seal)seal.addEventListener('click',function(){bell(3);});
+
+  // ---------- Personal invitation pass (story-size image) ----------
+  var form=$('passform');if(!form)return;
+  var nameIn=$('pass-name'),out=$('passout'),cv=$('passcv'),c=cv.getContext('2d'),W=1080,H=1920;
+  try{var to=(new URLSearchParams(location.search).get('to')||'').trim().slice(0,36);if(to)nameIn.value=to;}catch(e){}
+  function ls(v){if('letterSpacing' in c)c.letterSpacing=v+'px';}
+  function fit(text,max,face,size,min){size=size||100;do{c.font=face.replace('{s}',size);if(c.measureText(text).width<=max||size<=(min||40))break;size-=4;}while(true);return size;}
+  function center(text,y,font,color,sp){c.font=font;c.fillStyle=color;c.textAlign='center';c.textBaseline='middle';ls(sp||0);c.fillText(text,W/2,y);ls(0);}
+  function ornament(x,y,s){c.save();c.translate(x,y);c.rotate(Math.PI/4);c.fillRect(-s,-s,2*s,2*s);c.restore();}
+  function draw(name){
+    var g=c.createRadialGradient(W/2,H*.35,100,W/2,H*.5,H*.8);g.addColorStop(0,'#fffdf7');g.addColorStop(1,'#f4ecda');c.fillStyle=g;c.fillRect(0,0,W,H);
+    c.strokeStyle='#1c3263';c.lineWidth=16;c.strokeRect(36,36,W-72,H-72);
+    var gg=c.createLinearGradient(0,0,W,H);gg.addColorStop(0,'#b8893b');gg.addColorStop(.5,'#ecd38a');gg.addColorStop(1,'#a8843f');c.strokeStyle=gg;c.lineWidth=4;c.strokeRect(66,66,W-132,H-132);c.lineWidth=2;c.strokeRect(80,80,W-160,H-160);
+    c.fillStyle=gg;[[66,66],[W-66,66],[66,H-66],[W-66,H-66]].forEach(function(p){ornament(p[0],p[1],11);});
+    // crest
+    c.lineWidth=5;c.strokeStyle=gg;c.beginPath();c.arc(W/2,300,104,0,6.3);c.stroke();c.lineWidth=2;c.beginPath();c.arc(W/2,300,92,0,6.3);c.stroke();
+    c.fillStyle=gg;c.beginPath();c.moveTo(W/2-52,178);c.lineTo(W/2-52,140);c.lineTo(W/2-26,162);c.lineTo(W/2,126);c.lineTo(W/2+26,162);c.lineTo(W/2+52,140);c.lineTo(W/2+52,178);c.closePath();c.fill();
+    center('P & S',302,'600 62px Cinzel,Georgia,serif','#1c3263',2);
+    center('YOU ARE CORDIALLY INVITED',500,'600 34px Cinzel,Georgia,serif','#a8843f',7);
+    // guest name
+    var nm=name||'Dear Guest',sz=fit(nm,880,'{s}px Allura,"Snell Roundhand",cursive',190,70);center(nm,650,sz+'px Allura,"Snell Roundhand",cursive','#1c3263');
+    c.strokeStyle=gg;c.lineWidth=3;c.beginPath();c.moveTo(250,760);c.lineTo(500,760);c.moveTo(580,760);c.lineTo(830,760);c.stroke();c.fillStyle=gg;ornament(540,760,9);
+    center('to the wedding of',830,'italic 46px "Cormorant Garamond",Georgia,serif','#56627c');
+    var s2=fit('Pravin & Saranya',900,'{s}px Allura,"Snell Roundhand",cursive',200,90);center('Pravin & Saranya',975,s2+'px Allura,"Snell Roundhand",cursive','#1c3263');
+    center('WEDNESDAY · 18 NOVEMBER 2026',1105,'600 40px Cinzel,Georgia,serif','#a8843f',5);
+    c.strokeStyle=gg;c.lineWidth=2;c.beginPath();c.moveTo(200,1160);c.lineTo(880,1160);c.stroke();
+    var EV=[['10.30 AM · HOLY MATRIMONY','St. Joseph’s Church, Vattakarai, Nagercoil'],['AFTER MASS · WEDDING LUNCH','St. Joseph’s Church Mandapam'],['6.30 PM · RECEPTION & DINNER','St. Antony’s Church Mandapam, Azhagappapuram']];
+    EV.forEach(function(e,i){var y=1215+i*108;center(e[0],y,'600 32px Cinzel,Georgia,serif','#1c3263',3);
+      var fs=fit(e[1],880,'italic {s}px "Cormorant Garamond",Georgia,serif',38,26);center(e[1],y+48,fs+'px "Cormorant Garamond",Georgia,serif','#56627c');c.font='';});
+    // QR
+    var n=QR.length,cell=6,qs=n*cell,x0=W/2-qs/2-16,y0=1498,pad=24;
+    c.fillStyle='#fff';c.fillRect(x0,y0,qs+2*pad,qs+2*pad);c.strokeStyle='#d9ccb0';c.lineWidth=2;c.strokeRect(x0,y0,qs+2*pad,qs+2*pad);
+    c.fillStyle='#1c3263';for(var r=0;r<n;r++)for(var k=0;k<n;k++)if(QR[r][k]==='1')c.fillRect(x0+pad+k*cell,y0+pad+r*cell,cell,cell);
+    center('SCAN FOR DIRECTIONS & RSVP',y0+qs+2*pad+32,'600 22px Cinzel,Georgia,serif','#a8843f',3);
+    center(URLS,y0+qs+2*pad+68,'500 24px "Cormorant Garamond",Georgia,serif','#56627c');
+  }
+  function ready(){var f=['190px Allura','600 40px Cinzel','italic 40px "Cormorant Garamond"'];return Promise.all(f.map(function(x){return document.fonts?document.fonts.load(x,'Aa'):0;})).catch(function(){});}
+  var made=false,fname='Pravin-Saranya-Invitation.png';
+  form.addEventListener('submit',function(e){e.preventDefault();var nm=nameIn.value.trim().slice(0,36);if(!nm)return;
+    ready().then(function(){draw(nm);out.hidden=false;made=true;fname='Invitation-'+nm.replace(/[^\w஀-௿]+/g,'-').replace(/^-|-$/g,'')+'.png';
+      if(window.__petalBurst)window.__petalBurst(innerWidth/2,innerHeight*.4);out.scrollIntoView({behavior:'smooth',block:'nearest'});});});
+  function blob(){return new Promise(function(ok){cv.toBlob(ok,'image/png');});}
+  $('pass-save').addEventListener('click',function(){blob().then(function(b){var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=fname;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},4000);});});
+  $('pass-share').addEventListener('click',function(){blob().then(function(b){var f=new File([b],fname,{type:'image/png'}),d={files:[f],title:'Pravin & Saranya — Wedding Invitation',text:'You’re invited! https://'+URLS+'/'};
+    if(navigator.canShare&&navigator.canShare(d)&&navigator.share){navigator.share(d).catch(function(){});}else{$('pass-save').click();}});});
+})();
+</script>
+
 </body>
 </html>
