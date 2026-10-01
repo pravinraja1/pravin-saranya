@@ -358,6 +358,35 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
 #rsvp .preview{position:relative;justify-self:end;max-width:92%;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI",sans-serif;line-height:1.5;white-space:pre-wrap;background:#dcf8c6;color:#14321f;border-radius:14px 14px 4px 14px;padding:12px 14px 22px;font-size:13.5px;box-shadow:0 2px 0 rgba(0,0,0,.06)}
 #rsvp .preview::after{content:"✓✓";position:absolute;right:10px;bottom:5px;font:600 10px var(--mono);color:#4fb6ec;letter-spacing:-1px}
 .btn.wa{background:linear-gradient(135deg,#1f7a4d,#2a9a63);border:0;border-radius:14px;letter-spacing:.14em}
+
+/* ---- tilt, fireworks, day mode, maps, sparkle ---- */
+.hero-band{perspective:1400px}
+.hero-band .frame{transform-style:preserve-3d;transition:transform .25s ease-out;will-change:transform}
+.hero-band .frame .sheen{position:absolute;inset:0;z-index:3;pointer-events:none;mix-blend-mode:soft-light;opacity:.0;transition:opacity .4s;
+  background:radial-gradient(circle at var(--sx,50%) var(--sy,30%),rgba(255,244,214,.75),rgba(255,244,214,0) 45%)}
+.hero-band .frame.tilting .sheen{opacity:1}
+#fx,#spark{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+#fx{z-index:45}#spark{z-index:44}
+.done{font-family:var(--script);font-size:clamp(40px,8vw,60px);color:var(--gold);text-align:center;padding:10px 0}
+.today{display:none;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;text-align:center;padding:14px 18px;border-radius:999px;
+  background:linear-gradient(135deg,rgba(214,181,110,.18),rgba(214,181,110,.06));border:1px solid rgba(214,181,110,.6);color:#f6ecd4;font-family:var(--serif);font-size:18px}
+.today.on{display:flex}
+.today .live{display:inline-flex;align-items:center;gap:8px;font:700 12px var(--caps);letter-spacing:.24em;color:#0b1430;background:linear-gradient(135deg,#b8893b,#ecd38a);padding:7px 12px;border-radius:999px}
+.today .live i{width:8px;height:8px;border-radius:50%;background:#c23a4a;box-shadow:0 0 0 0 rgba(194,58,74,.7);animation:ping 1.6s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 9px rgba(194,58,74,0)}100%{box-shadow:0 0 0 0 rgba(194,58,74,0)}}
+.today b{color:#f1dfae}
+.event.now{box-shadow:0 0 0 4px rgba(255,255,255,.03),0 0 0 6px #d6b56e,0 0 40px rgba(214,181,110,.35)!important}
+.event .nowtag{display:none;position:absolute;top:-12px;right:16px;font:700 11px var(--caps);letter-spacing:.24em;color:#0b1430;background:linear-gradient(135deg,#b8893b,#ecd38a);padding:6px 10px;border-radius:999px}
+.event.now .nowtag{display:inline-block}
+.event.past{opacity:.55}
+details.map{margin-top:12px}
+details.map summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:40px;font:600 12px var(--caps);letter-spacing:.18em;color:#d6b56e}
+details.map summary::-webkit-details-marker{display:none}
+details.map summary::after{content:"▾";transition:transform .3s}
+details.map[open] summary::after{transform:rotate(180deg)}
+.mapbox{margin-top:8px;border-radius:12px;overflow:hidden;border:1px solid rgba(214,181,110,.55);box-shadow:0 0 0 4px rgba(255,255,255,.03);aspect-ratio:16/10;background:#0e1a3c}
+.mapbox iframe{width:100%;height:100%;border:0;display:block;filter:saturate(.85) contrast(1.02)}
+@media (prefers-reduced-motion:reduce){.hero-band .frame{transition:none}}
 </style>
 
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Welcome">
@@ -371,7 +400,7 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
     <div class="tap ta">திறக்க முத்திரையைத் தொடவும்</div>
   </div>
 </div>
-<canvas id="petals" aria-hidden="true"></canvas>
+<canvas id="petals" aria-hidden="true"></canvas><canvas id="fx" aria-hidden="true"></canvas><canvas id="spark" aria-hidden="true"></canvas>
 <div class="couple-dock" id="dock"><button type="button" class="cpl" id="cpl" aria-label="The dancing couple — tap for hearts"><svg viewBox="0 0 140 160" aria-hidden="true" class="couple-svg">
   <defs><radialGradient id="spotGa" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f2dc98" stop-opacity=".55"/><stop offset="1" stop-color="#f2dc98" stop-opacity="0"/></radialGradient></defs>
   <ellipse cx="72" cy="150" rx="62" ry="9" fill="url(#spotGa)"/>
@@ -416,7 +445,7 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
     </div>
   </div>
 
-  <div class="frame"><span class="gleam" aria-hidden="true"></span><svg class="corner tl" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M42 30C64 25 78 34 76 48C74 59 61 59 59 51C58 45 65 43 67 48" stroke-width="2.4"/><path d="M30 42C25 64 34 78 48 76C59 74 59 61 51 59C45 58 43 65 48 67" stroke-width="2.4"/><path d="M76 30C94 22 110 30 124 24C132 21 138 24 140 30M30 76C22 94 30 110 24 124C21 132 24 138 30 140" stroke-width="1.8"/><path d="M30 19L41 30L30 41L19 30Z" fill="currentColor" stroke="none"/></svg><svg class="corner tr" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M42 30C64 25 78 34 76 48C74 59 61 59 59 51C58 45 65 43 67 48" stroke-width="2.4"/><path d="M30 42C25 64 34 78 48 76C59 74 59 61 51 59C45 58 43 65 48 67" stroke-width="2.4"/><path d="M76 30C94 22 110 30 124 24C132 21 138 24 140 30M30 76C22 94 30 110 24 124C21 132 24 138 30 140" stroke-width="1.8"/><path d="M30 19L41 30L30 41L19 30Z" fill="currentColor" stroke="none"/></svg><svg class="corner bl" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M42 30C64 25 78 34 76 48C74 59 61 59 59 51C58 45 65 43 67 48" stroke-width="2.4"/><path d="M30 42C25 64 34 78 48 76C59 74 59 61 51 59C45 58 43 65 48 67" stroke-width="2.4"/><path d="M76 30C94 22 110 30 124 24C132 21 138 24 140 30M30 76C22 94 30 110 24 124C21 132 24 138 30 140" stroke-width="1.8"/><path d="M30 19L41 30L30 41L19 30Z" fill="currentColor" stroke="none"/></svg><svg class="corner br" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M42 30C64 25 78 34 76 48C74 59 61 59 59 51C58 45 65 43 67 48" stroke-width="2.4"/><path d="M30 42C25 64 34 78 48 76C59 74 59 61 51 59C45 58 43 65 48 67" stroke-width="2.4"/><path d="M76 30C94 22 110 30 124 24C132 21 138 24 140 30M30 76C22 94 30 110 24 124C21 132 24 138 30 140" stroke-width="1.8"/><path d="M30 19L41 30L30 41L19 30Z" fill="currentColor" stroke="none"/></svg><div class="frame-in">
+  <div class="frame" id="card"><span class="gleam" aria-hidden="true"></span><span class="sheen" aria-hidden="true"></span><svg class="corner tl" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M42 30C64 25 78 34 76 48C74 59 61 59 59 51C58 45 65 43 67 48" stroke-width="2.4"/><path d="M30 42C25 64 34 78 48 76C59 74 59 61 51 59C45 58 43 65 48 67" stroke-width="2.4"/><path d="M76 30C94 22 110 30 124 24C132 21 138 24 140 30M30 76C22 94 30 110 24 124C21 132 24 138 30 140" stroke-width="1.8"/><path d="M30 19L41 30L30 41L19 30Z" fill="currentColor" stroke="none"/></svg><svg class="corner tr" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M42 30C64 25 78 34 76 48C74 59 61 59 59 51C58 45 65 43 67 48" stroke-width="2.4"/><path d="M30 42C25 64 34 78 48 76C59 74 59 61 51 59C45 58 43 65 48 67" stroke-width="2.4"/><path d="M76 30C94 22 110 30 124 24C132 21 138 24 140 30M30 76C22 94 30 110 24 124C21 132 24 138 30 140" stroke-width="1.8"/><path d="M30 19L41 30L30 41L19 30Z" fill="currentColor" stroke="none"/></svg><svg class="corner bl" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M42 30C64 25 78 34 76 48C74 59 61 59 59 51C58 45 65 43 67 48" stroke-width="2.4"/><path d="M30 42C25 64 34 78 48 76C59 74 59 61 51 59C45 58 43 65 48 67" stroke-width="2.4"/><path d="M76 30C94 22 110 30 124 24C132 21 138 24 140 30M30 76C22 94 30 110 24 124C21 132 24 138 30 140" stroke-width="1.8"/><path d="M30 19L41 30L30 41L19 30Z" fill="currentColor" stroke="none"/></svg><svg class="corner br" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M42 30C64 25 78 34 76 48C74 59 61 59 59 51C58 45 65 43 67 48" stroke-width="2.4"/><path d="M30 42C25 64 34 78 48 76C59 74 59 61 51 59C45 58 43 65 48 67" stroke-width="2.4"/><path d="M76 30C94 22 110 30 124 24C132 21 138 24 140 30M30 76C22 94 30 110 24 124C21 132 24 138 30 140" stroke-width="1.8"/><path d="M30 19L41 30L30 41L19 30Z" fill="currentColor" stroke="none"/></svg><div class="frame-in">
     <p class="welcome" id="welcome" data-i18n="welcome">Welcome, dear family &amp; friends</p>
     <span class="caps" data-i18n="bless">With the Blessings of the Almighty</span>
     <div class="crest-wrap"><svg class="crest" viewBox="0 0 150 170" fill="none" aria-hidden="true">
@@ -465,8 +494,9 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
 
   <section class="band night" aria-labelledby="h-day">
     <h2 id="h-day" data-i18n="order">Order of the Day</h2>
+    <div class="today" id="today" aria-live="polite"></div>
     <div class="events">
-      <article class="event"><span class="medal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="14" r="5.5"/><circle cx="15" cy="14" r="5.5"/><path d="M12 3l1.5 2-1.5 2-1.5-2z"/></svg></span>
+      <article class="event" data-ev="1"><span class="nowtag" data-i18n="nowtag">Happening now</span><span class="medal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="14" r="5.5"/><circle cx="15" cy="14" r="5.5"/><path d="M12 3l1.5 2-1.5 2-1.5-2z"/></svg></span>
         <div class="t">10.30 AM</div>
         <div>
           <h3 data-i18n="e1">Holy Matrimony</h3>
@@ -476,17 +506,17 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
             <a class="btn solid" href="https://maps.google.com/?q=St+Josephs+Church+Vattakarai+Nagercoil" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="dir">Directions</span></a>
             <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pravin%20%26%20Saranya%20%E2%80%94%20Holy%20Matrimony&amp;dates=20261118T050000Z/20261118T070000Z&amp;location=St.%20Joseph%27s%20Church%2C%20Vattakarai%2C%20Nagercoil&amp;details=Wedding%20of%20F.%20Pravin%20Raja%20%26%20A.%20Josephin%20Saranya" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span data-i18n="cal">Add to calendar</span></a>
           </div>
-        </div>
+        <details class="map"><summary data-i18n="vmap">View map</summary><div class="mapbox" data-q="St Josephs Church Vattakarai Nagercoil"></div></details></div>
       </article>
-      <article class="event"><span class="medal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 2-2 6 0 8v10"/></svg></span>
+      <article class="event" data-ev="2"><span class="nowtag" data-i18n="nowtag">Happening now</span><span class="medal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 2-2 6 0 8v10"/></svg></span>
         <div class="t" data-i18n="aftermass">After Mass</div>
         <div>
           <h3 data-i18n="e2">Wedding Lunch</h3>
           <div class="v" data-i18n="e2v">St. Joseph’s Church Mandapam</div>
           <div class="p" data-i18n="e2p">Vattakarai, Nagercoil</div>
-        </div>
+        <details class="map"><summary data-i18n="vmap">View map</summary><div class="mapbox" data-q="St Josephs Church Vattakarai Nagercoil"></div></details></div>
       </article>
-      <article class="event"><span class="medal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 3h5l-.5 6a2 2 0 0 1-4 0zM13 3h5l-.5 6a2 2 0 0 1-4 0zM8.5 11v8M15.5 11v8M6 19h5M13 19h5"/></svg></span>
+      <article class="event" data-ev="3"><span class="nowtag" data-i18n="nowtag">Happening now</span><span class="medal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 3h5l-.5 6a2 2 0 0 1-4 0zM13 3h5l-.5 6a2 2 0 0 1-4 0zM8.5 11v8M15.5 11v8M6 19h5M13 19h5"/></svg></span>
         <div class="t">6.30 PM</div>
         <div>
           <h3 data-i18n="e3">Evening Reception</h3>
@@ -496,7 +526,7 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
             <a class="btn solid" href="https://maps.google.com/?q=St+Antonys+Church+Azhagappapuram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="dir">Directions</span></a>
             <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pravin%20%26%20Saranya%20%E2%80%94%20Reception&amp;dates=20261118T130000Z/20261118T160000Z&amp;location=St.%20Antony%27s%20Church%20Mandapam%2C%20First%20Floor%2C%20Azhagappapuram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span data-i18n="cal">Add to calendar</span></a>
           </div>
-        </div>
+        <details class="map"><summary data-i18n="vmap">View map</summary><div class="mapbox" data-q="St Antonys Church Azhagappapuram"></div></details></div>
       </article>
     </div>
   </section>
@@ -583,13 +613,13 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
   // countdown to 18 Nov 2026, 10:30 IST
   var target=Date.UTC(2026,10,18,5,0,0),pad=function(n){return String(n).padStart(2,'0')};
   function tick(){var d=target-Date.now(),el=document.getElementById('count');
-    if(d<=0){el.innerHTML='<div class="done" style="grid-column:1/-1">'+(lang==='ta'?'மணமக்கள் வாழ்க!':'Just married!')+'</div>';return;}
+    if(d<=0){el.innerHTML='<div class="done" style="grid-column:1/-1">'+(lang==='ta'?'மணமக்கள் வாழ்க! ❤':'Just Married ❤')+'</div>';if(window.__fireworks)window.__fireworks();return;}
     var s=Math.floor(d/1000);
     set('cd-d',String(Math.floor(s/86400)));set('cd-h',pad(Math.floor(s%86400/3600)));set('cd-m',pad(Math.floor(s%3600/60)));set('cd-s',pad(s%60));}
   function set(id,v){var el=document.getElementById(id);if(!el||el.textContent===v)return;el.textContent=v;var c=el.parentNode;c.classList.remove('flip');void c.offsetWidth;c.classList.add('flip');}
 
   // translations
-  var T={ta:{sgs:'பிரவின் வீட்டார்',sbs:'சரண்யா வீட்டார்',pvl:'உங்கள் செய்தியின் முன்னோட்டம்',sharebtn:'இந்த அழைப்பிதழை WhatsApp-ல் பகிருங்கள்',gsib:'<span>சகோதரி</span> F. பிரவினா ராணி',bsib:'<span>சகோதரர்</span> A. டோனி ஜோஸ்',famh:'இரு குடும்பங்கள், ஒரு கொண்டாட்டம்',gside:'மணமகன் குடும்பம்',bside:'மணமகள் குடும்பம்',gpar:'திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட்<br>– திருமதி. P. விஜி அமலா பிரின்ஸிலி',gfrom:'அழகப்பபுரம்',bpar:'திரு. S. அந்தோணி ஜோசப்<br>– திருமதி. G. இருதய தெரஸ் எடிட்',bfrom:'வட்டக்கரை',sidel:'யாருக்கு பதில் அனுப்புகிறீர்கள்',sg:'மணமகன் குடும்பம்',sb:'மணமகள் குடும்பம்',welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள் · <b>18 நவம்பர் 2026</b>',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
+  var T={ta:{vmap:'வரைபடம் காண்க',nowtag:'இப்போது நடைபெறுகிறது',sgs:'பிரவின் வீட்டார்',sbs:'சரண்யா வீட்டார்',pvl:'உங்கள் செய்தியின் முன்னோட்டம்',sharebtn:'இந்த அழைப்பிதழை WhatsApp-ல் பகிருங்கள்',gsib:'<span>சகோதரி</span> F. பிரவினா ராணி',bsib:'<span>சகோதரர்</span> A. டோனி ஜோஸ்',famh:'இரு குடும்பங்கள், ஒரு கொண்டாட்டம்',gside:'மணமகன் குடும்பம்',bside:'மணமகள் குடும்பம்',gpar:'திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட்<br>– திருமதி. P. விஜி அமலா பிரின்ஸிலி',gfrom:'அழகப்பபுரம்',bpar:'திரு. S. அந்தோணி ஜோசப்<br>– திருமதி. G. இருதய தெரஸ் எடிட்',bfrom:'வட்டக்கரை',sidel:'யாருக்கு பதில் அனுப்புகிறீர்கள்',sg:'மணமகன் குடும்பம்',sb:'மணமகள் குடும்பம்',welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள் · <b>18 நவம்பர் 2026</b>',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
     days:'நாட்கள்',hours:'மணி',mins:'நிமிடம்',secs:'விநாடி',verse:'“தேவன் இணைத்ததை மனுஷன் பிரிக்காதிருக்கக்கடவன்.” <b>மத்தேயு 19:6</b>',
     parents:'அன்புடன், திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட் – திருமதி. P. விஜி அமலா பிரின்ஸிலி, அழகப்பபுரம்',
     order:'நிகழ்ச்சி நிரல்',e1:'திருமணம்',e1v:'புனித சூசையப்பர் ஆலயம்',e1p:'கூட்டுத் திருப்பலியுடன் · வட்டக்கரை, நாகர்கோவில்',dir:'வழி',cal:'நாட்காட்டியில் சேர்',
@@ -735,6 +765,82 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
   if('IntersectionObserver' in window){var f=document.getElementById('rsvp'),ft=document.querySelector('footer');
     var vis={};new IntersectionObserver(function(es){es.forEach(function(e){vis[e.target===f?'f':'t']=e.isIntersecting;});inForm=!!(vis.f||vis.t);if(document.body.classList.contains('opened'))update();},{threshold:.05}).observe(f);
     }
+})();
+</script>
+
+<script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var q=new URLSearchParams(location.search);
+  function now(){var t=q.get('t');return t?new Date(t).getTime():Date.now();}  // ?t=2026-11-18T11:00+05:30 to preview
+
+  /* 1. 3D tilt card */
+  var card=document.getElementById('card');
+  function tilt(rx,ry){card.style.transform='rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg)';
+    card.style.setProperty('--sx',(50+ry*6)+'%');card.style.setProperty('--sy',(30-rx*6)+'%');card.classList.add('tilting');}
+  function untilt(){card.style.transform='';card.classList.remove('tilting');}
+  if(!reduce&&card){
+    if(window.matchMedia('(pointer:fine)').matches){
+      card.addEventListener('pointermove',function(e){var r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;tilt(-y*7,x*7);});
+      card.addEventListener('pointerleave',untilt);
+    }else{
+      var on=false;
+      function orient(e){if(e.beta==null)return;var b=Math.max(-25,Math.min(25,(e.beta-40))),g=Math.max(-25,Math.min(25,e.gamma));tilt(-b/4.5,g/4.5);on=true;}
+      function enable(){if(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==='function'){
+          DeviceOrientationEvent.requestPermission().then(function(st){if(st==='granted')addEventListener('deviceorientation',orient);}).catch(function(){});}
+        else addEventListener('deviceorientation',orient);}
+      var seal=document.getElementById('open-seal');if(seal)seal.addEventListener('click',enable);else enable();
+    }
+  }
+
+  /* 2. Fireworks */
+  var fx=document.getElementById('fx'),fc=fx.getContext('2d'),parts=[],fxOn=false,fired=false;
+  function fsize(){var d=window.devicePixelRatio||1;fx.width=innerWidth*d;fx.height=innerHeight*d;fc.setTransform(d,0,0,d,0,0);}fsize();addEventListener('resize',fsize);
+  var FC=['#f2dc98','#d6b56e','#fff6dc','#f3c4cc','#e9a3b2'];
+  function burst(){var x=innerWidth*(.2+Math.random()*.6),y=innerHeight*(.18+Math.random()*.32),c=FC[Math.random()*FC.length|0],n=70;
+    for(var i=0;i<n;i++){var a=Math.PI*2*i/n,sp=2+Math.random()*3.2;parts.push({x:x,y:y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:1,c:Math.random()<.25?'#fff':c});}}
+  function fstep(){fc.globalCompositeOperation='destination-out';fc.fillStyle='rgba(0,0,0,.18)';fc.fillRect(0,0,innerWidth,innerHeight);fc.globalCompositeOperation='lighter';
+    for(var i=parts.length-1;i>=0;i--){var p=parts[i];p.vx*=.985;p.vy=p.vy*.985+.045;p.x+=p.vx;p.y+=p.vy;p.life-=.012;
+      if(p.life<=0){parts.splice(i,1);continue;}fc.globalAlpha=p.life;fc.fillStyle=p.c;fc.beginPath();fc.arc(p.x,p.y,1.8,0,6.283);fc.fill();}
+    fc.globalAlpha=1;if(parts.length||fxOn)requestAnimationFrame(fstep);else{fc.globalCompositeOperation='source-over';fc.clearRect(0,0,innerWidth,innerHeight);}}
+  window.__fireworks=function(){if(fired||reduce)return;fired=true;fxOn=true;var k=0;(function go(){burst();if(Math.random()<.5)setTimeout(burst,250);if(++k<14)setTimeout(go,650+Math.random()*500);else fxOn=false;})();requestAnimationFrame(fstep);};
+  if(q.get('test')==='fireworks'){var s0=document.getElementById('open-seal');if(s0)s0.addEventListener('click',function(){setTimeout(window.__fireworks,1200);});}
+
+  /* 3. Wedding-day mode (IST) */
+  var EV=[{n:1,from:'2026-11-18T10:30+05:30',to:'2026-11-18T12:30+05:30',en:'Holy Matrimony',ta:'திருமணம்'},
+          {n:2,from:'2026-11-18T12:30+05:30',to:'2026-11-18T15:30+05:30',en:'Wedding Lunch',ta:'திருமண விருந்து'},
+          {n:3,from:'2026-11-18T18:30+05:30',to:'2026-11-18T21:30+05:30',en:'Evening Reception',ta:'மாலை வரவேற்பு'}];
+  var box=document.getElementById('today');
+  function day(){var t=now(),start=new Date('2026-11-18T00:00+05:30').getTime(),end=new Date('2026-11-19T00:00+05:30').getTime();
+    var ta=document.documentElement.lang==='ta';
+    document.querySelectorAll('.event').forEach(function(e){e.classList.remove('now','past');});
+    if(t<start||t>=end){box.classList.remove('on');return;}
+    var cur=null,next=null;EV.forEach(function(e){var a=new Date(e.from).getTime(),b=new Date(e.to).getTime();var el=document.querySelector('.event[data-ev="'+e.n+'"]');
+      if(t>=a&&t<b){cur=e;el&&el.classList.add('now');}else if(t>=b){el&&el.classList.add('past');}else if(!next)next=e;});
+    var h='<span class="live"><i></i>'+(ta?'இன்று':'Today')+'</span>';
+    if(cur)h+='<span>'+(ta?'இப்போது: ':'Now: ')+'<b>'+(ta?cur.ta:cur.en)+'</b></span>';
+    if(next)h+='<span>'+(ta?'அடுத்து: ':'Next: ')+'<b>'+(ta?next.ta:next.en)+'</b></span>';
+    if(!cur&&!next)h+='<span>'+(ta?'எங்களுடன் கொண்டாடியதற்கு நன்றி!':'Thank you for celebrating with us today!')+'</span>';
+    box.innerHTML=h;box.classList.add('on');}
+  day();setInterval(day,30000);
+  ['lang-en','lang-ta'].forEach(function(id){var b=document.getElementById(id);if(b)b.addEventListener('click',function(){setTimeout(day,0);});});
+
+  /* 4. Embedded maps (load on open) */
+  document.querySelectorAll('details.map').forEach(function(d){d.addEventListener('toggle',function(){var mb=d.querySelector('.mapbox');
+    if(d.open&&!mb.firstChild){var f=document.createElement('iframe');f.loading='lazy';f.referrerPolicy='no-referrer-when-downgrade';f.title='Map: '+mb.dataset.q;
+      f.src='https://maps.google.com/maps?q='+encodeURIComponent(mb.dataset.q)+'&z=15&output=embed';mb.appendChild(f);}});});
+
+  /* 5. Sparkle trail (mouse only) */
+  if(!reduce&&window.matchMedia('(pointer:fine)').matches){
+    var sc=document.getElementById('spark'),sx=sc.getContext('2d'),sp=[],run=false;
+    function ssize(){var d=window.devicePixelRatio||1;sc.width=innerWidth*d;sc.height=innerHeight*d;sx.setTransform(d,0,0,d,0,0);}ssize();addEventListener('resize',ssize);
+    addEventListener('pointermove',function(e){for(var i=0;i<2;i++)sp.push({x:e.clientX+(Math.random()-.5)*6,y:e.clientY+(Math.random()-.5)*6,vx:(Math.random()-.5)*.6,vy:.3+Math.random()*.6,l:1,r:.8+Math.random()*1.6});
+      if(sp.length>140)sp.splice(0,sp.length-140);if(!run){run=true;requestAnimationFrame(sstep);}});
+    function sstep(){sx.clearRect(0,0,innerWidth,innerHeight);for(var i=sp.length-1;i>=0;i--){var p=sp[i];p.x+=p.vx;p.y+=p.vy;p.l-=.025;if(p.l<=0){sp.splice(i,1);continue;}
+      sx.globalAlpha=p.l;sx.fillStyle='#f2dc98';sx.shadowColor='#f2dc98';sx.shadowBlur=8;sx.beginPath();
+      var r=p.r;sx.moveTo(p.x,p.y-r*2);sx.lineTo(p.x+r*.5,p.y-r*.5);sx.lineTo(p.x+r*2,p.y);sx.lineTo(p.x+r*.5,p.y+r*.5);sx.lineTo(p.x,p.y+r*2);sx.lineTo(p.x-r*.5,p.y+r*.5);sx.lineTo(p.x-r*2,p.y);sx.lineTo(p.x-r*.5,p.y-r*.5);sx.closePath();sx.fill();}
+      sx.globalAlpha=1;if(sp.length)requestAnimationFrame(sstep);else{run=false;sx.clearRect(0,0,innerWidth,innerHeight);}}
+  }
 })();
 </script>
 </body>
