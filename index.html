@@ -140,6 +140,53 @@ body.locked{overflow:hidden}
 .name.shine{background:linear-gradient(100deg,var(--ink) 40%,#6f86c2 50%,var(--ink) 60%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s ease-in-out 1.8s 2}
 @keyframes shine{from{background-position:120% 0}to{background-position:-20% 0}}
 @media (prefers-reduced-motion:reduce){.door{transition:none}.seal{animation:none}.reveal-pre{opacity:1;transform:none}.name.shine{animation:none;color:var(--ink);background:none}}
+
+/* ---- premium layer ---- */
+body{background:radial-gradient(ellipse 80% 40% at 50% 0,rgba(168,132,63,.12),transparent 70%),radial-gradient(circle,rgba(28,50,99,.05) 0 1.4px,transparent 1.9px) 0 0/26px 26px,var(--paper);background-attachment:fixed}
+.frame{box-shadow:0 30px 60px -30px rgba(15,29,61,.35)}
+.corner{position:absolute;width:74px;height:74px;color:var(--gold);pointer-events:none;z-index:1}
+.corner.tl{top:14px;left:14px}.corner.tr{top:14px;right:14px;transform:scaleX(-1)}
+.corner.bl{bottom:14px;left:14px;transform:scaleY(-1)}.corner.br{bottom:14px;right:14px;transform:scale(-1,-1)}
+.crest-wrap{position:relative;display:flex;justify-content:center}
+.star{position:absolute;width:14px;height:14px;color:#c9a75e;opacity:0;animation:twinkle 3.2s ease-in-out infinite}
+.star svg{width:100%;height:100%}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.4) rotate(0)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
+section > h2::after{content:"";display:block;width:180px;height:12px;margin:8px auto 0;
+  background:radial-gradient(circle,var(--gold) 0 3px,transparent 3.5px) center/12px 12px no-repeat,linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold) 70%,transparent) center/100% 1px no-repeat}
+section > h2.reveal-in::after{animation:grow 1.2s ease both}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.families{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch}
+.fam{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 18px;text-align:center;display:flex;flex-direction:column;gap:6px;box-shadow:0 0 0 4px #fff,0 0 0 5px var(--line)}
+.fam .caps{font-size:11.5px}
+.fam .who{font-size:20px;font-weight:700;line-height:1.3}
+.fam .from{font-style:italic;color:var(--soft);font-size:16px}
+.amp{align-self:center;font-family:var(--script);font-size:56px;color:var(--gold);line-height:1}
+@media (max-width:560px){.families{grid-template-columns:1fr}.amp{font-size:44px}}
+.events{position:relative;padding-left:34px}
+.events::before{content:"";position:absolute;left:14px;top:10px;bottom:10px;width:1.5px;background:linear-gradient(var(--gold),rgba(168,132,63,.25))}
+.event{position:relative;box-shadow:0 0 0 4px #fff,0 0 0 5px var(--line);transition:transform .35s ease,box-shadow .35s ease}
+.event:hover{transform:translateY(-3px);box-shadow:0 0 0 4px #fff,0 0 0 5px var(--gold),0 18px 30px -18px rgba(15,29,61,.35)}
+.medal{position:absolute;left:-41px;top:16px;width:40px;height:40px;border-radius:50%;background:var(--night);display:grid;place-items:center;box-shadow:0 0 0 3px var(--paper),0 0 0 4.5px var(--gold)}
+.medal svg{width:20px;height:20px;color:#e3c677}
+.cell.flip b{animation:flip .5s ease}
+@keyframes flip{0%{transform:rotateX(80deg);opacity:.2}100%{transform:none;opacity:1}}
+.cell{position:relative;overflow:hidden}
+.cell::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(241,223,174,.18) 50%,transparent 60%);transform:translateX(-100%);animation:sweep 6s ease-in-out infinite}
+@keyframes sweep{0%,70%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.btn.wa{position:relative;overflow:hidden;justify-content:center;font-size:14px;min-height:52px;box-shadow:0 10px 24px -12px rgba(31,122,77,.8)}
+.btn.wa::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-100%);animation:sweep 4.5s ease-in-out infinite}
+.side-l{display:block;margin-bottom:8px}
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.sides{grid-template-columns:1fr}}
+.sidecard{display:block;cursor:pointer;font-family:var(--serif);letter-spacing:0;text-transform:none;color:var(--ink)}
+.sidecard input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;min-height:0}
+.sidecard .sc{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--paper);transition:all .25s ease;min-height:64px}
+.sidecard .sc svg{width:30px;height:30px;flex-shrink:0;color:var(--gold)}
+.sidecard b{display:block;font-size:19px;line-height:1.2}
+.sidecard small{display:block;font-size:14.5px;color:var(--soft);font-style:italic}
+.sidecard input:checked + .sc{border-color:var(--ink);background:#fff;box-shadow:0 0 0 2px var(--ink),0 10px 22px -14px rgba(15,29,61,.5)}
+.sidecard input:focus-visible + .sc{outline:2px solid var(--gold);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.star,.cell::after,.btn.wa::after{animation:none;opacity:0}.event{transition:none}}
 </style>
 
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Welcome">
@@ -163,10 +210,10 @@ body.locked{overflow:hidden}
     </div>
   </div>
 
-  <div class="frame"><div class="frame-in">
+  <div class="frame"><svg class="corner tl" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M42 30C64 25 78 34 76 48C74 59 61 59 59 51C58 45 65 43 67 48" stroke-width="2.4"/><path d="M30 42C25 64 34 78 48 76C59 74 59 61 51 59C45 58 43 65 48 67" stroke-width="2.4"/><path d="M76 30C94 22 110 30 124 24C132 21 138 24 140 30M30 76C22 94 30 110 24 124C21 132 24 138 30 140" stroke-width="1.8"/><path d="M30 19L41 30L30 41L19 30Z" fill="currentColor" stroke="none"/></svg><svg class="corner tr" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M42 30C64 25 78 34 76 48C74 59 61 59 59 51C58 45 65 43 67 48" stroke-width="2.4"/><path d="M30 42C25 64 34 78 48 76C59 74 59 61 51 59C45 58 43 65 48 67" stroke-width="2.4"/><path d="M76 30C94 22 110 30 124 24C132 21 138 24 140 30M30 76C22 94 30 110 24 124C21 132 24 138 30 140" stroke-width="1.8"/><path d="M30 19L41 30L30 41L19 30Z" fill="currentColor" stroke="none"/></svg><svg class="corner bl" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M42 30C64 25 78 34 76 48C74 59 61 59 59 51C58 45 65 43 67 48" stroke-width="2.4"/><path d="M30 42C25 64 34 78 48 76C59 74 59 61 51 59C45 58 43 65 48 67" stroke-width="2.4"/><path d="M76 30C94 22 110 30 124 24C132 21 138 24 140 30M30 76C22 94 30 110 24 124C21 132 24 138 30 140" stroke-width="1.8"/><path d="M30 19L41 30L30 41L19 30Z" fill="currentColor" stroke="none"/></svg><svg class="corner br" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M42 30C64 25 78 34 76 48C74 59 61 59 59 51C58 45 65 43 67 48" stroke-width="2.4"/><path d="M30 42C25 64 34 78 48 76C59 74 59 61 51 59C45 58 43 65 48 67" stroke-width="2.4"/><path d="M76 30C94 22 110 30 124 24C132 21 138 24 140 30M30 76C22 94 30 110 24 124C21 132 24 138 30 140" stroke-width="1.8"/><path d="M30 19L41 30L30 41L19 30Z" fill="currentColor" stroke="none"/></svg><div class="frame-in">
     <p class="welcome" id="welcome" data-i18n="welcome">Welcome, dear family &amp; friends</p>
     <span class="caps" data-i18n="bless">With the Blessings of the Almighty</span>
-    <svg class="crest" viewBox="0 0 150 170" fill="none" aria-hidden="true">
+    <div class="crest-wrap"><svg class="crest" viewBox="0 0 150 170" fill="none" aria-hidden="true">
       <g fill="#a8843f">
         <path d="M49 46 L45 20 L62 33 L75 12 L88 33 L105 20 L101 46 Z"/><rect x="48" y="46" width="54" height="7" rx="2"/>
         <circle cx="45" cy="18" r="3.4"/><circle cx="75" cy="10" r="3.4"/><circle cx="105" cy="18" r="3.4"/>
@@ -175,7 +222,7 @@ body.locked{overflow:hidden}
       <circle class="draw" cx="75" cy="108" r="41.5" stroke="#a8843f" stroke-width=".6"/>
       <g fill="#a8843f" id="laurel"></g>
       <text x="75" y="118" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="600" font-size="30" fill="#1c3263">P<tspan fill="#a8843f" font-family="Cormorant Garamond, Georgia, serif" font-style="italic">&amp;</tspan>S</text>
-    </svg>
+    </svg><span class="star" style="top:6px;left:-26px;animation-delay:0s"><svg viewBox="0 0 20 20"><path d="M10 0L12 8L20 10L12 12L10 20L8 12L0 10L8 8Z" fill="currentColor"/></svg></span><span class="star" style="top:40px;right:-30px;animation-delay:0.8s"><svg viewBox="0 0 20 20"><path d="M10 0L12 8L20 10L12 12L10 20L8 12L0 10L8 8Z" fill="currentColor"/></svg></span><span class="star" style="bottom:30px;left:-34px;animation-delay:1.6s"><svg viewBox="0 0 20 20"><path d="M10 0L12 8L20 10L12 12L10 20L8 12L0 10L8 8Z" fill="currentColor"/></svg></span><span class="star" style="bottom:6px;right:-22px;animation-delay:2.3s"><svg viewBox="0 0 20 20"><path d="M10 0L12 8L20 10L12 12L10 20L8 12L0 10L8 8Z" fill="currentColor"/></svg></span><span class="star" style="top:-6px;right:-6px;animation-delay:1.2s"><svg viewBox="0 0 20 20"><path d="M10 0L12 8L20 10L12 12L10 20L8 12L0 10L8 8Z" fill="currentColor"/></svg></span></div>
     <span class="caps" data-i18n="weddingof">The Wedding of</span>
     <div class="names">
       <div class="name shine">F. Pravin Raja</div>
@@ -200,10 +247,19 @@ body.locked{overflow:hidden}
     <p class="note" data-i18n="parents">With love, Mr. B. Francis Raja Clement &amp; Mrs. P. Viji Amala Princily, Azhagappapuram</p>
   </div></div>
 
+  <section aria-labelledby="h-fam">
+    <h2 id="h-fam" data-i18n="famh">Two Families, One Celebration</h2>
+    <div class="families">
+      <div class="fam"><span class="caps" data-i18n="gside">The Groom’s Family</span><div class="who" data-i18n="gpar">Mr. B. Francis Raja Clement<br>&amp; Mrs. P. Viji Amala Princily</div><div class="from" data-i18n="gfrom">Azhagappapuram</div></div>
+      <div class="amp" aria-hidden="true">&amp;</div>
+      <div class="fam"><span class="caps" data-i18n="bside">The Bride’s Family</span><div class="who" data-i18n="bpar">Mr. S. Antony Joseph<br>&amp; Mrs. G. Iruthaya Therse Edit</div><div class="from" data-i18n="bfrom">Vattakarai</div></div>
+    </div>
+  </section>
+
   <section aria-labelledby="h-day">
     <h2 id="h-day" data-i18n="order">Order of the Day</h2>
     <div class="events">
-      <article class="event">
+      <article class="event"><span class="medal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="14" r="5.5"/><circle cx="15" cy="14" r="5.5"/><path d="M12 3l1.5 2-1.5 2-1.5-2z"/></svg></span>
         <div class="t">10.30 AM</div>
         <div>
           <h3 data-i18n="e1">Holy Matrimony</h3>
@@ -215,7 +271,7 @@ body.locked{overflow:hidden}
           </div>
         </div>
       </article>
-      <article class="event">
+      <article class="event"><span class="medal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 2-2 6 0 8v10"/></svg></span>
         <div class="t" data-i18n="aftermass">After Mass</div>
         <div>
           <h3 data-i18n="e2">Wedding Lunch</h3>
@@ -223,7 +279,7 @@ body.locked{overflow:hidden}
           <div class="p" data-i18n="e2p">Vattakarai, Nagercoil</div>
         </div>
       </article>
-      <article class="event">
+      <article class="event"><span class="medal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 3h5l-.5 6a2 2 0 0 1-4 0zM13 3h5l-.5 6a2 2 0 0 1-4 0zM8.5 11v8M15.5 11v8M6 19h5M13 19h5"/></svg></span>
         <div class="t">6.30 PM</div>
         <div>
           <h3 data-i18n="e3">Evening Reception</h3>
@@ -241,6 +297,13 @@ body.locked{overflow:hidden}
   <section aria-labelledby="h-rsvp">
     <h2 id="h-rsvp" data-i18n="rsvp">Kindly Reply</h2>
     <form id="rsvp" novalidate>
+      <div class="side-pick" role="radiogroup" aria-labelledby="side-l">
+        <span class="caps side-l" id="side-l" data-i18n="sidel">I am replying to</span>
+        <div class="sides">
+          <label class="sidecard" for="s-groom"><input type="radio" name="side" id="s-groom" value="groom" checked><span class="sc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-7 8-7s7 2.5 8 7M10 15l2 2 2-2"/></svg><span><b data-i18n="sg">The Groom’s Family</b><small>Pravin’s father · +91 94435 79704</small></span></span></label>
+          <label class="sidecard" for="s-bride"><input type="radio" name="side" id="s-bride" value="bride"><span class="sc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-7 8-7s7 2.5 8 7M8 6c1-3 7-3 8 0"/></svg><span><b data-i18n="sb">The Bride’s Family</b><small>Saranya’s father · +91 94426 53998</small></span></span></label>
+        </div>
+      </div>
       <div class="row">
         <label for="f-name"><span data-i18n="fname">Your name</span><input id="f-name" name="name" autocomplete="name" value="" placeholder="e.g. Joseph &amp; family"></label>
         <label for="f-count"><span data-i18n="fcount">Number of guests</span>
@@ -253,7 +316,7 @@ body.locked{overflow:hidden}
       <label for="f-msg"><span data-i18n="fmsg">Your wishes (optional)</span><textarea id="f-msg" placeholder="Congratulations to the couple!"></textarea></label>
       <pre class="preview" id="preview" aria-label="Message preview"></pre>
       <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3a.4.4 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3z"/></svg><span data-i18n="send">Send RSVP on WhatsApp</span></a>
-      <p class="note" data-i18n="wanote">Opens WhatsApp with your reply ready to send. If it doesn’t open, message +91 94435 79704.</p>
+      <p class="note" id="wanote"></p>
     </form>
   </section>
 
@@ -267,7 +330,7 @@ body.locked{overflow:hidden}
 
   <footer>
     <span class="caps" data-i18n="assist">For assistance</span>
-    <span class="num">+91 94435 79704 · +91 94421 07921</span>
+    <span class="num">+91 94435 79704 · +91 94421 07921 · +91 94426 53998</span>
     <span data-i18n="bless2">Your presence is our greatest blessing.</span>
   </footer>
 </div>
@@ -286,13 +349,11 @@ body.locked{overflow:hidden}
   function tick(){var d=target-Date.now(),el=document.getElementById('count');
     if(d<=0){el.innerHTML='<div class="done" style="grid-column:1/-1">'+(lang==='ta'?'மணமக்கள் வாழ்க!':'Just married!')+'</div>';return;}
     var s=Math.floor(d/1000);
-    document.getElementById('cd-d').textContent=Math.floor(s/86400);
-    document.getElementById('cd-h').textContent=pad(Math.floor(s%86400/3600));
-    document.getElementById('cd-m').textContent=pad(Math.floor(s%3600/60));
-    document.getElementById('cd-s').textContent=pad(s%60);}
+    set('cd-d',String(Math.floor(s/86400)));set('cd-h',pad(Math.floor(s%86400/3600)));set('cd-m',pad(Math.floor(s%3600/60)));set('cd-s',pad(s%60));}
+  function set(id,v){var el=document.getElementById(id);if(!el||el.textContent===v)return;el.textContent=v;var c=el.parentNode;c.classList.remove('flip');void c.offsetWidth;c.classList.add('flip');}
 
   // translations
-  var T={ta:{welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள்',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
+  var T={ta:{famh:'இரு குடும்பங்கள், ஒரு கொண்டாட்டம்',gside:'மணமகன் குடும்பம்',bside:'மணமகள் குடும்பம்',gpar:'திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட்<br>– திருமதி. P. விஜி அமலா பிரின்ஸிலி',gfrom:'அழகப்பபுரம்',bpar:'திரு. S. அந்தோணி ஜோசப்<br>– திருமதி. G. இருதய தெரஸ் எடிட்',bfrom:'வட்டக்கரை',sidel:'யாருக்கு பதில் அனுப்புகிறீர்கள்',sg:'மணமகன் குடும்பம்',sb:'மணமகள் குடும்பம்',welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள்',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
     days:'நாட்கள்',hours:'மணி',mins:'நிமிடம்',secs:'விநாடி',verse:'“தேவன் இணைத்ததை மனுஷன் பிரிக்காதிருக்கக்கடவன்.” <b>மத்தேயு 19:6</b>',
     parents:'அன்புடன், திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட் – திருமதி. P. விஜி அமலா பிரின்ஸிலி, அழகப்பபுரம்',
     order:'நிகழ்ச்சி நிரல்',e1:'திருமணம்',e1v:'புனித சூசையப்பர் ஆலயம்',e1p:'கூட்டுத் திருப்பலியுடன் · வட்டக்கரை, நாகர்கோவில்',dir:'வழி',cal:'நாட்காட்டியில் சேர்',
@@ -313,14 +374,17 @@ body.locked{overflow:hidden}
   document.getElementById('lang-ta').addEventListener('click',function(){setLang('ta')});
 
   // WhatsApp RSVP
-  var PHONE='919443579704';
-  function buildMsg(){
+  var PHONES={groom:{n:'919443579704',d:'+91 94435 79704',en:'the Groom’s family (Pravin’s father)',ta:'மணமகன் குடும்பத்திற்கு'},bride:{n:'919442653998',d:'+91 94426 53998',en:'the Bride’s family (Saranya’s father)',ta:'மணமகள் குடும்பத்திற்கு'}};
+  function side(){var r=document.querySelector('input[name="side"]:checked');return r?r.value:'groom';}
+  function buildMsg(){var S=PHONES[side()];
     var n=document.getElementById('f-name').value.trim()||'(your name)',c=document.getElementById('f-count').value,
         w=document.getElementById('c-wed').checked,rc=document.getElementById('c-rec').checked,m=document.getElementById('f-msg').value.trim();
     var ev=[w?'Wedding & Lunch':'',rc?'Evening Reception':''].filter(Boolean).join(' + ')||'Sending wishes only';
-    var txt='RSVP · Pravin & Saranya · 18 Nov 2026\nName: '+n+'\nGuests: '+c+'\nAttending: '+ev+(m?'\nWishes: '+m:'');
+    var txt='RSVP · Pravin & Saranya · 18 Nov 2026\nTo: '+(side()==='bride'?'Bride’s family':'Groom’s family')+'\nName: '+n+'\nGuests: '+c+'\nAttending: '+ev+(m?'\nWishes: '+m:'');
     document.getElementById('preview').textContent=txt;
-    document.getElementById('wa').href='https://wa.me/'+PHONE+'?text='+encodeURIComponent(txt);}
+    document.getElementById('wa').href='https://wa.me/'+S.n+'?text='+encodeURIComponent(txt);
+    document.getElementById('wanote').textContent=lang==='ta'?('உங்கள் பதில் '+S.ta+' WhatsApp-ல் தயாராக திறக்கும். திறக்காவிட்டால் '+S.d+' க்கு அனுப்பவும்.'):('Opens WhatsApp to '+S.en+' with your reply ready. If it doesn’t open, message '+S.d+'.');}
+  document.querySelectorAll('input[name="side"]').forEach(function(r){r.addEventListener('change',buildMsg);});
   ['f-name','f-count','c-wed','c-rec','f-msg'].forEach(function(id){var el=document.getElementById(id);el.addEventListener('input',buildMsg);el.addEventListener('change',buildMsg);});
   document.getElementById('rsvp').addEventListener('submit',function(e){e.preventDefault();});
 
@@ -385,7 +449,7 @@ body.locked{overflow:hidden}
   if(wa&&!reduce)wa.addEventListener('click',function(e){var r=wa.getBoundingClientRect();burst(r.left+r.width/2,r.top);});
   // scroll reveals
   if(!reduce&&'IntersectionObserver' in window){
-    var els=document.querySelectorAll('.event, section > h2, form, .term, footer');
+    var els=document.querySelectorAll('.event, section > h2, form, .term, footer, .fam');
     var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('reveal-in');en.target.classList.remove('reveal-pre');io.unobserve(en.target);}});},{threshold:.12});
     els.forEach(function(el){el.classList.add('reveal-pre');io.observe(el);});}
 })();
