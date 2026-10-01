@@ -327,6 +327,28 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:gleam 7s linear infinite;filter:drop-shadow(0 0 6px rgba(255,230,170,.8))}
 @keyframes gleam{to{--ga:360deg}}
 @media (prefers-reduced-motion:reduce){.hero-band .frame .gleam{animation:none;display:none}}
+
+/* ---- stylish RSVP ---- */
+#rsvp{position:relative;background:linear-gradient(180deg,#fffdf8,#fbf5e8);border:1px solid rgba(168,132,63,.55);border-radius:6px;padding:30px 26px 26px;gap:18px;box-shadow:0 0 0 6px #fffdf8,0 0 0 7px rgba(168,132,63,.35),0 30px 50px -30px rgba(15,29,61,.45)}
+#rsvp::before,#rsvp::after{content:"";position:absolute;width:30px;height:30px;border:1.5px solid var(--gold);pointer-events:none}
+#rsvp::before{top:9px;left:9px;border-right:0;border-bottom:0}
+#rsvp::after{bottom:9px;right:9px;border-left:0;border-top:0}
+.sidecard .sc{position:relative;background:#fff;border-color:rgba(168,132,63,.45);border-radius:14px;padding:16px 18px}
+.medal-sm{width:46px;height:46px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:var(--night);color:#e9cf86;font-family:var(--script);font-size:28px;line-height:1;box-shadow:0 0 0 2.5px #fff,0 0 0 3.5px var(--gold)}
+.sidecard small{font-style:italic;color:var(--gold);font-size:15px}
+.sidecard .tick{position:absolute;top:-9px;right:-9px;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#b8893b,#ecd38a);color:#0b1430;font:700 14px/26px var(--serif);text-align:center;opacity:0;transform:scale(.4);transition:all .3s cubic-bezier(.2,.9,.3,1.4);box-shadow:0 4px 10px -4px rgba(0,0,0,.4)}
+.sidecard input:checked + .sc{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold),0 14px 26px -16px rgba(15,29,61,.55)}
+.sidecard input:checked + .sc .tick{opacity:1;transform:none}
+#rsvp input:not([type]),#rsvp input[type="text"],#rsvp select,#rsvp textarea{background:#fff;border:1px solid rgba(168,132,63,.4);border-radius:10px;transition:border-color .2s,box-shadow .2s}
+#rsvp input:focus,#rsvp select:focus,#rsvp textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,181,110,.25)}
+.checks label{background:#fff;border-color:rgba(168,132,63,.45);transition:all .25s ease}
+.checks label:has(input:checked){background:var(--night);border-color:var(--night);color:#f1dfae}
+.checks label:has(input:checked) input{accent-color:#d6b56e}
+.bubble-wrap{display:grid;gap:8px}
+.pv-l{font-size:11.5px;letter-spacing:.22em}
+#rsvp .preview{position:relative;justify-self:end;max-width:92%;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI",sans-serif;line-height:1.5;white-space:pre-wrap;background:#dcf8c6;color:#14321f;border-radius:14px 14px 4px 14px;padding:12px 14px 22px;font-size:13.5px;box-shadow:0 2px 0 rgba(0,0,0,.06)}
+#rsvp .preview::after{content:"✓✓";position:absolute;right:10px;bottom:5px;font:600 10px var(--mono);color:#4fb6ec;letter-spacing:-1px}
+.btn.wa{background:linear-gradient(135deg,#1f7a4d,#2a9a63);border:0;border-radius:14px;letter-spacing:.14em}
 </style>
 
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Welcome">
@@ -476,8 +498,8 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
       <div class="side-pick" role="radiogroup" aria-labelledby="side-l">
         <span class="caps side-l" id="side-l" data-i18n="sidel">I am replying to</span>
         <div class="sides">
-          <label class="sidecard" for="s-groom"><input type="radio" name="side" id="s-groom" value="groom" checked><span class="sc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-7 8-7s7 2.5 8 7M10 15l2 2 2-2"/></svg><span><b data-i18n="sg">The Groom’s Family</b><small>+91 94435 79704</small></span></span></label>
-          <label class="sidecard" for="s-bride"><input type="radio" name="side" id="s-bride" value="bride"><span class="sc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-7 8-7s7 2.5 8 7M8 6c1-3 7-3 8 0"/></svg><span><b data-i18n="sb">The Bride’s Family</b><small>+91 94426 53998</small></span></span></label>
+          <label class="sidecard" for="s-groom"><input type="radio" name="side" id="s-groom" value="groom" checked><span class="sc"><span class="medal-sm" aria-hidden="true">P</span><span><b data-i18n="sg">The Groom’s Family</b><small data-i18n="sgs">Pravin’s side</small><span class="tick" aria-hidden="true">✓</span></span></span></label>
+          <label class="sidecard" for="s-bride"><input type="radio" name="side" id="s-bride" value="bride"><span class="sc"><span class="medal-sm" aria-hidden="true">S</span><span><b data-i18n="sb">The Bride’s Family</b><small data-i18n="sbs">Saranya’s side</small><span class="tick" aria-hidden="true">✓</span></span></span></label>
         </div>
       </div>
       <div class="row">
@@ -490,7 +512,7 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
         <label for="c-rec"><input type="checkbox" id="c-rec" checked><span data-i18n="c2">Evening Reception</span></label>
       </div>
       <label for="f-msg"><span data-i18n="fmsg">Your wishes (optional)</span><textarea id="f-msg" placeholder="Congratulations to the couple!"></textarea></label>
-      <pre class="preview" id="preview" aria-label="Message preview"></pre>
+      <div class="bubble-wrap"><span class="caps pv-l" data-i18n="pvl">Your message preview</span><pre class="preview" id="preview" aria-label="Message preview"></pre></div>
       <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3a.4.4 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3z"/></svg><span data-i18n="send">Send RSVP on WhatsApp</span></a>
       <p class="note" id="wanote"></p>
     </form>
@@ -535,8 +557,6 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
 </svg></div>
     <span class="sig">Pravin &amp; Saranya</span>
     <span class="sigdate">18 · XI · 2026</span>
-    <span class="caps" data-i18n="assist">For assistance</span>
-    <span class="num">+91 94435 79704 · +91 94421 07921 · +91 94426 53998</span>
     <span data-i18n="bless2">Your presence is our greatest blessing.</span>
     <a class="btn share" href="https://wa.me/?text=You%E2%80%99re%20invited%20to%20the%20wedding%20of%20Pravin%20%26%20Saranya%20%C2%B7%2018%20November%202026%20%C2%B7%20St.%20Joseph%E2%80%99s%20Church%2C%20Vattakarai%0Ahttps%3A%2F%2Fpravinraja1.github.io%2Fpravin-saranya%2F" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg><span data-i18n="sharebtn">Share this invitation on WhatsApp</span></a>
   </footer>
@@ -560,7 +580,7 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
   function set(id,v){var el=document.getElementById(id);if(!el||el.textContent===v)return;el.textContent=v;var c=el.parentNode;c.classList.remove('flip');void c.offsetWidth;c.classList.add('flip');}
 
   // translations
-  var T={ta:{sharebtn:'இந்த அழைப்பிதழை WhatsApp-ல் பகிருங்கள்',gsib:'<span>சகோதரி</span> F. பிரவினா ராணி',bsib:'<span>சகோதரர்</span> A. டோனி ஜோஸ்',famh:'இரு குடும்பங்கள், ஒரு கொண்டாட்டம்',gside:'மணமகன் குடும்பம்',bside:'மணமகள் குடும்பம்',gpar:'திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட்<br>– திருமதி. P. விஜி அமலா பிரின்ஸிலி',gfrom:'அழகப்பபுரம்',bpar:'திரு. S. அந்தோணி ஜோசப்<br>– திருமதி. G. இருதய தெரஸ் எடிட்',bfrom:'வட்டக்கரை',sidel:'யாருக்கு பதில் அனுப்புகிறீர்கள்',sg:'மணமகன் குடும்பம்',sb:'மணமகள் குடும்பம்',welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள் · <b>18 நவம்பர் 2026</b>',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
+  var T={ta:{sgs:'பிரவின் வீட்டார்',sbs:'சரண்யா வீட்டார்',pvl:'உங்கள் செய்தியின் முன்னோட்டம்',sharebtn:'இந்த அழைப்பிதழை WhatsApp-ல் பகிருங்கள்',gsib:'<span>சகோதரி</span> F. பிரவினா ராணி',bsib:'<span>சகோதரர்</span> A. டோனி ஜோஸ்',famh:'இரு குடும்பங்கள், ஒரு கொண்டாட்டம்',gside:'மணமகன் குடும்பம்',bside:'மணமகள் குடும்பம்',gpar:'திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட்<br>– திருமதி. P. விஜி அமலா பிரின்ஸிலி',gfrom:'அழகப்பபுரம்',bpar:'திரு. S. அந்தோணி ஜோசப்<br>– திருமதி. G. இருதய தெரஸ் எடிட்',bfrom:'வட்டக்கரை',sidel:'யாருக்கு பதில் அனுப்புகிறீர்கள்',sg:'மணமகன் குடும்பம்',sb:'மணமகள் குடும்பம்',welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள் · <b>18 நவம்பர் 2026</b>',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
     days:'நாட்கள்',hours:'மணி',mins:'நிமிடம்',secs:'விநாடி',verse:'“தேவன் இணைத்ததை மனுஷன் பிரிக்காதிருக்கக்கடவன்.” <b>மத்தேயு 19:6</b>',
     parents:'அன்புடன், திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட் – திருமதி. P. விஜி அமலா பிரின்ஸிலி, அழகப்பபுரம்',
     order:'நிகழ்ச்சி நிரல்',e1:'திருமணம்',e1v:'புனித சூசையப்பர் ஆலயம்',e1p:'கூட்டுத் திருப்பலியுடன் · வட்டக்கரை, நாகர்கோவில்',dir:'வழி',cal:'நாட்காட்டியில் சேர்',
@@ -590,7 +610,7 @@ body.opened .dove.d2{width:58px;animation-delay:2.8s}
     var txt='RSVP · Pravin & Saranya · 18 Nov 2026\nTo: '+(side()==='bride'?'Bride’s family':'Groom’s family')+'\nName: '+n+'\nGuests: '+c+'\nAttending: '+ev+(m?'\nWishes: '+m:'');
     document.getElementById('preview').textContent=txt;
     document.getElementById('wa').href='https://wa.me/'+S.n+'?text='+encodeURIComponent(txt);
-    document.getElementById('wanote').textContent=lang==='ta'?('உங்கள் பதில் '+S.ta+' WhatsApp-ல் தயாராக திறக்கும். திறக்காவிட்டால் '+S.d+' க்கு அனுப்பவும்.'):('Opens WhatsApp to '+S.en+' with your reply ready. If it doesn’t open, message '+S.d+'.');}
+    document.getElementById('wanote').textContent=lang==='ta'?('உங்கள் பதில் '+S.ta+' WhatsApp-ல் அனுப்பத் தயாராக திறக்கும்.'):('Opens WhatsApp to '+S.en+' with your reply ready to send.');}
   document.querySelectorAll('input[name="side"]').forEach(function(r){r.addEventListener('change',buildMsg);});
   ['f-name','f-count','c-wed','c-rec','f-msg'].forEach(function(id){var el=document.getElementById(id);el.addEventListener('input',buildMsg);el.addEventListener('change',buildMsg);});
   document.getElementById('rsvp').addEventListener('submit',function(e){e.preventDefault();});
