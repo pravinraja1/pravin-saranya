@@ -295,6 +295,28 @@ details.techie .term{border-radius:0;box-shadow:none}
 
 .fam .sib{margin-top:8px;padding-top:10px;border-top:1px solid rgba(168,132,63,.35);font-size:18px;font-weight:600;color:var(--ink)}
 .fam .sib span{display:block;font-family:var(--caps);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:2px}
+
+/* ---- readability, doves, bells, share ---- */
+.name,.name.shine{background-image:linear-gradient(100deg,#6e4c14 0%,#9c7428 22%,#c9a24e 38%,#dcbb6a 46%,#a8843f 58%,#7d5818 72%,#b38a3c 86%,#6e4c14 100%);filter:drop-shadow(0 1px 0 rgba(255,255,255,.8))}
+.event{grid-template-columns:128px 1fr}
+.event .t{white-space:nowrap;font-size:17px}
+@media (max-width:520px){.event{grid-template-columns:1fr}}
+.doves{position:absolute;left:50%;top:0;width:100vw;height:340px;transform:translateX(-50%);overflow:hidden;pointer-events:none;z-index:0}
+.dove{position:absolute;left:0;top:0;width:58px;opacity:0}
+body.opened .dove{animation:fly 16s linear 2.2s infinite}
+body.opened .dove.d2{width:48px;animation-delay:2.7s}
+@keyframes fly{0%{transform:translate(-80px,190px) rotate(-6deg);opacity:0}4%{opacity:1}50%{transform:translate(52vw,60px) rotate(-2deg)}92%{opacity:1}100%{transform:translate(110vw,120px) rotate(4deg);opacity:0}}
+.dove .d2off{}
+.dove .wing{transform-box:fill-box;transform-origin:50% 100%;animation:flap .32s ease-in-out infinite alternate}
+.dove .wing.back{animation-delay:.08s}
+@keyframes flap{from{transform:scaleY(1)}to{transform:scaleY(-.55)}}
+.bell{position:absolute;top:-14px;width:96px;display:none;z-index:0;transform-origin:50% 0;animation:swing 3.4s ease-in-out infinite alternate;pointer-events:none}
+.bell.l{left:calc(50% - 560px)}.bell.r{right:calc(50% - 560px);animation-delay:-1.7s}
+@media (min-width:1180px){.bell{display:block}}
+@keyframes swing{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
+.btn.share{margin-top:14px;background:transparent;border:1px solid #c9a75e;color:#f1dfae;justify-self:center}
+.btn.share svg{width:18px;height:18px}
+@media (prefers-reduced-motion:reduce){body.opened .dove{animation:none;opacity:0}.dove .wing,.bell{animation:none}}
 </style>
 
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Welcome">
@@ -338,7 +360,13 @@ details.techie .term{border-radius:0;box-shadow:none}
 </svg></button><button type="button" class="x" id="dock-x" aria-label="Hide the dancing couple">×</button></div>
 
 <div class="wrap">
-  <div class="band night hero-band"><div class="mandala" aria-hidden="true"><svg viewBox="0 0 560 560" fill="none" stroke="currentColor" id="mandala"></svg></div>
+  <div class="band night hero-band"><div class="doves" aria-hidden="true"><svg class="dove d1" viewBox="0 0 64 44" aria-hidden="true"><g fill="#fffaf0"><path class="wing back" d="M30 22 C34 8 44 2 52 3 C46 8 40 16 35 24Z" opacity=".75"/><path d="M12 25 C20 20 34 18 44 22 C50 19 56 17 60 19 C56 24 51 27 45 28 C36 33 22 33 12 25Z"/><circle cx="50" cy="21" r=".9" fill="#0b1430"/><path d="M58 19 L63 19.5 L58.5 21Z" fill="#e9c07a"/><path d="M12 25 C7 22 3 22 1 24 C5 26 8 28 13 28Z"/><path class="wing" d="M28 23 C20 6 8 2 2 5 C10 9 18 16 24 25Z"/></g></svg><svg class="dove d2" viewBox="0 0 64 44" aria-hidden="true"><g fill="#fffaf0"><path class="wing back" d="M30 22 C34 8 44 2 52 3 C46 8 40 16 35 24Z" opacity=".75"/><path d="M12 25 C20 20 34 18 44 22 C50 19 56 17 60 19 C56 24 51 27 45 28 C36 33 22 33 12 25Z"/><circle cx="50" cy="21" r=".9" fill="#0b1430"/><path d="M58 19 L63 19.5 L58.5 21Z" fill="#e9c07a"/><path d="M12 25 C7 22 3 22 1 24 C5 26 8 28 13 28Z"/><path class="wing" d="M28 23 C20 6 8 2 2 5 C10 9 18 16 24 25Z"/></g></svg></div><svg class="bell l" viewBox="0 0 90 200" aria-hidden="true"><defs><linearGradient id="bgl" x1="0" x2="1"><stop offset="0" stop-color="#8a6420"/><stop offset=".45" stop-color="#f2dc98"/><stop offset="1" stop-color="#a8843f"/></linearGradient></defs>
+<path d="M45 0 V96" stroke="#c9a75e" stroke-width="1.6"/><path d="M45 92 C34 84 26 88 28 96 C31 102 40 99 45 96 C50 99 59 102 62 96 C64 88 56 84 45 92Z" fill="#c23a4a"/><path d="M45 96 L36 116 M45 96 L54 116" stroke="#c23a4a" stroke-width="3" stroke-linecap="round"/>
+<path d="M45 104 C33 104 28 116 27 132 C26 148 20 156 14 162 H76 C70 156 64 148 63 132 C62 116 57 104 45 104Z" fill="url(#bgl)"/><rect x="11" y="160" width="68" height="7" rx="3.5" fill="url(#bgl)"/><circle cx="45" cy="172" r="6" fill="#b8893b"/>
+<path d="M33 120 C32 132 30 146 24 156" stroke="#fff6dc" stroke-width="2" opacity=".5" fill="none" stroke-linecap="round"/></svg><svg class="bell r" viewBox="0 0 90 200" aria-hidden="true"><defs><linearGradient id="bgr" x1="0" x2="1"><stop offset="0" stop-color="#8a6420"/><stop offset=".45" stop-color="#f2dc98"/><stop offset="1" stop-color="#a8843f"/></linearGradient></defs>
+<path d="M45 0 V96" stroke="#c9a75e" stroke-width="1.6"/><path d="M45 92 C34 84 26 88 28 96 C31 102 40 99 45 96 C50 99 59 102 62 96 C64 88 56 84 45 92Z" fill="#c23a4a"/><path d="M45 96 L36 116 M45 96 L54 116" stroke="#c23a4a" stroke-width="3" stroke-linecap="round"/>
+<path d="M45 104 C33 104 28 116 27 132 C26 148 20 156 14 162 H76 C70 156 64 148 63 132 C62 116 57 104 45 104Z" fill="url(#bgr)"/><rect x="11" y="160" width="68" height="7" rx="3.5" fill="url(#bgr)"/><circle cx="45" cy="172" r="6" fill="#b8893b"/>
+<path d="M33 120 C32 132 30 146 24 156" stroke="#fff6dc" stroke-width="2" opacity=".5" fill="none" stroke-linecap="round"/></svg><div class="mandala" aria-hidden="true"><svg viewBox="0 0 560 560" fill="none" stroke="currentColor" id="mandala"></svg></div>
 <div class="topbar">
     <span class="caps" data-i18n="save">Save the Date · <b>18 November 2026</b></span>
     <div class="lang" role="group" aria-label="Language">
@@ -500,6 +528,7 @@ details.techie .term{border-radius:0;box-shadow:none}
     <span class="caps" data-i18n="assist">For assistance</span>
     <span class="num">+91 94435 79704 · +91 94421 07921 · +91 94426 53998</span>
     <span data-i18n="bless2">Your presence is our greatest blessing.</span>
+    <a class="btn share" href="https://wa.me/?text=You%E2%80%99re%20invited%20to%20the%20wedding%20of%20Pravin%20%26%20Saranya%20%C2%B7%2018%20November%202026%20%C2%B7%20St.%20Joseph%E2%80%99s%20Church%2C%20Vattakarai%0Ahttps%3A%2F%2Fpravinraja1.github.io%2Fpravin-saranya%2F" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg><span data-i18n="sharebtn">Share this invitation on WhatsApp</span></a>
   </footer>
 </div>
 
@@ -521,7 +550,7 @@ details.techie .term{border-radius:0;box-shadow:none}
   function set(id,v){var el=document.getElementById(id);if(!el||el.textContent===v)return;el.textContent=v;var c=el.parentNode;c.classList.remove('flip');void c.offsetWidth;c.classList.add('flip');}
 
   // translations
-  var T={ta:{gsib:'<span>சகோதரி</span> F. பிரவினா ராணி',bsib:'<span>சகோதரர்</span> A. டோனி ஜோஸ்',famh:'இரு குடும்பங்கள், ஒரு கொண்டாட்டம்',gside:'மணமகன் குடும்பம்',bside:'மணமகள் குடும்பம்',gpar:'திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட்<br>– திருமதி. P. விஜி அமலா பிரின்ஸிலி',gfrom:'அழகப்பபுரம்',bpar:'திரு. S. அந்தோணி ஜோசப்<br>– திருமதி. G. இருதய தெரஸ் எடிட்',bfrom:'வட்டக்கரை',sidel:'யாருக்கு பதில் அனுப்புகிறீர்கள்',sg:'மணமகன் குடும்பம்',sb:'மணமகள் குடும்பம்',welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள் · <b>18 நவம்பர் 2026</b>',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
+  var T={ta:{sharebtn:'இந்த அழைப்பிதழை WhatsApp-ல் பகிருங்கள்',gsib:'<span>சகோதரி</span> F. பிரவினா ராணி',bsib:'<span>சகோதரர்</span> A. டோனி ஜோஸ்',famh:'இரு குடும்பங்கள், ஒரு கொண்டாட்டம்',gside:'மணமகன் குடும்பம்',bside:'மணமகள் குடும்பம்',gpar:'திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட்<br>– திருமதி. P. விஜி அமலா பிரின்ஸிலி',gfrom:'அழகப்பபுரம்',bpar:'திரு. S. அந்தோணி ஜோசப்<br>– திருமதி. G. இருதய தெரஸ் எடிட்',bfrom:'வட்டக்கரை',sidel:'யாருக்கு பதில் அனுப்புகிறீர்கள்',sg:'மணமகன் குடும்பம்',sb:'மணமகள் குடும்பம்',welcome:'அன்புக் குடும்பத்தினரே, நண்பர்களே, வருக!',save:'நாள் குறித்துக்கொள்ளுங்கள் · <b>18 நவம்பர் 2026</b>',bless:'இறைவன் திருவருளால்',weddingof:'திருமண அழைப்பு',wed:'புதன்கிழமை',nov:'நவம்பர்',time:'காலை 10.30',
     days:'நாட்கள்',hours:'மணி',mins:'நிமிடம்',secs:'விநாடி',verse:'“தேவன் இணைத்ததை மனுஷன் பிரிக்காதிருக்கக்கடவன்.” <b>மத்தேயு 19:6</b>',
     parents:'அன்புடன், திரு. B. பிரான்சிஸ் ராஜா கிளமென்ட் – திருமதி. P. விஜி அமலா பிரின்ஸிலி, அழகப்பபுரம்',
     order:'நிகழ்ச்சி நிரல்',e1:'திருமணம்',e1v:'புனித சூசையப்பர் ஆலயம்',e1p:'கூட்டுத் திருப்பலியுடன் · வட்டக்கரை, நாகர்கோவில்',dir:'வழி',cal:'நாட்காட்டியில் சேர்',
