@@ -448,6 +448,11 @@ button.tag:hover{color:var(--gold)}
 .lform input::placeholder{color:#9fb0d6}
 .lform input:focus{outline:2px solid #e9cf86;outline-offset:1px}
 .band.night .upstat{color:#e9cf86}
+.hint{position:absolute;right:0;top:-74px;width:max-content;max-width:190px;padding:8px 12px;border-radius:12px;background:#fff;border:1px solid var(--gold-2);color:var(--ink);font:600 12px/1.3 var(--caps);letter-spacing:.04em;text-align:center;box-shadow:0 10px 22px -10px rgba(15,29,61,.5);opacity:0;transform:translateY(6px);transition:opacity .5s,transform .5s;pointer-events:none}
+.hint::after{content:"";position:absolute;right:38px;bottom:-6px;width:10px;height:10px;background:#fff;border-right:1px solid var(--gold-2);border-bottom:1px solid var(--gold-2);transform:rotate(45deg)}
+.hint.on{opacity:1;transform:none;animation:hintb 2.2s ease-in-out infinite}
+@keyframes hintb{0%,100%{translate:0 0}50%{translate:0 -4px}}
+@media (prefers-reduced-motion:reduce){.hint.on{animation:none}}
 .hc{position:absolute;top:-24px;right:6px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 10px;font:700 12px var(--caps);color:#c24a63;box-shadow:0 6px 14px -8px rgba(15,29,61,.5);pointer-events:none}
 .hc b{color:var(--ink)}
 .cam .camv{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
@@ -478,7 +483,7 @@ button.tag:hover{color:var(--gold)}
   </div>
 </div>
 <canvas id="petals" aria-hidden="true"></canvas><canvas id="fx" aria-hidden="true"></canvas><canvas id="spark" aria-hidden="true"></canvas>
-<div class="couple-dock" id="dock"><div class="hc" id="hc" hidden aria-label="Hearts sent by guests">♥ <b id="hcn">0</b></div><button type="button" class="cpl" id="cpl" aria-label="The dancing couple — tap for hearts"><svg viewBox="0 0 140 160" aria-hidden="true" class="couple-svg">
+<div class="couple-dock" id="dock"><div class="hint" id="hhint" aria-hidden="true">Tap us to send a heart ❤</div><div class="hc" id="hc" hidden aria-label="Hearts sent by guests">♥ <b id="hcn">0</b></div><button type="button" class="cpl" id="cpl" aria-label="The dancing couple — tap for hearts"><svg viewBox="0 0 140 160" aria-hidden="true" class="couple-svg">
   <defs><radialGradient id="spotGa" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f2dc98" stop-opacity=".55"/><stop offset="1" stop-color="#f2dc98" stop-opacity="0"/></radialGradient></defs>
   <ellipse cx="72" cy="150" rx="62" ry="9" fill="url(#spotGa)"/>
   <path d="M14 152 Q72 140 130 152" fill="none" stroke="#c9a75e" stroke-width="1.4"/>
@@ -1167,7 +1172,7 @@ button.tag:hover{color:var(--gold)}
       draw(t);if(vis&&!reduce)raf=requestAnimationFrame(step);}
     function layout(){L.forEach(function(l,i){l.px=l.x0*W;});}
     function kick(){if(!raf){last=0;raf=requestAnimationFrame(step);}}
-    function pick(i){sel=i;var l=L[i];if(!l)return;cap.hidden=false;cap.textContent=(l.n?(ta()?l.n+': ':'From '+l.n+': '):'')+'“'+l.w+'”';idle=0;if(reduce){layout();draw(0);}}
+    function pick(i){sel=i;var l=L[i];if(!l)return;emptyCap=false;cap.hidden=false;cap.textContent=(l.n?(ta()?l.n+': ':'From '+l.n+': '):'')+'“'+l.w+'”';idle=0;if(reduce){layout();draw(0);}}
     cvs.addEventListener('pointerdown',function(e){var r=cvs.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,best=-1,bd=1e9;
       L.forEach(function(l,i){var d=Math.hypot(l.px-x,l.y-y);if(d<l.s*1.6&&d<bd){bd=d;best=i;}});if(best>=0)pick(best);});
     new ResizeObserver(function(){if(!sec.hidden){size();layout();if(reduce)draw(0);}}).observe(cvs.parentNode);
@@ -1180,7 +1185,10 @@ button.tag:hover{color:var(--gold)}
       if(srv&&!seeded){seeded=true;disp=hearts;hcn.textContent=disp.toLocaleString();}   // first value from the server shows instantly, no count-up from 0
       try{localStorage.setItem('ps-hearts',String(hearts));}catch(x){}
       if(disp<hearts&&!hAnim)hAnim=setInterval(paintHearts,60);
-      if(hl)hl.textContent=(ta()?'❤ '+hearts.toLocaleString()+' இதயங்கள் அனுப்பப்பட்டுள்ளன. அன்பை அனுப்ப அடிப்பகுதியிலுள்ள ஜோடியைத் தொடுங்கள்.':'❤ '+hearts.toLocaleString()+' hearts sent by guests. Tap the dancing couple to send one.');}
+      line();}
+    function line(){if(hl&&hearts)hl.textContent=(ta()?'❤ '+hearts.toLocaleString()+' இதயங்கள் அனுப்பப்பட்டுள்ளன. அன்பை அனுப்ப அடிப்பகுதியிலுள்ள ஜோடியைத் தொடுங்கள்.':'❤ '+hearts.toLocaleString()+' hearts sent by guests. Tap the dancing couple to send one.');}
+    var emptyCap=false;
+    ['lang-en','lang-ta'].forEach(function(id){var b=$(id);if(b)b.addEventListener('click',function(){setTimeout(function(){line();if(emptyCap)cap.textContent=ta()?'முதல் விளக்கை ஏற்றுங்கள் ✨':'Be the first to light a lantern ✨';},0);});});
     try{var c0=+localStorage.getItem('ps-hearts');if(c0>0){hearts=c0;disp=c0;hcn.textContent=c0.toLocaleString();hc.hidden=false;}}catch(x){}
     window.__heartTap=function(){pend++;setHearts(hearts+1);};
     setInterval(function(){if(!pend)return;var n=Math.min(pend,30);pend-=n;jget('a=heart&n='+n).then(function(d){if(d)setHearts(d.hearts);}).catch(function(){pend+=n;});},3000);
@@ -1190,7 +1198,7 @@ button.tag:hover{color:var(--gold)}
       if(first){sec.hidden=false;size();}
       d.lanterns.slice().reverse().forEach(function(o){var l=addL(o,false);if(l)l.px=l.x0*W;});
       setHearts(d.hearts,true);
-      if(first){if(L.length)pick(Math.floor(Math.random()*L.length));else{cap.hidden=false;cap.textContent=ta()?'முதல் விளக்கை ஏற்றுங்கள் ✨':'Be the first to light a lantern ✨';}if(reduce)draw(0);}
+      if(first){if(L.length)pick(Math.floor(Math.random()*L.length));else{emptyCap=true;cap.hidden=false;cap.textContent=ta()?'முதல் விளக்கை ஏற்றுங்கள் ✨':'Be the first to light a lantern ✨';}if(reduce)draw(0);}
     }).catch(function(){});}
     load(true);setInterval(function(){if(document.visibilityState==='visible')load(false);},30000);
 
@@ -1200,7 +1208,7 @@ button.tag:hover{color:var(--gold)}
       try{n=+localStorage.getItem('ps-lanterns')||0;}catch(x){}
       if(n>=3){stat.textContent=ta()?'ஒருவர் 3 விளக்குகள் ஏற்றலாம். நன்றி!':'Three lanterns each, thank you!';return;}
       stat.textContent=ta()?'விளக்கு ஏற்றப்படுகிறது…':'Lighting your lantern…';
-      var tmp=-Math.floor(Math.random()*1e6)-1,l=addL({id:tmp,n:nm,w:wi},true);L.indexOf(l);sel=L.indexOf(l);cap.hidden=false;cap.textContent='“'+wi+'”';kick();
+      var tmp=-Math.floor(Math.random()*1e6)-1,l=addL({id:tmp,n:nm,w:wi},true);L.indexOf(l);sel=L.indexOf(l);emptyCap=false;cap.hidden=false;cap.textContent='“'+wi+'”';kick();
       fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({kind:'lantern',name:nm,wish:wi})}).then(function(r){return r.json();}).then(function(j){
         if(!j.ok)throw 0;if(l&&j.id){delete ids[tmp];l.id=j.id;ids[j.id]=1;}
         try{localStorage.setItem('ps-lanterns',String(n+1));}catch(x){}
@@ -1246,6 +1254,16 @@ button.tag:hover{color:var(--gold)}
     addEventListener('keydown',function(e){var t=e.target&&e.target.tagName;if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT')return;
       var k=(e.key||'').toLowerCase();if(k===seq[pos]){pos++;if(pos===seq.length){pos=0;egg();}}else pos=(k===seq[0])?1:0;});
     var taps=0,tt=0,cnt=$('count');if(cnt)cnt.addEventListener('click',function(){var n=Date.now();if(n-tt>3000)taps=0;tt=n;if(++taps>=7){taps=0;egg();}});
+  })();
+
+  (function(){ // "tap us" hint above the dancing couple until the first tap
+    var h=$('hhint'),dock=$('dock'),cpl=$('cpl');if(!h||!dock)return;var done=false;try{done=localStorage.getItem('ps-hearted')==='1';}catch(e){}
+    function txt(){h.textContent=ta()?'எங்களைத் தொட்டு இதயம் அனுப்புங்கள் ❤':'Tap us to send a heart ❤';}
+    txt();['lang-en','lang-ta'].forEach(function(id){var b=$(id);if(b)b.addEventListener('click',function(){setTimeout(txt,0);});});
+    if(done)return;var shown=false;
+    function hide(){h.classList.remove('on');try{localStorage.setItem('ps-hearted','1');}catch(e){}}
+    cpl.addEventListener('click',hide);
+    new MutationObserver(function(){if(shown||!dock.classList.contains('show'))return;shown=true;setTimeout(function(){h.classList.add('on');setTimeout(function(){h.classList.remove('on');},12000);},1500);}).observe(dock,{attributes:true,attributeFilter:['class']});
   })();
 
   try{console.log('%cPravin ♥ Saranya','font:700 22px Georgia;color:#a8843f','\nCurious? There is a terminal under "For the Techies", and a code with arrows, B and A.\n18.11.2026 · merge approved ✓');}catch(e){}
