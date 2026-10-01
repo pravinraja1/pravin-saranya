@@ -406,6 +406,15 @@ button.tag:hover{color:var(--gold)}
 .scratch{position:absolute;inset:-10px;width:calc(100% + 20px);height:calc(100% + 20px);z-index:3;border-radius:14px;cursor:grab;touch-action:none;transition:opacity .9s ease}
 .scratch.gone{opacity:0;pointer-events:none}
 .scratch:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0 0 0 0)}
+.photos{display:grid;gap:12px;width:100%;margin-top:6px}
+.upnote{margin:0;color:var(--soft)}
+.upstat{margin:0;min-height:1.4em;font-size:16px;color:var(--gold);font-family:var(--caps);letter-spacing:.06em}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.pgrid button{padding:0;border:1px solid var(--line);border-radius:10px;background:var(--paper-2);aspect-ratio:1;overflow:hidden;cursor:zoom-in}
+.pgrid img{width:100%;height:100%;object-fit:cover;display:block}
+.lb{position:fixed;inset:0;z-index:200;background:rgba(8,14,34,.92);display:grid;place-items:center;padding:16px}
+.lb img{max-width:100%;max-height:92vh;border-radius:8px}
 </style>
 
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Welcome">
@@ -598,6 +607,17 @@ button.tag:hover{color:var(--gold)}
         <a class="btn" id="tag-ig" href="https://www.instagram.com/explore/tags/pravinwedssaranya/" target="_blank" rel="noopener"><span>Instagram</span></a>
         <a class="btn solid" id="tag-album" href="#" target="_blank" rel="noopener" hidden><span data-i18n="album">Open photo album</span></a>
       </div>
+<div class="photos" id="photos" hidden>
+      <p class="upnote" data-i18n="upnote">Take a selfie or add your photos. They appear here for everyone.</p>
+      <div class="acts" style="justify-content:center">
+        <label class="btn solid" for="up-selfie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span data-i18n="selfie">Take a selfie</span></label>
+        <label class="btn" for="up-files"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg><span data-i18n="uploadp">Add photos</span></label>
+      </div>
+      <input class="vh" type="file" id="up-selfie" accept="image/*" capture="user">
+      <input class="vh" type="file" id="up-files" accept="image/*" multiple>
+      <p class="upstat" id="upstat" role="status" aria-live="polite"></p>
+      <div class="pgrid" id="pgrid"></div>
+    </div>
     </div>
   </section>
 
@@ -663,7 +683,7 @@ button.tag:hover{color:var(--gold)}
   function set(id,v){var el=document.getElementById(id);if(!el||el.textContent===v)return;el.textContent=v;var c=el.parentNode;c.classList.remove('flip');void c.offsetWidth;c.classList.add('flip');}
 
   // translations
-  var T={ta:{addall:'அனைத்தையும் நாட்காட்டியில் சேர்க்க',shareinv:'அழைப்பைப் பகிர்க',faqh:'விருந்தினர் குறிப்புகள்',
+  var T={ta:{upnote:'செல்ஃபி எடுங்கள் அல்லது உங்கள் புகைப்படங்களைச் சேருங்கள். அனைவரும் இங்கே காணலாம்.',selfie:'செல்ஃபி எடுக்க',uploadp:'புகைப்படங்களைச் சேர்க்க',addall:'அனைத்தையும் நாட்காட்டியில் சேர்க்க',shareinv:'அழைப்பைப் பகிர்க',faqh:'விருந்தினர் குறிப்புகள்',
     q1:'வாகனம் எங்கே நிறுத்தலாம்?',a1:'புனித சூசையப்பர் ஆலய மண்டபம், வட்டக்கரை (திருமணம் & விருந்து) மற்றும் புனித அந்தோனியார் ஆலய மண்டபம், அழகப்பபுரம் (வரவேற்பு) – இரு இடங்களிலும் வாகனம் நிறுத்த வசதி உண்டு. சற்று முன்பே வருமாறு வேண்டுகிறோம்.',
     
     q6:'விருந்து எப்போது?',a6:'திருப்பலி முடிந்ததும் புனித சூசையப்பர் ஆலய மண்டபத்தில் மதிய விருந்து.',
@@ -956,6 +976,32 @@ button.tag:hover{color:var(--gold)}
     paint();addEventListener('resize',function(){if(!touched&&!gone)paint();});
     if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){if(!touched&&!gone)paint();});
   }
+})();
+</script>
+<script>
+(function(){
+  var UPLOAD_URL='';   // paste the Google Apps Script web-app URL here to switch on selfie upload + live gallery
+  var box=document.getElementById('photos');if(!box||!UPLOAD_URL)return;
+  box.hidden=false;
+  var ta=function(){return document.documentElement.lang==='ta';},grid=document.getElementById('pgrid'),st=document.getElementById('upstat');
+  function say(en,tm){st.textContent=ta()?tm:en;}
+  function thumb(id,w){return 'https://drive.google.com/thumbnail?id='+encodeURIComponent(id)+'&sz=w'+w;}
+  function add(src,full,first){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Open photo');var i=new Image();i.src=src;i.loading='lazy';i.alt='Guest photo';b.appendChild(i);
+    b.addEventListener('click',function(){var o=document.createElement('div');o.className='lb';var f=new Image();f.src=full;f.alt='Guest photo';o.appendChild(f);o.addEventListener('click',function(){o.remove();});document.body.appendChild(o);});
+    first?grid.insertBefore(b,grid.firstChild):grid.appendChild(b);}
+  function load(){fetch(UPLOAD_URL).then(function(r){return r.json();}).then(function(l){grid.innerHTML='';l.forEach(function(p){add(thumb(p.id,400),thumb(p.id,1600));});}).catch(function(){});}
+  function shrink(file){return new Promise(function(ok,no){var u=URL.createObjectURL(file),im=new Image();im.onload=function(){var m=1600,k=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(function(b){b?ok(b):no();},'image/jpeg',.82);};im.onerror=no;im.src=u;});}
+  function b64(blob){return new Promise(function(ok,no){var r=new FileReader();r.onload=function(){ok(String(r.result).split(',')[1]);};r.onerror=no;r.readAsDataURL(blob);});}
+  async function send(files){var list=[].slice.call(files).filter(function(f){return /^image\//.test(f.type)||/\.(heic|heif|jpe?g|png|webp)$/i.test(f.name);});if(!list.length)return;
+    var done=0,fail=0;
+    for(var n=0;n<list.length;n++){say('Uploading '+(n+1)+' of '+list.length+'…','பதிவேற்றம் '+(n+1)+' / '+list.length+'…');
+      try{var blob=await shrink(list[n]),data=await b64(blob);
+        var r=await fetch(UPLOAD_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'image/jpeg',data:data})}),j=await r.json();
+        if(!j.ok)throw 0;done++;var local=URL.createObjectURL(blob);add(local,local,true);}catch(e){fail++;}}
+    if(done&&window.__petalBurst)window.__petalBurst(innerWidth/2,innerHeight*.3);
+    say(fail?(done+' added, '+fail+' failed. Please try again.'):('Thank you! '+done+' photo'+(done>1?'s':'')+' added ❤'),fail?(done+' சேர்ந்தது, '+fail+' தோல்வி. மீண்டும் முயலவும்.'):('நன்றி! '+done+' புகைப்படம் சேர்ந்தது ❤'));}
+  ['up-selfie','up-files'].forEach(function(id){var el=document.getElementById(id);el.addEventListener('change',function(){send(el.files).then(function(){el.value='';});});});
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();load();}},{rootMargin:'300px'});io.observe(box);}else load();
 })();
 </script>
 </body>
