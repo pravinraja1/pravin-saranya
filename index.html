@@ -711,7 +711,7 @@ button.tag:hover{color:var(--gold)}
     <p class="skynote" data-i18n="skys">Make a wish for Pravin &amp; Saranya. Your lantern joins everyone else’s in the sky.</p>
     <div class="sky" id="sky"><canvas id="skyc" aria-label="A night sky full of guests’ wish lanterns"></canvas><div class="wishcap" id="wishcap" aria-live="polite" hidden></div></div>
     <form class="lform" id="lform" autocomplete="off">
-      <input id="l-name" maxlength="30" placeholder="Your name (optional)" aria-label="Your name (optional)">
+      <input id="l-name" maxlength="30" placeholder="Your name" aria-label="Your name" required>
       <input id="l-wish" maxlength="80" placeholder="Your wish for the couple" aria-label="Your wish for the couple" required>
       <button class="btn solid" type="submit"><span data-i18n="release">Release lantern</span></button>
     </form>
@@ -1269,6 +1269,7 @@ button.tag:hover{color:var(--gold)}
 
     form.addEventListener('submit',function(e){e.preventDefault();
       var nm=$('l-name').value.trim().slice(0,30),wi=$('l-wish').value.trim().slice(0,80),n=0;
+      if(!nm){stat.textContent=ta()?'முதலில் உங்கள் பெயரை எழுதுங்கள்.':'Please enter your name first.';$('l-name').focus();return;}
       if(!wi){stat.textContent=ta()?'முதலில் ஒரு வாழ்த்து எழுதுங்கள்.':'Please write a wish first.';return;}
       try{n=+localStorage.getItem('ps-lanterns')||0;}catch(x){}
       if(n>=3){stat.textContent=ta()?'ஒருவர் 3 விளக்குகள் ஏற்றலாம். நன்றி!':'Three lanterns each, thank you!';return;}
